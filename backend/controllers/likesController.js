@@ -1,14 +1,15 @@
 const asyncHandler = require("express-async-handler");
 const Like = require("../models/likesModel");
 
+
 // GET LIKES (GET REQUEST - "/api/likes")
-const getLike = asyncHandler(async (req, res) => {
-    const like = await Like.find({ user: req.user.id });
-    res.status(200).json(like);
+const getLikes = asyncHandler(async (req, res) => {
+    const likes = await Like.find({ user: req.user.id });
+    res.status(200).json(likes);
 });
 
 // SET LIKES (POST REQUEST - "/api/likes")
-const setLike = asyncHandler(async (req, res) => {
+const setLikes = asyncHandler(async (req, res) => {
     if (!req.body.like) {
         res.status(400);
         throw new Error("Please change the value...");
@@ -19,11 +20,11 @@ const setLike = asyncHandler(async (req, res) => {
         user: req.user.id
     });
 
-    res.status(200).json(goal);
+    res.status(200).json(like);
 });
 
 // UPDATE LIKES (PUT REQUEST - "/api/likes:id")
-const updateLike = asyncHandler(async (req, res) => {
+const updateLikes = asyncHandler(async (req, res) => {
     // FIND THE ID
     const like = await Like.findById(req.params.id);
 
@@ -45,4 +46,5 @@ const updateLike = asyncHandler(async (req, res) => {
     res.status(200).json(updatedLike);
 });
 
-module.exports = { getLike, setLike, updateLike };
+module.exports = { getLikes, setLikes, updateLikes };
+

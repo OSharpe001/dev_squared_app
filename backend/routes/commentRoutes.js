@@ -8,6 +8,6 @@ const { protect } = require("../middleware/authMiddleware");
 // (CHAINING METHODS THAT HAVE THE SAME ROUTE)
 router.route("/").get(protect, getComments).post(protect, setComments);
 
-router.route("/:id").delete(protect, deleteComments).put(protect, updateComments);
+router.route("/:id").put(protect, updateComments).delete(protect, deleteComments);
 
 module.exports = router;

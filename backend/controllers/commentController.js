@@ -1,11 +1,11 @@
-const Comment = require("..models/commentModel");
+const Comment = require("../models/commentModel");
 // const Blog = require("..models/blogModel");
 // const User = require("..models/userModel");
 const asyncHandler = require("express-async-handler");
 
 // GET COMMENTS (GET REQUEST - "/api/comments")
 const getComments = asyncHandler(async (req, res) => {
-    const comments = await Comment.find({ blog: req.blog.id });
+    const comments = await Comment.find({ user: req.user.id });
     res.status(200).json(comments);
 });
 
@@ -18,7 +18,7 @@ const setComments = asyncHandler(async (req, res) => {
     const comment = await Comment.create({
         text: req.body.text,
         user: req.user.id,
-        blog: req.blog.id,
+        // blog: req.blog.id,
     });
 
     res.status(200).json(comment);

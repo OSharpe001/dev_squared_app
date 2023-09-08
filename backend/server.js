@@ -1,7 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv").config();
 const cors = require("cors");
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5012;
 const { errorHandler } = require("./middleware/errorMiddleware");
 const connectDB = require("./config/database");
 
@@ -20,7 +20,7 @@ app.use("/api/blogs", require("./routes/blogRoutes"));
 // USE ROUTES/COMMENTROUTES TO HANDLE ANY ENDPOINTS THAT END WITH /API/COMMENTS
 app.use("/api/comments", require("./routes/commentRoutes"));
 // USE ROUTES/LIKESROUTES TO HANDLE ANY ENDPOINTS THAT END WITH /API/LIKES
-app.use("/api/likes", require("./routes/likesRoutes"));
+// app.use("/api/likes", require("./routes/likesRoutes"));
 
 // TRYING TO AVOID THE ACCESS-CONTROL-ALLOW-ORIGIN ISSUE
 app.use(cors());
