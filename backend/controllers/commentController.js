@@ -1,15 +1,21 @@
 const Comment = require("../models/commentModel");
-// const Blog = require("..models/blogModel");
-// const User = require("..models/userModel");
+const Blog = require("../models/blogModel");
+// const User = require("../models/userModel");
 const asyncHandler = require("express-async-handler");
 
-// GET COMMENTS (GET REQUEST - "/api/comments")
-const getComments = asyncHandler(async (req, res) => {
+// GET ALL BLOG COMMENTS (GET REQUEST - "/api/blog_id/comments")
+const getBlogComments = asyncHandler(async (req, res) => {
+    const comments = await Comment.find({ blog: req.blog.id });
+    res.status(200).json(comments);
+});
+
+// GET USER COMMENTS (GET REQUEST - "/api/blog_id/comments")
+const getUserComments = asyncHandler(async (req, res) => {
     const comments = await Comment.find({ user: req.user.id });
     res.status(200).json(comments);
 });
 
-// SET COMMENTS (POST REQUEST - "/api/comments")
+// SET COMMENTS (POST REQUEST - "/api/blog_id/comments")
 const setComments = asyncHandler(async (req, res) => {
     if (!req.body.text) {
         res.status(400);
@@ -24,7 +30,7 @@ const setComments = asyncHandler(async (req, res) => {
     res.status(200).json(comment);
 });
 
-// UPDATE COMMENTS (PUT REQUEST - "/api/comments/:id")
+// UPDATE COMMENTS (PUT REQUEST - "/api/blog_id/comments/:id")
 const updateComments = asyncHandler(async (req, res) => {
     // FIND THE COMMENT'S ID
     const comment = await Comment.findById(req.params.id);
@@ -59,7 +65,7 @@ const updateComments = asyncHandler(async (req, res) => {
     res.status(200).json(updatedComment);
 });
 
-// DELETE COMMENTS (DELETE REQUEST - "/api/comments/:id")
+// DELETE COMMENTS (DELETE REQUEST - "/api/blog_id/comments/:id")
 const deleteComments = asyncHandler(async (req, res) => {
 
     // FIND THE COMMENT BY ID
@@ -95,4 +101,4 @@ const deleteComments = asyncHandler(async (req, res) => {
 });
 
 
-module.exports = { getComments, setComments, updateComments, deleteComments };
+module.exports = { getBlogComments, getUserComments, setComments, updateComments, deleteComments };
