@@ -6,8 +6,8 @@ const { protect } = require("../middleware/authMiddleware");
 
 // BLOGS ROUTES--
 // (CHAINING METHODS THAT HAVE THE SAME ROUTE)
-router.route("/").get(protect, getBlogsList).post(protect, setBlogs);
+router.route("/").get(getBlogsList).post(protect, setBlogs);
 
-router.route("/:id").get(protect, getBlog).put(protect, updateBlogs).delete(protect, deleteBlogs);
+router.route("/:id").get(getBlog).put(protect, updateBlogs).delete(protect, deleteBlogs);
 
 module.exports = router;
