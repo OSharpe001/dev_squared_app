@@ -18,7 +18,7 @@ app.use("/api/users", require("./routes/userRoutes"));
 // USE ROUTES/BLOGROUTES TO HANDLE ANY ENDPOINTS THAT END WITH /API/BLOGS
 app.use("/api/blogs", require("./routes/blogRoutes"));
 // USE ROUTES/COMMENTROUTES TO HANDLE ANY ENDPOINTS THAT END WITH /API/COMMENTS
-app.use("/api/comments", require("./routes/commentRoutes"));
+app.use("/api/blogs/comments", require("./routes/commentRoutes"));
 // USE ROUTES/LIKESROUTES TO HANDLE ANY ENDPOINTS THAT END WITH /API/LIKES
 // app.use("/api/likes", require("./routes/likesRoutes"));
 
