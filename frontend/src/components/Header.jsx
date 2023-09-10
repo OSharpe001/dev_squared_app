@@ -11,6 +11,7 @@ export default function Header({ navigate, loggedIn, setLoggedIn }) {
   };
 
   const logOut = () => {
+    localStorage.removeItem("Dev2User");
     setLoggedIn(false);
     navigate("/sign-up")
   }
