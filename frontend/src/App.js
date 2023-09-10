@@ -9,7 +9,7 @@ import { useState } from 'react';
 
 export default function App() {
 
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState("");
   const navigate = useNavigate();
 
   return (
@@ -22,9 +22,12 @@ export default function App() {
       <Routes>
         <Route path="/sign-in" element={<Login
                                           setLoggedIn={setLoggedIn}
+                                          loggedIn={loggedIn}
+                                          navigate={navigate}
                                         />}/>
         <Route path="/sign-up" element={<Register
                                           setLoggedIn={setLoggedIn}
+                                          navigate={navigate}
                                         />}/>
         <Route path="/blog" element={<CurrentBlog
                                         navigate={navigate}
