@@ -5,7 +5,7 @@ export default function Footer() {
 
   return (
     <footer>
-      <p>Sharpe Media©    2023</p>
+      <p>Dev^2©    2023</p>
       <nav>
         <Link className="nav-item button" aria-label="On Click" target="_blank" to="https://osharpesportfolio.vercel.app" >O. Sharpe's Portfolio</Link>
       </nav>
