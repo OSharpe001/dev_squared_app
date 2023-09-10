@@ -15,16 +15,44 @@ button, .button {
   text-decoration: none;
   background-color: aliceblue;
   border-radius: 16px;
-  box-shadow: -4px 3px 5px black;
+  box-shadow: -4px 3px 5px aliceblue;
 }
 button:hover, .button:hover {
   text-decoration: underline;
 }
 button:active, .button:active {
-  box-shadow: -1px 1px 5px black;
+  box-shadow: -1px 1px 5px aliceblue;
 }
 .title {
   text-align: center;
+  margin: 0;
+  padding: 30px 0 50px;
+  /* margin-top: ; */
+  font-size: 28pt;
+}
+.underlined {
+  text-decoration: underline;
+}
+a {
+  text-decoration: none;
+  color: rgb(160, 204, 243);
+}
+a:hover {
+  text-decoration: underline;
+}
+label {
+  display: block;
+  font-size: 16pt;
+  margin-bottom: 10px;
+}
+input {
+  display: block;
+  font-size: 14pt;
+  margin-bottom: 30px;
+  line-height: 1.5;
+  box-shadow: 1px 1px 7px aliceblue;
+  border: blue;
+  border-radius: 0 5px;
 }
 
 /* SPINNER FROM BRAD TRAVERSY */
@@ -65,7 +93,8 @@ button:active, .button:active {
   animation-duration: .3s;
   animation-iteration-count: 1;
   animation-timing-function: linear;
-  border: 2px solid red;
+  /* margin: 0; */
+  /* border: 2px solid red; */
 }
 
 @keyframes drop-nav {
@@ -122,7 +151,7 @@ header nav {
   margin: 0;
   padding: 0 50px;
   background-color: aliceblue;
-  border: 2px solid blue;
+  /* border: 2px solid blue; */
 }
 
 .nav-items {
@@ -139,21 +168,30 @@ header nav {
 /* REGISTER PAGE STYLES */
 .register-page {
   min-height: 95vh;
+  color: aliceblue;
+  background-color: #2A4365;
 }
 
 /* LOGIN PAGE STYLES */
 .login-page {
   min-height: 95vh;
+  color: aliceblue;
+  background-color: #2A4365;
+  padding: 0 30px;
 }
 
 /* HOMEPAGE STYLES */
 .home-page {
   min-height: 95vh;
+  color: aliceblue;
+  background-color: #2A4365;
 }
 
 /* CURRENT BLOG PAGE STYLES */
 .current-blog-page {
   min-height: 95vh;
+  color: aliceblue;
+  background-color: #2A4365;
 }
 
 /* FOOTER STYLES */
