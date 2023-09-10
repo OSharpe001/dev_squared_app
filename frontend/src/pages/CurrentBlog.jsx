@@ -1,4 +1,5 @@
-import React from 'react'
+// import React from 'react';
+
 
 export default function CurrentBlog({ loggedIn, navigate }) {
 
@@ -7,6 +8,8 @@ export default function CurrentBlog({ loggedIn, navigate }) {
     };
 
     return (
-        <div>CurrentBlog</div>
+        <div className="current-blog-page">
+            <h1 className="title">CurrentBlog</h1>
+        </div>
     );
 };

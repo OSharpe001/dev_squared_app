@@ -1,9 +1,11 @@
-import React from 'react'
+// import React from 'react';
 
-function Register() {
+
+export default function Register({ setLoggedIn }) {
+
   return (
-    <div>Register</div>
-  )
-}
-
-export default Register
+    <div className='register-page'>
+      <h1 className="title">Register</h1>
+    </div>
+  );
+};

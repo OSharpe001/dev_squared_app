@@ -1,9 +1,30 @@
+/* GENERAL STYLES */
 body {
   margin: 0;
   box-sizing: border-box;
 }
 .App {
   min-height: 98vh;
+}
+button, .button {
+  font-size: 14pt;
+  color: black;
+  padding: 3px 8px;
+  width: 16ch;
+  color: blue;
+  text-decoration: none;
+  background-color: aliceblue;
+  border-radius: 16px;
+  box-shadow: -4px 3px 5px black;
+}
+button:hover, .button:hover {
+  text-decoration: underline;
+}
+button:active, .button:active {
+  box-shadow: -1px 1px 5px black;
+}
+.title {
+  text-align: center;
 }
 
 /* HEADER (NAVBAR) STYLES */
@@ -84,28 +105,25 @@ header nav {
   width: max-content;
 }
 
-button, .button {
-  font-size: 14pt;
-  color: black;
-  padding: 3px 8px;
-  width: 16ch;
-  color: blue;
-  text-decoration: none;
-  background-color: aliceblue;
-  border-radius: 16px;
-  box-shadow: -4px 3px 5px black;
+/* REGISTER PAGE STYLES */
+.register-page {
+  min-height: 95vh;
 }
 
-button:hover, .button:hover {
-  text-decoration: underline;
+/* LOGIN PAGE STYLES */
+.login-page {
+  min-height: 95vh;
 }
 
-button:active, .button:active {
-  box-shadow: -1px 1px 5px black;
+/* HOMEPAGE STYLES */
+.home-page {
+  min-height: 95vh;
 }
 
-
-
+/* CURRENT BLOG PAGE STYLES */
+.current-blog-page {
+  min-height: 95vh;
+}
 
 /* FOOTER STYLES */
 footer {
