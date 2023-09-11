@@ -15,13 +15,19 @@ button, .button {
   text-decoration: none;
   background-color: aliceblue;
   border-radius: 16px;
-  box-shadow: -4px 3px 5px aliceblue;
+  border: 2px solid blue;
+  box-shadow: -2px 2px 5px aliceblue;
+}
+button:disabled {
+  cursor: not-allowed;
+  box-shadow: none;
+  border: 1px ridge red;
 }
 button:hover, .button:hover {
   text-decoration: underline;
 }
 button:active, .button:active {
-  box-shadow: -1px 1px 5px aliceblue;
+  box-shadow: -1px 1px 3px aliceblue;
 }
 .title {
   text-align: center;
@@ -48,11 +54,19 @@ label {
 input {
   display: block;
   font-size: 14pt;
-  margin-bottom: 30px;
+  margin-bottom: 2px;
   line-height: 1.5;
   box-shadow: 1px 1px 7px aliceblue;
   border: blue;
   border-radius: 0 5px;
+}
+.error-message {
+  color: red;
+  font-size: 16pt;
+  height: 2.3ch;
+  text-shadow: 1px 1px 1px aliceblue;
+
+  margin: 4px auto 30px;
 }
 
 /* SPINNER FROM BRAD TRAVERSY */
