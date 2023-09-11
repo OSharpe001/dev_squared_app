@@ -10,6 +10,7 @@ button, .button {
   font-size: 14pt;
   color: black;
   padding: 3px 8px;
+  margin-bottom: 20px;
   width: 16ch;
   color: blue;
   text-decoration: none;
@@ -32,8 +33,7 @@ button:active, .button:active {
 .title {
   text-align: center;
   margin: 0;
-  padding: 30px 0 50px;
-  /* margin-top: ; */
+  padding: 20px 0 30px;
   font-size: 28pt;
 }
 .underlined {
@@ -184,6 +184,7 @@ header nav {
   min-height: 95vh;
   color: aliceblue;
   background-color: #2A4365;
+  padding: 0 30px;
 }
 
 /* LOGIN PAGE STYLES */
@@ -199,6 +200,7 @@ header nav {
   min-height: 95vh;
   color: aliceblue;
   background-color: #2A4365;
+  padding: 0 30px;
 }
 
 /* CURRENT BLOG PAGE STYLES */
@@ -206,6 +208,7 @@ header nav {
   min-height: 95vh;
   color: aliceblue;
   background-color: #2A4365;
+  padding: 0 30px;
 }
 
 /* FOOTER STYLES */
