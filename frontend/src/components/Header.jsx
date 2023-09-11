@@ -4,9 +4,11 @@ import { useLocation } from "react-router-dom";
 import { useState } from "react";
 
 
-export default function Header({ navigate, loggedIn, setLoggedIn }) {
+export default function Header({ navigate, loggedIn, setLoggedIn, setCurrentBlog, setBlogId }) {
 
   const backHome = () => {
+    setCurrentBlog("");
+    setBlogId("")
     navigate("/");
   };
 
