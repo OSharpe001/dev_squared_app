@@ -7,7 +7,7 @@ export default function Footer() {
     <footer>
       <p>Dev^2©    2023</p>
       <nav>
-        <Link className="nav-item button" aria-label="On Click" target="_blank" to="https://osharpesportfolio.vercel.app" >O. Sharpe's Portfolio</Link>
+        <Link className="nav-item button" aria-label="On Click" target="_blank" to="https://osharpesportfolio.netlify.app" >O. Sharpe's Portfolio</Link>
       </nav>
     </footer>
   );
