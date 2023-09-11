@@ -10,13 +10,12 @@ button, .button {
   font-size: 14pt;
   color: black;
   padding: 3px 8px;
-  margin-bottom: 20px;
   width: 16ch;
   color: blue;
   text-decoration: none;
   background-color: aliceblue;
   border-radius: 16px;
-  border: 2px solid blue;
+  border: 2px ridge blue;
   box-shadow: -2px 2px 5px aliceblue;
 }
 button:disabled {
@@ -65,8 +64,10 @@ input {
   font-size: 16pt;
   height: 2.3ch;
   text-shadow: 1px 1px 1px aliceblue;
-
   margin: 4px auto 30px;
+}
+li {
+  list-style-type: none;
 }
 
 /* SPINNER FROM BRAD TRAVERSY */
@@ -102,13 +103,10 @@ input {
 
 /* HEADER (NAVBAR) STYLES */
 .nav-header {
-  min-height: 8vh;
   height:max-content;
   animation-duration: .3s;
   animation-iteration-count: 1;
   animation-timing-function: linear;
-  /* margin: 0; */
-  /* border: 2px solid red; */
 }
 
 @keyframes drop-nav {
@@ -164,32 +162,35 @@ header nav {
   align-items: center;
   margin: 0;
   padding: 0 50px;
-  background-color: aliceblue;
-  /* border: 2px solid blue; */
+  background-color: grey;
 }
 
 .nav-items {
   width: 40%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: right;
 }
 
 .nav-items .button {
   width: max-content;
+  margin: auto 10px;
 }
 
 /* REGISTER PAGE STYLES */
 .register-page {
-  min-height: 95vh;
+  min-height: 87vh;
   color: aliceblue;
   background-color: #2A4365;
   padding: 0 30px;
 }
+.register-page button {
+  margin-bottom: 20px;
+}
 
 /* LOGIN PAGE STYLES */
 .login-page {
-  min-height: 95vh;
+  min-height: 87vh;
   color: aliceblue;
   background-color: #2A4365;
   padding: 0 30px;
@@ -197,15 +198,15 @@ header nav {
 
 /* HOMEPAGE STYLES */
 .home-page {
-  min-height: 95vh;
+  min-height: 87vh;
   color: aliceblue;
   background-color: #2A4365;
-  padding: 0 30px;
+  border: 2px solid blue;
 }
 
 /* CURRENT BLOG PAGE STYLES */
 .current-blog-page {
-  min-height: 95vh;
+  min-height: 87vh;
   color: aliceblue;
   background-color: #2A4365;
   padding: 0 30px;
@@ -221,5 +222,5 @@ footer {
   min-height: 8vh;
   height: 55px;
   color: black;
-  background-color: aliceblue;
+  background-color: grey;
 }
