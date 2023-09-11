@@ -51,8 +51,6 @@ export default function Register({ loggedIn, setLoggedIn, navigate }) {
     };
   };
 
-  // const specialCharacters = /[^a-zA-Z0-9]/;
-
   const handleChange = ({ target }) => {
     if (target.name === "name") {
       setName(target.value);
@@ -61,7 +59,6 @@ export default function Register({ loggedIn, setLoggedIn, navigate }) {
       };
     } else if (target.name === "userName") {
       setUserName(target.value);
-      // if (target.value.length >= 2 && !target.value.find(/[^a-zA-Z0-9]/)) {
       if (target.value.length >= 3 && !target.value.includes("@")) {
         setUserNameErrorMessage("");
       };
@@ -95,7 +92,6 @@ export default function Register({ loggedIn, setLoggedIn, navigate }) {
       resetPassword();
     };
 
-    // ****************
     const getMe = async () => {
       const URL = `http://localhost:5011/api/users`;
       if (formData.password) {
@@ -107,13 +103,11 @@ export default function Register({ loggedIn, setLoggedIn, navigate }) {
           console.log(err);
           resetPassword();
         };
-        // return response.data
       };
       resetLoginForm();
     };
     getMe();
   }, [formData, loggedIn, setLoggedIn, navigate]);
-  // ****************
 
   const errorHandling = ({ target }) => {
     if (target.name === "name" && target.value.length < 4) {
@@ -124,7 +118,6 @@ export default function Register({ loggedIn, setLoggedIn, navigate }) {
 
     if (target.name === "userName" && target.value.length < 3) {
       setUserNameErrorMessage("UserName must have at least 2 characters");
-    // } else if (userName.find(/[^a-zA-Z0-9]/)) {
     } else if (userName.includes("@")) {
       setUserNameErrorMessage('UserName can not have an "@" character');
     } else if (userName.length >= 2 && !userName.includes("@")) {
@@ -154,11 +147,6 @@ export default function Register({ loggedIn, setLoggedIn, navigate }) {
 
   const incomplete = nameErrorMessage || userNameErrorMessage || emailErrorMessage || password1ErrorMessage || password2ErrorMessage || !name || !userName || !email || !password1 || !password2;
 
-  // **************
-  // // **LOCAL STORAGE SETTINGS FOR WATCHLIST (BINGO-BOOK)
-  // const viewWatchList = () => JSON.parse(localStorage.getItem("WatchList"));
-  // localStorage.setItem("WatchList", JSON.stringify(newWatchList));
-  // **************
 
   return (
     <div className='register-page'>
