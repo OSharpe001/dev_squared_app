@@ -25,18 +25,16 @@ export default function Login({ loggedIn, setLoggedIn, navigate }) {
 
   const submitForm = (e) => {
     e.preventDefault();
-    if (alias.includes("@")) {
-      setFormData(prev => ({
-        ...prev,
+    if (alias.includes("@") && alias.includes(".")) {
+      setFormData({
         email: alias,
         password: password
-      }));
+      });
     } else {
-      setFormData(prev => ({
-        ...prev,
+      setFormData({
         userName: alias,
         password: password
-      }));
+      });
     };
   };
 
@@ -55,6 +53,10 @@ export default function Login({ loggedIn, setLoggedIn, navigate }) {
   };
 
   useEffect(() => {
+    if (loggedIn) {
+      navigate("/");
+    };
+
     const resetLoginForm = () => {
       resetAlias();
       resetPassword();
@@ -76,7 +78,7 @@ export default function Login({ loggedIn, setLoggedIn, navigate }) {
       resetLoginForm();
     };
     getMe();
-  }, [formData, setLoggedIn]);
+  }, [formData, loggedIn, setLoggedIn, navigate]);
 
   const errorHandling = ({ target }) => {
     if (target.name === "alias" && alias.length < 4) {
@@ -93,9 +95,6 @@ export default function Login({ loggedIn, setLoggedIn, navigate }) {
 
   const incomplete = aliasErrorMessage || passwordErrorMessage || !alias || !password;
 
-  if (loggedIn) {
-    navigate("/");
-  };
 
   return (
     <div className='login-page'>
