@@ -37,7 +37,7 @@ export default function Login({ loggedIn, setLoggedIn, navigate }) {
         userName: alias,
         password: password
       }));
-    }
+    };
   };
 
   const handleChange = ({ target }) => {
@@ -100,7 +100,7 @@ export default function Login({ loggedIn, setLoggedIn, navigate }) {
   return (
     <div className='login-page'>
       <h1 className="title">Login <span className="underlined">or</span> <a href="/sign-up">Register</a></h1>
-      <form action="">
+      <form>
         <label htmlFor="alias">UserName <span className='underlined'>or</span> Email:</label>
         <input onChange={handleChange} onBlur={errorHandling} type="text" name="alias" id="alias" placeholder='jd@email.com' value={alias} />
         <p className="error-message">{aliasErrorMessage}</p>
