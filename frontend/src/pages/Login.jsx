@@ -7,6 +7,9 @@ export default function Login({ loggedIn, setLoggedIn, navigate }) {
   const [alias, setAlias] = useState("");
   const [password, setPassword] = useState("");
 
+  const [aliasErrorMessage, setAliasErrorMessage] = useState("");
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
+
   const [formData, setFormData] = useState({
     userName: "",
     email: "",
@@ -40,9 +43,15 @@ export default function Login({ loggedIn, setLoggedIn, navigate }) {
   const handleChange = ({ target }) => {
     if (target.name === "alias") {
       setAlias(target.value);
+      if (target.value.length >= 4) {
+        setAliasErrorMessage("");
+      };
     } else {
       setPassword(target.value);
-    }
+      if (target.value.length >= 7) {
+        setPasswordErrorMessage("");
+      };
+    };
   };
 
   useEffect(() => {
@@ -69,6 +78,21 @@ export default function Login({ loggedIn, setLoggedIn, navigate }) {
     getMe();
   }, [formData, setLoggedIn]);
 
+  const errorHandling = ({ target }) => {
+    if (target.name === "alias" && alias.length < 4) {
+      setAliasErrorMessage("Please place proper UserName or Email in field");
+    } else if (alias.length >= 4) {
+      setAliasErrorMessage("");
+    };
+    if (target.name === "password" && password.length < 7) {
+      setPasswordErrorMessage("Password must have at least 8 characters");
+    } else if (password.length >= 7) {
+      setPasswordErrorMessage("");
+    };
+  };
+
+  const incomplete = aliasErrorMessage || passwordErrorMessage || !alias || !password;
+
   if (loggedIn) {
     navigate("/");
   };
@@ -78,10 +102,13 @@ export default function Login({ loggedIn, setLoggedIn, navigate }) {
       <h1 className="title">Login <span className="underlined">or</span> <a href="/sign-up">Register</a></h1>
       <form action="">
         <label htmlFor="alias">UserName <span className='underlined'>or</span> Email:</label>
-        <input onChange={handleChange} type="text" name="alias" id="alias" placeholder='jd@email.com' value={alias} />
+        <input onChange={handleChange} onBlur={errorHandling} type="text" name="alias" id="alias" placeholder='jd@email.com' value={alias} />
+        <p className="error-message">{aliasErrorMessage}</p>
+
         <label htmlFor="password">Password:</label>
-        <input onChange={handleChange} type="password" name="password" id="password" value={password} />
-        <button onClick={submitForm}>Submit</button>
+        <input onChange={handleChange} onBlur={errorHandling} type="password" name="password" id="password" value={password} />
+        <p className="error-message">{passwordErrorMessage}</p>
+        <button onClick={submitForm} disabled={incomplete}>Submit</button>
       </form>
     </div>
   );
