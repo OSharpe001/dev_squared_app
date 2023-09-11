@@ -198,10 +198,76 @@ header nav {
 
 /* HOMEPAGE STYLES */
 .home-page {
+  /* padding: 0 30px; */
   min-height: 87vh;
   color: aliceblue;
   background-color: #2A4365;
   border: 2px solid blue;
+}
+.hero {
+  height: 35vh;
+  width: 90vw;
+  display: flex;
+  margin: 0 auto 40px;
+  justify-content: space-around;
+  box-shadow: -2px 2px 5px aliceblue;
+  border-radius: 7px;
+  /* border: 2px solid blue; */
+}
+.speech {
+  margin-top: 0;
+  padding-top: 0;
+  /* font-size: 2.3vh; */
+  font-size: 14pt;
+  line-height: 1.5;
+  max-width: 325px;
+  overflow: scroll;
+}
+.meme-button {
+  height: 100%;
+  width: 20vw;
+  justify-content: center;
+  justify-self: center;
+  justify-items: center;
+  align-items: center;
+  align-self: center;
+  align-content: center;
+  background-color: grey;
+  border: 1px solid blue;
+}
+.meme-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 7px;
+  /* border: 2px solid blue; */
+}
+.announcement {
+  /* width: 100%; */
+  /* text-align: center; */
+  margin: 0 auto 10px;
+  /* border: 2px solid red; */
+}
+.create-blog-button {
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+.homepage-blog {
+  display: flex;
+  flex-direction: row;
+  margin: 20px auto;
+}
+.blog-item {
+  margin-right: 15px;
+  width: max-content;
+}
+.author {
+  margin-right: 15px;
+}
+.created {
+  margin-right: 15px;
+}
+.likes {
+  margin-right: 15px;
 }
 
 /* CURRENT BLOG PAGE STYLES */
@@ -210,6 +276,21 @@ header nav {
   color: aliceblue;
   background-color: #2A4365;
   padding: 0 30px;
+}
+.blog-info {
+  width: max-content;
+  margin: auto auto 50px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.current-blog-page .title {
+  margin-bottom: 5px;
+  padding-bottom: 0;
+}
+.blog-info p {
+  margin: 0 0 2px 30px;
+  text-align: left;
 }
 
 /* FOOTER STYLES */
