@@ -9,11 +9,12 @@ export default function HomePage({ loggedIn, navigate }) {
 
     const [blogs, setBlogs] = useState([])
 
-    if (!loggedIn) {
-        navigate("/sign-up")
-    };
 
     useEffect(() => {
+        if (!loggedIn) {
+            navigate("/sign-up")
+        };
+
         const getAllBlogs = async () => {
             const URL = "http://localhost:5011/api/blogs";
             const options = { method: "GET" };
@@ -27,7 +28,7 @@ export default function HomePage({ loggedIn, navigate }) {
             };
         };
         getAllBlogs();
-    }, []);
+    }, [loggedIn, navigate]);
 
     if (blogs.length < 1) {
         return (
