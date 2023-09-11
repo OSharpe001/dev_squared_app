@@ -95,11 +95,12 @@ export default function Register({ loggedIn, setLoggedIn, navigate }) {
     const getMe = async () => {
       const URL = `http://localhost:5011/api/users`;
       if (formData.password) {
+        const response = await axios.post(URL, formData);
         try {
-          const response = await axios.post(URL, formData);
           localStorage.setItem("Dev2User", JSON.stringify(response.data));
           await setLoggedIn(JSON.parse(localStorage.getItem("Dev2User")));
         } catch (err) {
+          alert("an Error occurred. Please try, again.")
           console.log(err);
           resetPassword();
         };
