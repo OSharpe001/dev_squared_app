@@ -2,30 +2,50 @@ import { useState, useEffect } from 'react';
 import CommentModal from '../components/CommentModal';
 
 
-export default function CurrentBlog({ currentBlog , loggedIn, navigate }) {
+export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navigate }) {
 
     const [commentModalHidden, setCommentModalHidden] = useState(true);
+    const [commentToDelete, setCommentToDelete] = useState("");
 
     useEffect(() => {
         if (!loggedIn) {
             navigate("/sign-up");
         };
-    
+
         if (loggedIn && !currentBlog) {
             navigate("/");
         };
-    
-      
-    }, [loggedIn, currentBlog, navigate])
-    
-    
+
+        // *************************
+        if (commentToDelete) {
+            const commentDeletion = async () => {
+                const URL = "http://localhost:5011/api/blogs/comments/";
+                const options = { method: "DELETE" };
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${loggedIn.token}`
+                    },
+                };
+                try {
+                    await fetch(URL + commentToDelete, config, options);
+                } catch (err) {
+                    console.log("RELEVANT COMMENTS FETCH ERROR: ", err)
+                };
+            };
+            commentDeletion();
+        };
+        // *************************
+
+    }, [loggedIn, currentBlog, navigate, commentToDelete]);
 
     const startComment =() => {
         setCommentModalHidden(false);
     };
 
-    console.log("**CURRENTBLOGS CURRENTBLOG VALUE: ", currentBlog);
-    console.log("**CURRENTBLOGS LOGGEDIN INFO: ", loggedIn);
+    // console.log("**CURRENTBLOGS CURRENTBLOG VALUE: ", currentBlog);
+    // console.log("**CURRENTBLOGS LOGGEDIN INFO: ", loggedIn);
+    // console.log("CURRENTBLOGS COMMENTS INFO: ", blogComments);
+    // console.log("CURRENTBLOGS COMMENTTODELETE VALUE: ", commentToDelete);
 
     return (
         <section className="current-blog-page">
@@ -51,6 +71,29 @@ export default function CurrentBlog({ currentBlog , loggedIn, navigate }) {
                     <button>Comment</button>
                 </>
             }
+            </div>
+
+            <div className="comment-section">
+                <h3 className="blog-title underlined">Comments</h3>
+                <ul className='comments'>
+                    {blogComments.map(comment => (
+                        <li>
+                            <div className="comment-info">
+                                <p className="author">By: {comment.userName}</p>
+                                <p className="created">{new Date(comment.updatedAt).toLocaleString().split(",")[0]}</p>
+                            </div>
+                            <p className="comment" key={comment.id}>{comment.text}</p>
+                            {comment.userName === loggedIn.userName ?
+                                <div className='ud-buttons'>
+                                    <button>Edit</button>
+                                    <button onClick={() => setCommentToDelete(comment._id)}>Delete</button>
+                                </div>
+                            :
+                                <button>Love</button>
+                            }
+                        </li>
+                    ))}
+                </ul>
             </div>
 
             <CommentModal
