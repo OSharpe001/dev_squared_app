@@ -310,13 +310,13 @@ header nav {
   overflow:scroll;
   margin: 3px auto 5px;
   height: 24vh;
-  width: 100%;
+  width: 99.5%;
   background-color: transparent;
 }
 /* COMMENT SECTION OF CURRENT BLOG PAGE */
 .current-blog-page li {
   padding: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   box-shadow: -1px 1px 5px aliceblue;
   border-radius: 5px;
 }
