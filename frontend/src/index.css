@@ -313,6 +313,17 @@ header nav {
   width: 100%;
   background-color: transparent;
 }
+/* COMMENT SECTION OF CURRENT BLOG PAGE */
+.current-blog-page li {
+  padding: 5px;
+  margin-bottom: 10px;
+  box-shadow: -1px 1px 5px aliceblue;
+  border-radius: 5px;
+}
+.comment-info {
+  display: flex;
+  flex-direction: row;
+}
 
 /* FOOTER STYLES */
 footer {
