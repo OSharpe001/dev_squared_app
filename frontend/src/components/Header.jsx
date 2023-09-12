@@ -7,8 +7,8 @@ import { useState } from "react";
 export default function Header({ navigate, loggedIn, setLoggedIn, setCurrentBlog, setBlogId }) {
 
   const backHome = () => {
+    setBlogId("");
     setCurrentBlog("");
-    setBlogId("")
     navigate("/");
   };
 
