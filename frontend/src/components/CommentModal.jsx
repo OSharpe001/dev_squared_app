@@ -19,7 +19,7 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
     const handleTextChange = ({ target }) => {
         setCommentText(target.value);
     };
-    console.log("COMMENTMODAL'S COMMENTTEXT VALUE: ", commentText);
+    // console.log("COMMENTMODAL'S COMMENTTEXT VALUE: ", commentText);
 
     const submitForm = () => {
         setFormData(prev => ({
