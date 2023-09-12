@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Spinner from '../components/Spinner';
 import Hero from '../components/Hero';
+import BlogModal from '../components/BlogModal';
 // import { grabUserName } from '../features/grabUserName';
 // import axios from 'axios';
 
@@ -10,9 +11,9 @@ import Hero from '../components/Hero';
 export default function HomePage({ setBlogId, loggedIn, navigate }) {
 
     // console.log("HOMEPAGE'S LOGGEDIN INFO: ", loggedIn);
-
+    const [blogModalHidden, setblogModalHidden] = useState(false)
     const [blogs, setBlogs] = useState([]);
-    console.log("HOMEPAGE'S BLOGS INFO: ", blogs)
+    // console.log("HOMEPAGE'S BLOGS INFO: ", blogs);
 
     useEffect(() => {
         if (!loggedIn) {
@@ -26,9 +27,9 @@ export default function HomePage({ setBlogId, loggedIn, navigate }) {
             try {
                 const response = await fetch(URL, options);
                 const data = await response.json();
-                setBlogs(data);
+                setBlogs(data.reverse());
             } catch (err) {
-                console.log("FETCH ERROR: ", err)
+                console.log("HOMEPAGE'S FETCH ERROR: ", err)
             };
         };
         getAllBlogs();
@@ -71,6 +72,11 @@ export default function HomePage({ setBlogId, loggedIn, navigate }) {
                     </div>
                 ))}
             </ul>
+            <BlogModal
+                    loggedIn={loggedIn}
+                    blogModalHidden={blogModalHidden}
+                    setblogModalHidden={setblogModalHidden}
+                />
         </div>
     );
 };
