@@ -6,8 +6,8 @@ const { protect } = require("../middleware/authMiddleware");
 
 // COMMENT ROUTES--
 // (CHAINING METHODS THAT HAVE THE SAME ROUTE)
-router.route("/").get(getBlogComments).get(getUserComments).post(protect, setComments);
+router.route("/").get(getUserComments).post(protect, setComments);
 
-router.route("/:id").put(protect, updateComments).delete(protect, deleteComments);
+router.route("/:id").get(getBlogComments).put(protect, updateComments).delete(protect, deleteComments);
 
 module.exports = router;
