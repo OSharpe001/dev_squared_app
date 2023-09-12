@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 
@@ -98,7 +99,7 @@ export default function Login({ loggedIn, setLoggedIn, navigate }) {
 
   return (
     <div className='login-page'>
-      <h1 className="title">Login <span className="underlined">or</span> <a href="/sign-up">Register</a></h1>
+      <h1 className="title">Login <span className="underlined">or</span> <Link aria-label="On Click" to="/sign-up">Register</Link></h1>
       <form>
         <label htmlFor="alias">UserName <span className='underlined'>or</span> Email:</label>
         <input onChange={handleChange} onBlur={errorHandling} type="text" name="alias" id="alias" placeholder='jd@email.com' value={alias} />
