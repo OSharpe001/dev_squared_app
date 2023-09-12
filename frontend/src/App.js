@@ -19,6 +19,10 @@ export default function App() {
   console.log("APP'S CURRENT BLOGID VALUE: ", blogId);
 
   useEffect(() => {
+
+    // if (!blogId && !currentBlog) {
+    //   navigate("/")
+    // };
     const getCurrentBlog = async () => {
       if (loggedIn && !blogId) {
         setCurrentBlog("");
@@ -52,7 +56,7 @@ export default function App() {
 
     getRelevantComments();
     getCurrentBlog();
-  }, [blogId, loggedIn, navigate]);
+  }, [blogId, loggedIn, navigate/*, currentBlog*/]);
 
   return (
     <>
@@ -78,6 +82,7 @@ export default function App() {
                                         navigate={navigate}
                                         loggedIn={loggedIn}
                                         blogComments={blogComments}
+                                        // setBlogId={setBlogId}
                                       />}/>
         <Route path="/" element={<HomePage
                                     navigate={navigate}
