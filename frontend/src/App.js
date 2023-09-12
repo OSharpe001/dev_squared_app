@@ -10,7 +10,7 @@ import axios from 'axios';
 
 export default function App() {
 
-  const [loggedIn, setLoggedIn] = useState(JSON.parse(localStorage.getItem("Dev2User")));
+  const [loggedIn, setLoggedIn] = useState(JSON.parse(localStorage.getItem("Dev2User")) ? JSON.parse(localStorage.getItem("Dev2User")) : false);
   const [currentBlog, setCurrentBlog] = useState("");
   const [blogId, setBlogId] = useState("");
   const navigate = useNavigate();
@@ -18,10 +18,13 @@ export default function App() {
 
   useEffect(() => {
     const getCurrentBlog = async () => {
-      if (blogId) {
+      if (loggedIn && !blogId) {
+        setCurrentBlog("");
+        navigate("/");
+      } else if (blogId) {
         const URL = `http://localhost:5011/api/blogs/${blogId}`;
         const response = await axios.get(URL);
-        console.log("APP.JS' GETCURRENTBLOG VALUE: ", response.data);
+        // console.log("APP.JS' GETCURRENTBLOG VALUE: ", response.data);
         try {
           await setCurrentBlog(response.data);
         } catch (err) {
