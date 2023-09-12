@@ -5,7 +5,7 @@ const asyncHandler = require("express-async-handler");
 
 // GET ALL BLOG COMMENTS (GET REQUEST - "/api/blog_id/comments")
 const getBlogComments = asyncHandler(async (req, res) => {
-    const comments = await Comment.find({ blog: req.blog.id });
+    const comments = await Comment.find({ blogId: req.params.id });
     res.status(200).json(comments);
 });
 
@@ -36,7 +36,7 @@ const updateComments = asyncHandler(async (req, res) => {
     // FIND THE COMMENT'S ID
     const comment = await Comment.findById(req.params.id);
 
-    // CHECK IF THE GOAL EXISTS TO BE UPDATED
+    // CHECK IF THE COMMENT EXISTS TO BE UPDATED
     if (!comment) {
         res.status(400);
         throw new Error("Comment does not exist...");
@@ -79,16 +79,16 @@ const deleteComments = asyncHandler(async (req, res) => {
     };
 
     // CHECK FOR THE USER
-    if (!req.user) {
+    if (!req.user.id) {
         res.status(401);
         throw new Error("Creator not found...");
     };
 
     // CHECK FOR THE ASSOCIATED BLOG
-    if (!req.blog) {
-        res.status(401);
-        throw new Error("Associated blog not found...");
-    };
+    // if (!req.blog) {
+    //     res.status(401);
+    //     throw new Error("Associated blog not found...");
+    // };
 
     // MAKE SURE THE CURRENT USER MATCHES THE COMMENT'S CREATOR
     if (comment.user.toString() !== req.user.id) {
@@ -114,7 +114,7 @@ module.exports = { getBlogComments, getUserComments, setComments, updateComments
 //     const creator = await Comment.findById(req.body.userName);
 //     const blogId = await Comment.findById(req.body.blogId);
 
-//     // CHECK IF THE GOAL EXISTS TO BE UPDATED
+//     // CHECK IF THE COMMENT EXISTS TO BE UPDATED
 //     if (!comment) {
 //         res.status(400);
 //         throw new Error("Comment does not exist...");
