@@ -13,6 +13,8 @@ export default function App() {
   const [loggedIn, setLoggedIn] = useState(JSON.parse(localStorage.getItem("Dev2User")) ? JSON.parse(localStorage.getItem("Dev2User")) : false);
   const [currentBlog, setCurrentBlog] = useState("");
   const [blogId, setBlogId] = useState("");
+  const [blogComments, setBlogComments] = useState([]);
+
   const navigate = useNavigate();
   console.log("APP'S CURRENT BLOGID VALUE: ", blogId);
 
@@ -34,6 +36,21 @@ export default function App() {
         navigate("/blog");
       };
     };
+
+    const getRelevantComments = async () => {
+      const URL = "http://localhost:5011/api/blogs/comments/";
+      const options = { method: "GET" };
+
+      try {
+          const response = await fetch(URL + blogId, options);
+          const data = await response.json();
+          setBlogComments(data.reverse());
+      } catch (err) {
+          console.log("RELEVANT COMMENTS FETCH ERROR: ", err)
+      };
+  };
+
+    getRelevantComments();
     getCurrentBlog();
   }, [blogId, loggedIn, navigate]);
 
@@ -60,6 +77,7 @@ export default function App() {
                                         currentBlog={currentBlog}
                                         navigate={navigate}
                                         loggedIn={loggedIn}
+                                        blogComments={blogComments}
                                       />}/>
         <Route path="/" element={<HomePage
                                     navigate={navigate}
