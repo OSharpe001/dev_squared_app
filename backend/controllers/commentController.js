@@ -48,11 +48,11 @@ const updateComments = asyncHandler(async (req, res) => {
         throw new Error("Creator not found...");
     };
 
-    // CHECK IF BLOG EXISTS
-    if (!req.blog) {
-        res.status(401);
-        throw new Error("Associated blog not found...");
-    };
+    // // CHECK IF BLOG EXISTS
+    // if (!req.blog) {
+    //     res.status(401);
+    //     throw new Error("Associated blog not found...");
+    // };
 
     // MAKE SURE THE CURRENT USER WROTE THE COMMENT
     if (comment.user.toString() !== req.user.id) {
@@ -66,11 +66,11 @@ const updateComments = asyncHandler(async (req, res) => {
     res.status(200).json(updatedComment);
 });
 
-// DELETE COMMENTS (DELETE REQUEST - "/api/blog_id/comments/:id")
+// DELETE COMMENTS (DELETE REQUEST - "/api/blogs/comments/:id")
 const deleteComments = asyncHandler(async (req, res) => {
 
     // FIND THE COMMENT BY ID
-    const comment = Comment.findById(req.params.id);
+    const comment = await Comment.findById(req.params.id);
 
     // CHECK IF THE COMMENT DOESN'T EXIST
     if (!comment) {
@@ -94,6 +94,8 @@ const deleteComments = asyncHandler(async (req, res) => {
     if (comment.user.toString() !== req.user.id) {
         res.status(401);
         throw new Error("Not authorized...");
+        // throw new Error(`**COMMENT.USER: ${comment.user} - **REQUEST.USER.ID: ${req.user.id}`);
+        // throw new Error(`**COMMENT INFO ${comment}`);
     };
 
     await Comment.findByIdAndRemove(req.params.id);
