@@ -32,6 +32,7 @@ export default function HomePage({ setBlogId, loggedIn, navigate }) {
                 console.log("HOMEPAGE'S FETCH ERROR: ", err)
             };
         };
+
         getAllBlogs();
     }, [loggedIn, navigate]);
 
