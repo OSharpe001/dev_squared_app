@@ -2,10 +2,7 @@ import { useState, useEffect } from 'react';
 import Spinner from '../components/Spinner';
 import Hero from '../components/Hero';
 import BlogModal from '../components/BlogModal';
-// import { grabUserName } from '../features/grabUserName';
-// import axios from 'axios';
-
-// import { fetchFromAPI } from '../features/handleAPICall';
+import axios from 'axios';
 
 
 export default function HomePage({ setBlogId, loggedIn, navigate }) {
@@ -21,11 +18,13 @@ export default function HomePage({ setBlogId, loggedIn, navigate }) {
         };
 
         const getAllBlogs = async () => {
-            const URL = "http://localhost:5011/api/blogs";
+            // const URL = "http://localhost:5011/api/blogs";
             const options = { method: "GET" };
 
             try {
-                const response = await fetch(URL, options);
+                const URL = "http://localhost:5011/api/blogs";
+                // const response = await fetch(URL, options);
+                const response = await axios.get(URL, options);
                 const data = await response.json();
                 setBlogs(data.reverse());
             } catch (err) {
@@ -44,11 +43,6 @@ export default function HomePage({ setBlogId, loggedIn, navigate }) {
         );
     };
 
-    // const getUserName = async (id) => {
-
-    // }
-
-    // grabUserName();
     return (
         <div className='home-page'>
             <h1 className='title'>Welcome Back to Dev^2, {loggedIn.userName}!</h1>
@@ -64,11 +58,10 @@ export default function HomePage({ setBlogId, loggedIn, navigate }) {
                     <div key={blog._id} >
                         <li className='homepage-blog'>
                             <button className="blog-item" onClick={() => setBlogId(blog._id)}>{blog.title}</button>
-                            
+
                             <p className="author">By: {blog.user}</p>
                             <p className="created">{new Date(blog.updatedAt).toLocaleString().split(",")[0]}</p>
                             <p className="likes">Likes: {}</p>
-
                         </li>
                     </div>
                 ))}
