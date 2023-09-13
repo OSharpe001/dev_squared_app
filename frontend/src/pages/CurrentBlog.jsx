@@ -1,13 +1,17 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import CommentModal from '../components/CommentModal';
+import BlogModal from '../components/BlogModal';
 
 
-export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navigate }) {
+export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navigate, blogModalHidden, setblogModalHidden }) {
 
     const [commentModalHidden, setCommentModalHidden] = useState(true);
     const [commentToDelete, setCommentToDelete] = useState("");
+    const [blogToDelete, setBlogToDelete] = useState("");
     const [commentToUpdate, setCommentToUpdate] = useState("");
+
+    console.log("CURRENTBLOG BLOGMODALHIDDEN VALUE: ", blogModalHidden)
 
     useEffect(() => {
         if (!loggedIn) {
@@ -29,13 +33,30 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
                 try {
                     await axios.delete(URL + commentToDelete, config);
                 } catch (err) {
-                    console.log("RELEVANT COMMENTS FETCH ERROR: ", err)
+                    console.log("DELETE FETCH ERROR: ", err)
                 };
             };
             commentDeletion();
         };
 
-    }, [loggedIn, currentBlog, navigate, commentToDelete, commentToUpdate/*, setBlogId*/]);
+        if (blogToDelete) {
+            const blogDeletion = async () => {
+                const URL = "http://localhost:5011/api/blogs/";
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${loggedIn.token}`
+                    },
+                };
+                try {
+                    await axios.delete(URL + blogToDelete, config);
+                } catch (err) {
+                    console.log("DELETE FETCH ERROR: ", err)
+                };
+            };
+            blogDeletion();
+        };
+
+    }, [loggedIn, currentBlog, navigate, commentToDelete, commentToUpdate, blogToDelete]);
 
     const startComment = () => {
         setCommentModalHidden(false);
@@ -57,7 +78,7 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
                 <h2 className="blog-title underlined">{currentBlog.title}</h2>
                 <p className="blog-text">{currentBlog.text}</p>
                 <div className="blog-info">
-                    <p className="current-blog-author underlined">By: {currentBlog.user}</p>
+                    <p className="current-blog-author underlined">By: {currentBlog.userName}</p>
                     <p className="current-blog-date underlined">{new Date(currentBlog.updatedAt).toLocaleString().split(",")[0]}</p>
                 </div>
             </div>
@@ -65,7 +86,7 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
             <div className="add-or-update">
                 {loggedIn._id === currentBlog.user ?
                     <>
-                        <button>Delete</button>
+                        <button onClick={() => setBlogToDelete(currentBlog._id)}>Delete</button>
                         <button>Edit</button>
                     </>
                     :
@@ -92,7 +113,7 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
                                     <button onClick={() => setCommentToDelete(comment._id)}>Delete</button>
                                 </div>
                                 :
-                                <button>Love</button>
+                                <button>Like</button>
                             }
                         </li>
                     ))}
@@ -105,6 +126,12 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
                 loggedIn={loggedIn}
                 currentBlog={currentBlog}
                 commentToUpdate={commentToUpdate}
+                navigate={navigate}
+            />
+
+            <BlogModal
+                loggedIn={loggedIn}
+                setblogModalHidden={setblogModalHidden}
             />
         </section>
     );
