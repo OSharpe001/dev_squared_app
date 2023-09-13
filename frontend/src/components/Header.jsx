@@ -14,8 +14,8 @@ export default function Header({ navigate, loggedIn, setLoggedIn, setCurrentBlog
   const logOut = () => {
     localStorage.removeItem("Dev2User");
     setLoggedIn(false);
-    navigate("/sign-up")
-  }
+    navigate("/sign-up");
+  };
 
   // NECESSARY TO CHANGE THE "VIEW-POSTER" BUTTON TO "CHANGE-POSTER" WHEN ON POSTER PAGE
   const currentScreen = useLocation().pathname;
