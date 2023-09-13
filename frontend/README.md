@@ -10,13 +10,15 @@
 
 ## Issues I couldn't resolve:
 
-- Staying on the Current Blog page after creating or updating a blog.
+- Staying on the Current Blog page after  updating a blog.
 
 - Having the screen re-render to show the updated list of comments after deleting one.
 
-- There is a rapid amount of re-renders when logging-out.
+- There is a large amount of rapid re-renders when logging-out.
 
-- after deleting a comment, the screen does not refresh. Making it look like the comment wasn't deleted (but it was). Add that to the issue that my "back to home" button doesn't work, things are not looking pretty.
+- After deleting a comment, the screen does not refresh. Making it look like the comment wasn't deleted (but it was).
+
+-The "Back to Blogs" button doesn't work. There are a lot of re-renders and client ends up back on the "Current Blog" page they were trying to leave.
 
 ---
 
@@ -27,21 +29,21 @@
 - JavaScript: Used to adapt interactivity to a web page, making it a "web application".
 - HTML: The "document" section of a web page. Holds all the document's text.
 - CSS: Used to apply styling to the web page document.
-- @babel/plugin-proposal-private-property-in-object:
--axios:
+- Babel Plug-in: Comes with create-react-app (in the node modules, I believe) but since they are no longer keeping up with c-r-a's maintenance, it's  not automatically installed in your dependencies. Without it, you'll face more issues uploading it to hosting sites, like Netlify.
+- axios: Used to make fetch requests a little simpler.
 
 ### Back-End:
-- bcrypt:
-- cors:
-- dotenv:
-- express:
-- express-async-handler:
-- gitignore:
-- jsonwebtoken:
-- mongoose:
+- bcrypt: Encryption to avoid sending secret info to the database.
+- cors: Helps avoid Access-Control-Allow-Origin errors (still doesn't work for me although I have seen it help others. I had to disable those restrictions on my Mac).
+- dotenv: Allows the recognition and usage of the ".env" file.
+- express: Aids back-end routing.
+- express-async-handler: Helps keep boilerplate code to a minimum by replacing "try/catch" statements.
+- gitignore: Stops the uploading of specified (secret) files from your computer.
+- jsonwebtoken: Encryption to aid in authentication over the web.
+- mongoose: Ties our back-end to our database.
 
 - **HONORABLE MENTIONS**
-- JavaScript's "window" reference: Used to get info about what's happening in the browser's current window (like mouse location).
+- JavaScript's "window" reference: Used to get info about what's happening in the browser's current window (like client mouse location).
 
 ---
 
@@ -52,6 +54,7 @@
 ---
 
 ## Live Site Link:
+### **COMING SOON!**
 - []()
 
 ---
