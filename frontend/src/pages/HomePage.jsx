@@ -2,15 +2,13 @@ import { useState, useEffect } from 'react';
 import Spinner from '../components/Spinner';
 import Hero from '../components/Hero';
 import BlogModal from '../components/BlogModal';
-import axios from 'axios';
 
 
-export default function HomePage({ setBlogId, loggedIn, navigate }) {
+export default function HomePage({ setBlogId, loggedIn, navigate, blogModalHidden, setblogModalHidden }) {
 
     // console.log("HOMEPAGE'S LOGGEDIN INFO: ", loggedIn);
-    const [blogModalHidden, setblogModalHidden] = useState(false)
     const [blogs, setBlogs] = useState([]);
-    // console.log("HOMEPAGE'S BLOGS INFO: ", blogs);
+    console.log("HOMEPAGE'S BLOGS INFO: ", blogs);
 
     useEffect(() => {
         if (!loggedIn) {
@@ -18,13 +16,11 @@ export default function HomePage({ setBlogId, loggedIn, navigate }) {
         };
 
         const getAllBlogs = async () => {
-            // const URL = "http://localhost:5011/api/blogs";
-            const options = { method: "GET" };
-
             try {
                 const URL = "http://localhost:5011/api/blogs";
-                // const response = await fetch(URL, options);
-                const response = await axios.get(URL, options);
+                const options = { method: "GET" };
+
+                const response = await fetch(URL, options);
                 const data = await response.json();
                 setBlogs(data.reverse());
             } catch (err) {
@@ -43,6 +39,17 @@ export default function HomePage({ setBlogId, loggedIn, navigate }) {
         );
     };
 
+    const createBlog = () => {
+        setblogModalHidden(false);
+    };
+
+    const goToBlog = (blog) => {
+        setblogModalHidden(true);
+        setBlogId(blog);
+    };
+
+    const disabled = !blogModalHidden;
+
     return (
         <div className='home-page'>
             <h1 className='title'>Welcome Back to Dev^2, {loggedIn.userName}!</h1>
@@ -50,16 +57,16 @@ export default function HomePage({ setBlogId, loggedIn, navigate }) {
             <Hero />
             <ul>
             <h2 className='announcement'>Create A New Blog <span className='underlined'>or</span> Check Out Previous Ones!</h2>
-            <button className="create-blog-button">Create Blog</button>
+            <button className="create-blog-button" disabled={disabled} onClick={createBlog}>Create Blog</button>
             </ul>
 
             <ul className="bloglist">
                 {blogs.map(blog => (
                     <div key={blog._id} >
                         <li className='homepage-blog'>
-                            <button className="blog-item" onClick={() => setBlogId(blog._id)}>{blog.title}</button>
+                            <button className="blog-item" disabled={disabled} onClick={() => goToBlog(blog._id)}>{blog.title}</button>
 
-                            <p className="author">By: {blog.user}</p>
+                            <p className="author underlined">By: {blog.userName}</p>
                             <p className="created">{new Date(blog.updatedAt).toLocaleString().split(",")[0]}</p>
                             <p className="likes">Likes: {}</p>
                         </li>
