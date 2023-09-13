@@ -19,14 +19,12 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
     const handleTextChange = ({ target }) => {
         setCommentText(target.value);
     };
-    // console.log("COMMENTMODAL'S COMMENTTEXT VALUE: ", commentText);
 
     const submitForm = () => {
             setFormData(prev => ({
                 ...prev,
                 text: commentText
             }));
-        // console.log("COMMENTMODAL'S SUBMITFORM'S SETFORMDATA TEXT VALUE: ", commentText);
     };
 
     useEffect(() => {
@@ -42,17 +40,16 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
                         },
                     };
                     try {
-                        const response = await axios.put(URL, formData, config);
-                        console.log("COMMENTMODAL'S USEEFFECT POST ATTEMPT RESPONSE: ", response);
+                        await axios.put(URL, formData, config);
                     } catch (err) {
-                        console.log("FETCH ERROR: ", err)
+                        console.log("UPDATE FETCH ERROR: ", err)
                     };
                 };
                 updateComment();
-                navigate("/")
+                navigate("/");
             };
 
-        } else {
+        } else if (formData.text) {
             const createComment = async () => {
                 const URL = "http://localhost:5011/api/blogs/comments";
                 const config = {
@@ -68,10 +65,7 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
             };
             createComment();
         };
-
     }, [formData, loggedIn.token, currentBlog, commentToUpdate, navigate]);
-
-    // console.log("TEXT TO BE UPDATED: ", text, "CURRENT COMMENTTEXT: ", commentText);
 
     return (
         <form className={commentModalHidden ? "hidden" : "comment-modal modal"}>

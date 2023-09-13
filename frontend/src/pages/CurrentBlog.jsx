@@ -4,14 +4,12 @@ import CommentModal from '../components/CommentModal';
 import BlogModal from '../components/BlogModal';
 
 
-export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navigate, blogModalHidden, setblogModalHidden }) {
+export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navigate, blogModalHidden, setBlogModalHidden }) {
 
     const [commentModalHidden, setCommentModalHidden] = useState(true);
     const [commentToDelete, setCommentToDelete] = useState("");
     const [blogToDelete, setBlogToDelete] = useState("");
     const [commentToUpdate, setCommentToUpdate] = useState("");
-
-    console.log("CURRENTBLOG BLOGMODALHIDDEN VALUE: ", blogModalHidden)
 
     useEffect(() => {
         if (!loggedIn) {
@@ -33,7 +31,7 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
                 try {
                     await axios.delete(URL + commentToDelete, config);
                 } catch (err) {
-                    console.log("DELETE FETCH ERROR: ", err)
+                    console.log("COMMENT DELETE FETCH ERROR: ", err);
                 };
             };
             commentDeletion();
@@ -50,7 +48,7 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
                 try {
                     await axios.delete(URL + blogToDelete, config);
                 } catch (err) {
-                    console.log("DELETE FETCH ERROR: ", err)
+                    console.log("BLOG DELETE FETCH ERROR: ", err);
                 };
             };
             blogDeletion();
@@ -68,9 +66,10 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
     };
 
     // console.log("**CURRENTBLOGS CURRENTBLOG VALUE: ", currentBlog);
-    console.log("**CURRENTBLOGS LOGGEDIN INFO: ", loggedIn);
-    console.log("CURRENTBLOGS COMMENTS INFO: ", blogComments);
+    // console.log("**CURRENTBLOGS LOGGEDIN INFO: ", loggedIn);
+    // console.log("CURRENTBLOGS COMMENTS INFO: ", blogComments);
     // console.log("CURRENTBLOGS COMMENTTODELETE VALUE: ", commentToDelete);
+    // console.log("CURRENTBLOG BLOGMODALHIDDEN VALUE: ", blogModalHidden);
 
     return (
         <section className="current-blog-page">
@@ -87,7 +86,7 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
                 {loggedIn._id === currentBlog.user ?
                     <>
                         <button onClick={() => setBlogToDelete(currentBlog._id)}>Delete</button>
-                        <button>Edit</button>
+                        <button onClick={() => setBlogModalHidden(false)}>Edit</button>
                     </>
                     :
                     <>
@@ -131,7 +130,10 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
 
             <BlogModal
                 loggedIn={loggedIn}
-                setblogModalHidden={setblogModalHidden}
+                blogModalHidden={blogModalHidden}
+                currentBlog={currentBlog}
+                setBlogModalHidden={setBlogModalHidden}
+                navigate={navigate}
             />
         </section>
     );

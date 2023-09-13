@@ -9,7 +9,6 @@ export default function Header({ navigate, loggedIn, setLoggedIn, setCurrentBlog
   const backHome = () => {
     setBlogId("");
     setCurrentBlog("");
-    navigate("/");
   };
 
   const logOut = () => {

@@ -4,11 +4,10 @@ import Hero from '../components/Hero';
 import BlogModal from '../components/BlogModal';
 
 
-export default function HomePage({ setBlogId, loggedIn, navigate, blogModalHidden, setblogModalHidden }) {
+export default function HomePage({ setBlogId, loggedIn, navigate, blogModalHidden, setBlogModalHidden }) {
 
     // console.log("HOMEPAGE'S LOGGEDIN INFO: ", loggedIn);
     const [blogs, setBlogs] = useState([]);
-    console.log("HOMEPAGE'S BLOGS INFO: ", blogs);
 
     useEffect(() => {
         if (!loggedIn) {
@@ -24,7 +23,7 @@ export default function HomePage({ setBlogId, loggedIn, navigate, blogModalHidde
                 const data = await response.json();
                 setBlogs(data.reverse());
             } catch (err) {
-                console.log("HOMEPAGE'S FETCH ERROR: ", err)
+                console.log("GET BLOGS FETCH ERROR: ", err)
             };
         };
 
@@ -40,11 +39,11 @@ export default function HomePage({ setBlogId, loggedIn, navigate, blogModalHidde
     };
 
     const createBlog = () => {
-        setblogModalHidden(false);
+        setBlogModalHidden(false);
     };
 
     const goToBlog = (blog) => {
-        setblogModalHidden(true);
+        setBlogModalHidden(true);
         setBlogId(blog);
     };
 
@@ -76,7 +75,7 @@ export default function HomePage({ setBlogId, loggedIn, navigate, blogModalHidde
             <BlogModal
                     loggedIn={loggedIn}
                     blogModalHidden={blogModalHidden}
-                    setblogModalHidden={setblogModalHidden}
+                    setBlogModalHidden={setBlogModalHidden}
                 />
         </div>
     );
