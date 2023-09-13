@@ -28,7 +28,8 @@ const setBlogs = asyncHandler(async (req, res) => {
     const blog = await Blog.create({
         title: req.body.title,
         text: req.body.text,
-        user: req.user.id
+        user: req.user.id,
+        userName: req.body.userName
     });
 
     res.status(200).json(blog);

@@ -6,6 +6,10 @@ const blogSchema = new mongoose.Schema({
         required: true,
         ref: "User",
     },
+    userName: {
+        type: String,
+        required: [true, "You must be signed in to create a blog..."],
+    },
     title: {
         type: String,
         required: [true, "Please add your blog title..."],
