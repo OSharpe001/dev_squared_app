@@ -12,10 +12,10 @@ export default function App() {
   const [currentBlog, setCurrentBlog] = useState("");
   const [blogId, setBlogId] = useState("");
   const [blogComments, setBlogComments] = useState([]);
-  const [blogModalHidden, setblogModalHidden] = useState(true);
+  const [blogModalHidden, setBlogModalHidden] = useState(true);
 
   const navigate = useNavigate();
-  console.log("APP'S CURRENT BLOGID VALUE: ", blogId);
+  // console.log("APP'S CURRENT BLOGID VALUE: ", blogId);
 
   useEffect(() => {
     const getCurrentBlog = async () => {
@@ -78,14 +78,14 @@ export default function App() {
                                         loggedIn={loggedIn}
                                         blogComments={blogComments}
                                         blogModalHidden={blogModalHidden}
-                                        setblogModalHidden={setblogModalHidden}
+                                        setBlogModalHidden={setBlogModalHidden}
                                       />}/>
         <Route path="/" element={<HomePage
                                     navigate={navigate}
                                     loggedIn={loggedIn}
                                     setBlogId={setBlogId}
                                     blogModalHidden={blogModalHidden}
-                                    setblogModalHidden={setblogModalHidden}
+                                    setBlogModalHidden={setBlogModalHidden}
                                   />}/>
       </Routes>
       <Footer />
