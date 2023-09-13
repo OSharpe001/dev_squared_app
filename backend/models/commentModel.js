@@ -9,7 +9,6 @@ const commentSchema = mongoose.Schema({
     text: {
         type: String,
         required: [true, "Please add your comment..."],
-        unique: [true, "This comment has been previously used. Please think of another comment..."],
     },
     userName: {
         type: String,
