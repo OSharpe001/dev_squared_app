@@ -16,6 +16,8 @@
 
 - There is a rapid amount of re-renders when logging-out.
 
+- after deleting a comment, the screen does not refresh. Making it look like the comment wasn't deleted (but it was). Add that to the issue that my "back to home" button doesn't work, things are not looking pretty.
+
 ---
 
 ## **Technologies Used**
