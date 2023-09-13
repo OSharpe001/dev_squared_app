@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 
-export default function CommentModal({ commentModalHidden, setCommentModalHidden, currentBlog, loggedIn, commentToUpdate }) {
+export default function CommentModal({ commentModalHidden, setCommentModalHidden, currentBlog, loggedIn, commentToUpdate, navigate }) {
 
     const [commentText, setCommentText] = useState("");
     const [formData, setFormData] = useState({
@@ -49,6 +49,7 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
                     };
                 };
                 updateComment();
+                navigate("/")
             };
 
         } else {
@@ -62,18 +63,18 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
                 try {
                     await axios.post(URL, formData, config);
                 } catch (err) {
-                    console.log("FETCH ERROR: ", err)
+                    console.log("FETCH ERROR: ", err);
                 };
             };
             createComment();
         };
 
-    }, [formData, loggedIn.token, currentBlog, commentToUpdate]);
+    }, [formData, loggedIn.token, currentBlog, commentToUpdate, navigate]);
 
     // console.log("TEXT TO BE UPDATED: ", text, "CURRENT COMMENTTEXT: ", commentText);
 
     return (
-        <form className={commentModalHidden ? "hidden" : "modal"}>
+        <form className={commentModalHidden ? "hidden" : "comment-modal modal"}>
             <textarea className="modal-comment" value={commentText} onChange={handleTextChange} placeholder="Leave a comment..." />
             <button className="submit-text" onClick={submitForm}>Submit</button>
             <button className="cancel" onClick={cancelComment}>Cancel</button>
