@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import CommentModal from '../components/CommentModal';
 import BlogModal from '../components/BlogModal';
+import like from "../assets/images/icons/filled_red_heart.png";
+import dislike from "../assets/images/icons/heart_shell.png";
 
 
-export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navigate, blogModalHidden, setBlogModalHidden }) {
+export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navigate, blogModalHidden, setBlogModalHidden, allLikes }) {
 
     const [commentModalHidden, setCommentModalHidden] = useState(true);
     const [commentToDelete, setCommentToDelete] = useState("");
@@ -65,6 +67,8 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
         setCommentModalHidden(false);
     };
 
+    const disabled = !blogModalHidden || !commentModalHidden;
+
     // console.log("**CURRENTBLOGS CURRENTBLOG VALUE: ", currentBlog);
     // console.log("**CURRENTBLOGS LOGGEDIN INFO: ", loggedIn);
     // console.log("CURRENTBLOGS COMMENTS INFO: ", blogComments);
@@ -76,24 +80,29 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
             <div className="blog">
                 <h2 className="blog-title underlined">{currentBlog.title}</h2>
                 <p className="blog-text">{currentBlog.text}</p>
-                <div className="blog-info">
-                    <p className="current-blog-author underlined">By: {currentBlog.userName}</p>
-                    <p className="current-blog-date underlined">{new Date(currentBlog.updatedAt).toLocaleString().split(",")[0]}</p>
-                </div>
+            </div>
+            <div className="blog-info">
+                <p className="current-blog-author underlined">By: {currentBlog.userName}</p>
+                <p className="current-blog-date underlined">{new Date(currentBlog.updatedAt).toLocaleString().split(",")[0]}</p>
             </div>
 
             <div className="add-or-update">
+                <button onClick={startComment} disabled={disabled}>Comment</button>
                 {loggedIn._id === currentBlog.user ?
                     <>
-                        <button onClick={() => setBlogToDelete(currentBlog._id)}>Delete</button>
-                        <button onClick={() => setBlogModalHidden(false)}>Edit</button>
+                        <button onClick={() => setBlogToDelete(currentBlog._id)} disabled={disabled}>Delete</button>
+                        <button onClick={() => setBlogModalHidden(false)} disabled={disabled}>Edit</button>
                     </>
                     :
                     <>
-                        <button>Like</button>
+                        {allLikes.filter(like => (like.blogId === currentBlog._id && like.userName === loggedIn.userName))
+                            ?
+                            <img disabled={disabled} className="heart" src={like} alt="like" />
+                            :
+                            <img disabled={disabled} className="heart" src={dislike} alt="dislike" />
+                        }
                     </>
                 }
-                <button onClick={startComment}>Comment</button>
             </div>
 
             <div className="comment-section">
@@ -101,18 +110,28 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
                 <ul className='comments'>
                     {blogComments.map(comment => (
                         <li key={comment._id}>
-                            <div className="comment-info">
-                                <p className="author">By: {comment.userName}</p>
-                                <p className="created">{new Date(comment.updatedAt).toLocaleString().split(",")[0]}</p>
+                            <div className="comment-box">
+                                <div className="comment-info">
+                                    <p className="author">By: {comment.userName}</p>
+                                    <p className="created">{new Date(comment.updatedAt).toLocaleString().split(",")[0]}</p>
+                                    <p className="likes"><span className='underlined'>Likes</span>: {allLikes.filter(like => (like.commentId === comment._id)).length}</p>
+                                </div>
+                                <p className="comment">{comment.text}</p>
                             </div>
-                            <p className="comment">{comment.text}</p>
                             {comment.userName === loggedIn.userName ?
                                 <div className='ud-buttons'>
-                                    <button onClick={() => updateComment({ text: comment.text, id: comment._id })}>Edit</button>
-                                    <button onClick={() => setCommentToDelete(comment._id)}>Delete</button>
+                                    <button onClick={() => updateComment({ text: comment.text, id: comment._id })} disabled={disabled}>Edit</button>
+                                    <button onClick={() => setCommentToDelete(comment._id)} disabled={disabled}>Delete</button>
                                 </div>
                                 :
-                                <button>Like</button>
+                                <>
+                                    {allLikes.filter(like => (like.commentId === comment._id && like.userName === loggedIn.userName))
+                                        ?
+                                        <img disabled={disabled} className="heart" src={like} alt="like" />
+                                        :
+                                        <img disabled={disabled} className="heart" src={dislike} alt="dislike" />
+                                    }
+                                </>
                             }
                         </li>
                     ))}
