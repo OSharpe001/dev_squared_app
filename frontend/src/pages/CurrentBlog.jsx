@@ -95,7 +95,7 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
                     </>
                     :
                     <>
-                        {allLikes.filter(like => (like.blogId === currentBlog._id && like.userName === loggedIn.userName))
+                        {allLikes.filter(like => like.blogId === currentBlog._id && like.userName === loggedIn.userName).length
                             ?
                             <img disabled={disabled} className="heart" src={like} alt="like" />
                             :
@@ -125,7 +125,7 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
                                 </div>
                                 :
                                 <>
-                                    {allLikes.filter(like => (like.commentId === comment._id && like.userName === loggedIn.userName))
+                                    {allLikes.filter(like => like.commentId === comment._id && like.userName === loggedIn.userName).length
                                         ?
                                         <img disabled={disabled} className="heart" src={like} alt="like" />
                                         :
