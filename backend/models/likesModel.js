@@ -6,7 +6,16 @@ const likesSchema = mongoose.Schema({
         required: true,
         ref: "User",
     },
-    like: Boolean,
+    userName: {
+        type: String,
+        required: [true, "Not Authorized..."],
+    },
+    blogId: {
+        type: String,
+    },
+    commentId: {
+        type: String,
+    },
 });
 
 module.exports = mongoose.model("Likes", likesSchema);

@@ -2,9 +2,9 @@ const asyncHandler = require("express-async-handler");
 const Like = require("../models/likesModel");
 
 
-// GET LIKES (GET REQUEST - "/api/likes")
-const getLikes = asyncHandler(async (req, res) => {
-    const likes = await Like.find({ user: req.user.id });
+// GET MY BLOG LIKES (GET REQUEST - "/api/likes")
+const getAllLikes = asyncHandler(async (req, res) => {
+    const likes = await Like.find({});
     res.status(200).json(likes);
 });
 
@@ -16,17 +16,25 @@ const setLikes = asyncHandler(async (req, res) => {
     };
 
     const like = await Like.create({
-        like: req.body.like,
-        user: req.user.id
+        user: req.user.id,
+        userName: req.body.userName,
+        blogId: req.body.blogId,
+        commentId: req.body.commentId
     });
 
     res.status(200).json(like);
 });
 
-// UPDATE LIKES (PUT REQUEST - "/api/likes:id")
-const updateLikes = asyncHandler(async (req, res) => {
-    // FIND THE ID
+// DELETE LIKES (DELETE REQUEST - "/api/likes:id")
+const deleteLikes = asyncHandler(async (req, res) => {
+    // FIND THE LIKE BY ID
     const like = await Like.findById(req.params.id);
+
+    // CHECK IF THE LIKE DOESN'T EXIST
+    if (!like) {
+        res.status(400);
+        throw new Error("Like not found...");
+    };
 
     // CHECK FOR THE USER
     if (!req.user) {
@@ -40,11 +48,11 @@ const updateLikes = asyncHandler(async (req, res) => {
         throw new Error("User not authorized...");
     };
 
-    // FINDING THE LIKE AND UPDATING IT
-    const updatedLike = Like.findByIdAndUpdate(req.params.id, req.body.like, { new: true });
+    // FINDING THE LIKE AND DELETING IT
+    await Like.findByIdAndRemove(req.params.id);
 
-    res.status(200).json(updatedLike);
+    res.status(200).json({ id: req.params.id });
 });
 
-module.exports = { getLikes, setLikes, updateLikes };
+module.exports = { getAllLikes, setLikes, deleteLikes };
 

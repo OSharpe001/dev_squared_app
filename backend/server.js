@@ -20,7 +20,7 @@ app.use("/api/blogs", require("./routes/blogRoutes"));
 // USE ROUTES/COMMENTROUTES TO HANDLE ANY ENDPOINTS THAT END WITH /API/COMMENTS
 app.use("/api/blogs/comments", require("./routes/commentRoutes"));
 // USE ROUTES/LIKESROUTES TO HANDLE ANY ENDPOINTS THAT END WITH /API/LIKES
-// app.use("/api/likes", require("./routes/likesRoutes"));
+app.use("/api/likes", require("./routes/likesRoutes"));
 
 // SETTING UP CORS OPTIONS TO AVOID ACCESS-CONTROL-ALLOW-ORIGIN ISSUES
 const corsOption = {
