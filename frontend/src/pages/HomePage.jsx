@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import Spinner from '../components/Spinner';
 import Hero from '../components/Hero';
 import BlogModal from '../components/BlogModal';
+import like from "../assets/images/icons/filled_red_heart.png";
 
 
-export default function HomePage({ setBlogId, loggedIn, navigate, blogModalHidden, setBlogModalHidden }) {
+export default function HomePage({ setBlogId, loggedIn, navigate, blogModalHidden, setBlogModalHidden, allLikes }) {
 
     // console.log("HOMEPAGE'S LOGGEDIN INFO: ", loggedIn);
     const [blogs, setBlogs] = useState([]);
@@ -67,7 +68,7 @@ export default function HomePage({ setBlogId, loggedIn, navigate, blogModalHidde
 
                             <p className="author underlined">By: {blog.userName}</p>
                             <p className="created">{new Date(blog.updatedAt).toLocaleString().split(",")[0]}</p>
-                            <p className="likes">Likes: {}</p>
+                            <p className="likes"><img src={like} alt="likes-heart" className="heart"/> {allLikes.filter(like => (like.blogId === blog._id)).length}</p>
                         </li>
                     </div>
                 ))}
