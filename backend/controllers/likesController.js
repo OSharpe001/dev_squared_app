@@ -10,10 +10,15 @@ const getAllLikes = asyncHandler(async (req, res) => {
 
 // SET LIKES (POST REQUEST - "/api/likes")
 const setLikes = asyncHandler(async (req, res) => {
-    if (!req.body.like) {
+    if (!req.body.userName) {
         res.status(400);
-        throw new Error("Please change the value...");
+        throw new Error("Not Authorized...");
     };
+
+    if (!req.body.blogId && !req.body.commentId) {
+        res.status(400);
+        throw new Error("No Blog or Comment. Denied...");
+    }
 
     const like = await Like.create({
         user: req.user.id,

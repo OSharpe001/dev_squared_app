@@ -12,6 +12,12 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
     const [commentToDelete, setCommentToDelete] = useState("");
     const [blogToDelete, setBlogToDelete] = useState("");
     const [commentToUpdate, setCommentToUpdate] = useState("");
+    const [changeLike, setChangeLike] = useState({
+        userName: loggedIn.userName,
+        blogId: "",
+        commentId: "",
+        action: ""
+    });
 
     useEffect(() => {
         if (!loggedIn) {
@@ -40,7 +46,8 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
         };
 
         if (blogToDelete) {
-            const blogDeletion = async () => {
+            const blogDeletion = async () => {//TRY, LATER IF YOU CAN MAKE THIS CALL WITHOUT DECLARING A FUNCTION
+                // async () => {
                 const URL = "http://localhost:5011/api/blogs/";
                 const config = {
                     headers: {
@@ -53,10 +60,89 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
                     console.log("BLOG DELETE FETCH ERROR: ", err);
                 };
             };
-            blogDeletion();
-        };
+            blogDeletion();//
+        };//
 
-    }, [loggedIn, currentBlog, navigate, commentToDelete, commentToUpdate, blogToDelete]);
+        // *************************
+        if (changeLike.action === "delete" && changeLike.blogId) {
+            const blogLikeDeletion = async () => {
+                const blogLikeId = changeLike.blogId;
+                console.log("RUNNING THE BLOG-LIKE DELETE USEEFFECT METHOD WITH THE ID OF... ", blogLikeId);
+                const URL = `http://localhost:5011/api/likes/${blogLikeId}`;
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${loggedIn.token}`
+                    },
+                };
+                try {
+                    await axios.delete(URL, config);
+                } catch (err) {
+                    console.log("BLOG-LIKE DELETE FETCH ERROR: ", err);
+                };
+            };
+            blogLikeDeletion();
+
+        } else if (changeLike.action === "add" && changeLike.blogId) {
+            const createBlogLike = async () => {
+                const URL = "http://localhost:5011/api/likes";
+                const options = {
+                    userName: changeLike.userName,
+                    blogId: changeLike.blogId
+                };
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${loggedIn.token}`
+                    },
+                };
+                try {
+                    await axios.post(URL, options, config);
+                } catch (err) {
+                    console.log("ADD BLOG-LIKE FETCH ERROR: ", err);
+                };
+            };
+            createBlogLike();
+
+        } else if (changeLike.action === "delete" && changeLike.commentId) {
+            const commentLikeDeletion = async () => {
+                const commentLikeId = changeLike.commentId;
+                console.log("RUNNING THE COMMENT-LIKE DELETE USEEFFECT METHOD WITH THE ID OF... ", commentLikeId);
+                const URL = `http://localhost:5011/api/likes/${commentLikeId}`;
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${loggedIn.token}`
+                    },
+                };
+                try {
+                    await axios.delete(URL, config);
+                } catch (err) {
+                    console.log("COMMENT-LIKE DELETE FETCH ERROR: ", err);
+                };
+            };
+            commentLikeDeletion();
+
+        } else if (changeLike.action === "add" && changeLike.commentId) {
+            const createCommentLike = async () => {
+                const URL = "http://localhost:5011/api/likes";
+                const options = {
+                    userName: changeLike.userName,
+                    commentId: changeLike.commentId
+                };
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${loggedIn.token}`
+                    },
+                };
+                try {
+                    await axios.post(URL, options, config);
+                } catch (err) {
+                    console.log("ADD COMMENT-LIKE FETCH ERROR: ", err);
+                };
+            };
+            createCommentLike();
+        };
+        // *************************
+
+    }, [loggedIn, currentBlog, navigate, commentToDelete, commentToUpdate, blogToDelete, changeLike]);
 
     const startComment = () => {
         setCommentModalHidden(false);
@@ -67,6 +153,30 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
         setCommentModalHidden(false);
     };
 
+    const changeLikeBlog = (action, blogId) => {
+        setChangeLike(prev => ({
+            ...prev,
+            action: action,
+            blogId: blogId
+        }));
+    };
+
+    const changeLikeComment = (action, commentId) => {
+        setChangeLike(prev => ({
+            ...prev,
+            action: action,
+            blogId: commentId
+        }));
+    };
+
+    const currentBlogLikeId = (blogId) => (
+        allLikes.filter(like => like.blogId === blogId && like.userName === loggedIn.userName)[0]._id
+    );
+
+    const currentCommentLikeId = (commentId) => (
+        allLikes.filter(like => like.commentId === commentId && like.userName === loggedIn.userName)[0]._id
+    );
+
     const disabled = !blogModalHidden || !commentModalHidden;
 
     // console.log("**CURRENTBLOGS CURRENTBLOG VALUE: ", currentBlog);
@@ -74,6 +184,7 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
     // console.log("CURRENTBLOGS COMMENTS INFO: ", blogComments);
     // console.log("CURRENTBLOGS COMMENTTODELETE VALUE: ", commentToDelete);
     // console.log("CURRENTBLOG BLOGMODALHIDDEN VALUE: ", blogModalHidden);
+    console.log("CURRENTBLOG PAGE'S CHANGELIKE VALUE: ", changeLike)
 
     return (
         <section className="current-blog-page">
@@ -97,9 +208,9 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
                     <>
                         {allLikes.filter(like => like.blogId === currentBlog._id && like.userName === loggedIn.userName).length
                             ?
-                            <img disabled={disabled} className="heart" src={like} alt="like" />
+                            <button className="likes-button" onClick={() => changeLikeBlog("delete", currentBlogLikeId(currentBlog._id))}><img disabled={disabled} className="heart" src={like} alt="like" /></button>
                             :
-                            <img disabled={disabled} className="heart" src={dislike} alt="dislike" />
+                            <button className="likes-button" onClick={() => changeLikeBlog("add", currentBlog._id)}><img disabled={disabled} className="heart" src={dislike} alt="dislike" /></button>
                         }
                     </>
                 }
@@ -127,9 +238,9 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
                                 <>
                                     {allLikes.filter(like => like.commentId === comment._id && like.userName === loggedIn.userName).length
                                         ?
-                                        <img disabled={disabled} className="heart" src={like} alt="like" />
+                                        <button className="likes-button" onClick={() => changeLikeComment("delete", currentCommentLikeId(comment._id))}><img disabled={disabled} className="heart" src={like} alt="like" /></button>
                                         :
-                                        <img disabled={disabled} className="heart" src={dislike} alt="dislike" />
+                                        <button className="likes-button" onClick={() => changeLikeComment("add", comment._id)}><img disabled={disabled} className="heart" src={dislike} alt="dislike" /></button>
                                     }
                                 </>
                             }
