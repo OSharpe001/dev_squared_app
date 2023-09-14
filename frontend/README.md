@@ -89,6 +89,6 @@
 
 ## Live Site Link:
 ### **COMING SOON!**
-- []()
+- [Dev Squared](https://devsquared.onrender.com)
 
 ---
