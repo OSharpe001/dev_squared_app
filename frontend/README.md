@@ -8,17 +8,19 @@
 
 ---
 
-## Issues I couldn't resolve:
+## Issues I couldn't (yet) resolve:
 
-- Staying on the Current Blog page after  updating a blog.
+- Staying on the Current Blog page after updating a blog with no rerender.
 
-- Having the screen re-render to show the updated list of comments after deleting one.
+- Making the screen re-render to show the updated list of comments after adding, editing or deleting one.
 
 - There is a large amount of rapid re-renders when logging-out.
 
-- After deleting a comment, the screen does not refresh. Making it look like the comment wasn't deleted (but it was).
+- After editing/deleting a comment/blog, the screen does not refresh. Making it look like the comment/blog wasn't edited/deleted (but it was).
 
 -The "Back to Blogs" button doesn't work. There are a lot of re-renders and client ends up back on the "Current Blog" page they were trying to leave.
+
+- After pressing the like button, the screen doesn't rerender to reflect the change. This allows a user to add multiple likes on the same blog or comment.
 
 ---
 
