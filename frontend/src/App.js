@@ -25,7 +25,6 @@ export default function App() {
       } else if (blogId) {
         const URL = `https://devsquaredbe.onrender.com/api/blogs/${blogId}`;
         const response = await axios.get(URL);
-
         try {
           await setCurrentBlog(response.data);
         } catch (err) {
@@ -39,7 +38,6 @@ export default function App() {
     const getRelevantComments = async () => {
       const URL = "https://devsquaredbe.onrender.com/api/blogs/comments/";
       const options = { method: "GET" };
-
       try {
         const response = await fetch(URL + blogId, options);
         const data = await response.json();
@@ -55,7 +53,6 @@ export default function App() {
     const getAllLikes = async () => {
       const URL = "https://devsquaredbe.onrender.com/api/likes/";
       const options = { method: "GET" };
-
       try {
         const response = await fetch(URL, options);
         const data = await response.json();
@@ -65,6 +62,7 @@ export default function App() {
       };
     };
     getAllLikes();
+
   }, [blogId, loggedIn, navigate]);
 
 

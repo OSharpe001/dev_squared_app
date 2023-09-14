@@ -1,6 +1,7 @@
 # Welcome to my Dev Squared's Readme!
 **Here, we'll discuss issues that I couldn't (yet) overcome, technologies used, a "User Story" (provided on Trello) and cap it all off with my stretch goals ("Future Enhancements") for this app. I'll also provide the link to my site, within.**
 
+[Home page]("./src/assets/images/dev_squared.png")
 ---
 
 ## App Description
