@@ -8,7 +8,7 @@ const commentSchema = mongoose.Schema({
     },
     text: {
         type: String,
-        required: [true, "Please add your comment..."],
+        required: [true, "Please add comment..."],
     },
     userName: {
         type: String,

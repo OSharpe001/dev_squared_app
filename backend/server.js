@@ -28,7 +28,7 @@ const corsOption = {
     methods: "GET, PUT, POST, DELETE",
     credentials: true,
     exposeHeaders: ["X-auth-token"],
-}
+};
 // TRYING TO AVOID THE ACCESS-CONTROL-ALLOW-ORIGIN ISSUE
 app.use(cors(corsOption));
 
@@ -38,4 +38,4 @@ app.use(errorHandler);
 
 app.listen(PORT, () => {
     console.log(`The dev^2 server is currently running on port ${PORT}!`);
-})
+});

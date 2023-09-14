@@ -16,14 +16,14 @@ const registerUser = asyncHandler(async (req, res) => {
     const userExists = await User.findOne({email});
     if (userExists) {
         res.status(400);
-        throw new Error("A user already exists with this email account...");
+        throw new Error("Prior account with this email...");
     };
 
     // CHECK IF ALIAS IS ALREADY IN USE
     const aliasExists = await User.findOne({userName});
     if (aliasExists) {
         res.status(400);
-        throw new Error("A user already exists with this alias...");
+        throw new Error("Prior account uses this alias...");
     };
 
     // HASH THE PASSWORD

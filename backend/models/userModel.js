@@ -7,13 +7,13 @@ const userSchema = new mongoose.Schema({
     },
     userName: {
         type: String,
-        required: [true, "Please create an alias..."],
-        unique: [true, "Sorry, there's already an account under this alias. Please choose another..."],
+        required: [true, "Please create alias..."],
+        unique: [true, "Alias already used. Please choose another..."],
     },
     email: {
         type: String,
         required: [true, "Please add your email address..."],
-        unique: [true, "There's already an account for this email address..."],
+        unique: [true, "Prior account exists for this email..."],
     },
     password: {
         type: String,

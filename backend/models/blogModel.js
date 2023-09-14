@@ -8,16 +8,16 @@ const blogSchema = new mongoose.Schema({
     },
     userName: {
         type: String,
-        required: [true, "You must be signed in to create a blog..."],
+        required: [true, "Not Authorized..."],
     },
     title: {
         type: String,
         required: [true, "Please add your blog title..."],
-        unique: [true, "This title has been previously used. Please think of another title..."],
+        unique: [true, "Title previously used. Please use new title..."],
     },
     text: {
         type: String,
-        required: [true, "Please add your blog content..."],
+        required: [true, "Please add blog content..."],
     },
 },
 {

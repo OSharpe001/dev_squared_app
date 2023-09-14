@@ -55,7 +55,7 @@ const updateBlogs = asyncHandler(async (req,res) => {
     // CHECK TO SEE IF AN ITEM WAS CHANGED
     if ((req.body.title == blog.title && req.body.text === blog.text) || (!req.body.title && !req.body.text) || (req.body.title == blog.title && !req.body.text) || (req.body.text === blog.text && !req.body.title)) {
         res.status(401);
-        throw new Error("Please change at least one field...")
+        throw new Error("No edits found...")
     };
 
     // MAKE SURE THE CURRENT USER MATCHES THE BLOG'S CREATOR
