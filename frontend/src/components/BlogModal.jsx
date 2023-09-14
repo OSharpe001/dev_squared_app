@@ -62,7 +62,6 @@ export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedI
                     };
                 };
                 updateBlog();
-                navigate("/blog");
             };
         } else if (formData.title && formData.text) {
             const createBlog = async () => {
