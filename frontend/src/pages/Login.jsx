@@ -7,7 +7,6 @@ export default function Login({ loggedIn, setLoggedIn, navigate }) {
 
   const [alias, setAlias] = useState("");
   const [password, setPassword] = useState("");
-
   const [aliasErrorMessage, setAliasErrorMessage] = useState("");
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
 
@@ -20,6 +19,7 @@ export default function Login({ loggedIn, setLoggedIn, navigate }) {
   const resetAlias = () => {
     setAlias("");
   };
+
   const resetPassword = () => {
     setPassword("");
   };
@@ -79,6 +79,7 @@ export default function Login({ loggedIn, setLoggedIn, navigate }) {
       resetLoginForm();
     };
     getMe();
+
   }, [formData, loggedIn, setLoggedIn, navigate]);
 
   const errorHandling = ({ target }) => {

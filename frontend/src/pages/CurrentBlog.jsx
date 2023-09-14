@@ -63,7 +63,6 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
             blogDeletion();//
         };//
 
-        // *************************
         if (changeLike.action === "delete" && changeLike.blogId) {
             const blogLikeDeletion = async () => {
                 const blogLikeId = changeLike.blogId;
@@ -140,7 +139,6 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
             };
             createCommentLike();
         };
-        // *************************
 
     }, [loggedIn, currentBlog, navigate, commentToDelete, commentToUpdate, blogToDelete, changeLike]);
 
@@ -178,13 +176,6 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
     );
 
     const disabled = !blogModalHidden || !commentModalHidden;
-
-    // console.log("**CURRENTBLOGS CURRENTBLOG VALUE: ", currentBlog);
-    // console.log("**CURRENTBLOGS LOGGEDIN INFO: ", loggedIn);
-    // console.log("CURRENTBLOGS COMMENTS INFO: ", blogComments);
-    // console.log("CURRENTBLOGS COMMENTTODELETE VALUE: ", commentToDelete);
-    // console.log("CURRENTBLOG BLOGMODALHIDDEN VALUE: ", blogModalHidden);
-    console.log("CURRENTBLOG PAGE'S CHANGELIKE VALUE: ", changeLike)
 
     return (
         <section className="current-blog-page">

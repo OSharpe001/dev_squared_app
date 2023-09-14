@@ -42,7 +42,7 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
                     try {
                         await axios.put(URL, formData, config);
                     } catch (err) {
-                        console.log("UPDATE FETCH ERROR: ", err)
+                        console.log("UPDATE FETCH ERROR: ", err);
                     };
                 };
                 updateComment();
@@ -65,6 +65,7 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
             };
             createComment();
         };
+
     }, [formData, loggedIn.token, currentBlog, commentToUpdate, navigate]);
 
     return (

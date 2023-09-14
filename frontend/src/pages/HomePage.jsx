@@ -7,12 +7,11 @@ import like from "../assets/images/icons/filled_red_heart.png";
 
 export default function HomePage({ setBlogId, loggedIn, navigate, blogModalHidden, setBlogModalHidden, allLikes }) {
 
-    // console.log("HOMEPAGE'S LOGGEDIN INFO: ", loggedIn);
     const [blogs, setBlogs] = useState([]);
 
     useEffect(() => {
         if (!loggedIn) {
-            navigate("/sign-up")
+            navigate("/sign-up");
         };
 
         const getAllBlogs = async () => {
@@ -24,20 +23,12 @@ export default function HomePage({ setBlogId, loggedIn, navigate, blogModalHidde
                 const data = await response.json();
                 setBlogs(data.reverse());
             } catch (err) {
-                console.log("GET BLOGS FETCH ERROR: ", err)
+                console.log("GET BLOGS FETCH ERROR: ", err);
             };
         };
-
         getAllBlogs();
-    }, [loggedIn, navigate]);
 
-    if (blogs.length < 1) {
-        return (
-            <div className='home-page'>
-                <Spinner />
-            </div>
-        );
-    };
+    }, [loggedIn, navigate]);
 
     const createBlog = () => {
         setBlogModalHidden(false);
@@ -49,6 +40,14 @@ export default function HomePage({ setBlogId, loggedIn, navigate, blogModalHidde
     };
 
     const disabled = !blogModalHidden;
+
+    if (blogs.length < 1) {
+        return (
+            <div className='home-page'>
+                <Spinner />
+            </div>
+        );
+    };
 
     return (
         <div className='home-page'>
@@ -73,6 +72,7 @@ export default function HomePage({ setBlogId, loggedIn, navigate, blogModalHidde
                     </div>
                 ))}
             </ul>
+
             <BlogModal
                     loggedIn={loggedIn}
                     blogModalHidden={blogModalHidden}

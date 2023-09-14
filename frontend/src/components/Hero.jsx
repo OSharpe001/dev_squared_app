@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { images } from "./images";
 
+
 export default function Hero() {
 
     const [currentMeme, setCurrentMeme] = useState(images[Math.floor(Math.random() * images.length)]);

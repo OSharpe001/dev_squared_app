@@ -20,7 +20,7 @@ export default function Header({ navigate, loggedIn, setLoggedIn, setCurrentBlog
   // NECESSARY TO CHANGE THE "VIEW-POSTER" BUTTON TO "CHANGE-POSTER" WHEN ON POSTER PAGE
   const currentScreen = useLocation().pathname;
 
-  // **SHIFTING HEADER USESTATES AND FUNCTIONS
+  // SHIFTING-HEADER USESTATES AND FUNCTIONS
   const [scrollPosition, setScrollPosition] = useState({
     y: 0,
   });

@@ -16,7 +16,6 @@ export default function App() {
   const [allLikes, setAllLikes] = useState([]);
 
   const navigate = useNavigate();
-  // console.log("APP'S CURRENT BLOGID VALUE: ", blogId);
 
   useEffect(() => {
     const getCurrentBlog = async () => {
@@ -26,7 +25,7 @@ export default function App() {
       } else if (blogId) {
         const URL = `https://devsquaredbe.onrender.com/api/blogs/${blogId}`;
         const response = await axios.get(URL);
-        // console.log("APP.JS' GETCURRENTBLOG VALUE: ", response.data);
+
         try {
           await setCurrentBlog(response.data);
         } catch (err) {
@@ -49,7 +48,6 @@ export default function App() {
         console.log("RELEVANT COMMENTS FETCH ERROR: ", err)
       };
     };
-
     getRelevantComments();
     getCurrentBlog();
 
@@ -57,6 +55,7 @@ export default function App() {
     const getAllLikes = async () => {
       const URL = "https://devsquaredbe.onrender.com/api/likes/";
       const options = { method: "GET" };
+
       try {
         const response = await fetch(URL, options);
         const data = await response.json();

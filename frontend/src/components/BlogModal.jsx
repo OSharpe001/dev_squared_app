@@ -41,12 +41,10 @@ export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedI
 
     useEffect(() => {
         if (currentBlog) {
-            // console.log("BLOGMODAL'S CURRENT BLOG INFO: ", currentBlog._id);
             setBlogTitle(currentBlog.title);
             setBlogText(currentBlog.text);
             if (formData.ready) {
                 const updateBlog = async () => {
-                    // console.log("BEFORE PLACING IT IN URL: ", currentBlog._id);
                     const URL = `https://devsquaredbe.onrender.com/api/blogs/${currentBlog._id}`;
                     const config = {
                         headers: {
@@ -54,7 +52,6 @@ export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedI
                         },
                     };
                     try {
-                        // await axios.put(URL, formData, config);
                         const response = await axios.put(URL, formData, config);
                         console.log("WHY ISN'T THE UPDATE FORM WORKING??: ", response);
                     } catch (err) {
@@ -79,6 +76,7 @@ export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedI
             };
             createBlog();
         };
+
     }, [formData, loggedIn, currentBlog]);
 
     return (

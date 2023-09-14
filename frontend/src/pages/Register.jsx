@@ -101,7 +101,7 @@ export default function Register({ loggedIn, setLoggedIn, navigate }) {
           localStorage.setItem("Dev2User", JSON.stringify(response.data));
           await setLoggedIn(JSON.parse(localStorage.getItem("Dev2User")));
         } catch (err) {
-          alert("an Error occurred. Please try, again.")
+          alert("an Error occurred. Please try, again.");
           console.log(err);
           resetPassword();
         };
@@ -109,6 +109,7 @@ export default function Register({ loggedIn, setLoggedIn, navigate }) {
       resetLoginForm();
     };
     getMe();
+
   }, [formData, loggedIn, setLoggedIn, navigate]);
 
   const errorHandling = ({ target }) => {
