@@ -47,7 +47,7 @@ export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedI
             if (formData.ready) {
                 const updateBlog = async () => {
                     // console.log("BEFORE PLACING IT IN URL: ", currentBlog._id);
-                    const URL = `http://localhost:5011/api/blogs/${currentBlog._id}`;
+                    const URL = `https://devsquaredbe.onrender.com/api/blogs/${currentBlog._id}`;
                     const config = {
                         headers: {
                             Authorization: `Bearer ${loggedIn.token}`
@@ -65,7 +65,7 @@ export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedI
             };
         } else if (formData.title && formData.text) {
             const createBlog = async () => {
-                const URL = "http://localhost:5011/api/blogs/";
+                const URL = "https://devsquaredbe.onrender.com/api/blogs/";
                 const config = {
                     headers: {
                         Authorization: `Bearer ${loggedIn.token}`

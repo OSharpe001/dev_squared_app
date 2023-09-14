@@ -94,7 +94,7 @@ export default function Register({ loggedIn, setLoggedIn, navigate }) {
     };
 
     const getMe = async () => {
-      const URL = `http://localhost:5011/api/users`;
+      const URL = `https://devsquaredbe.onrender.com/api/users`;
       if (formData.password) {
         const response = await axios.post(URL, formData);
         try {

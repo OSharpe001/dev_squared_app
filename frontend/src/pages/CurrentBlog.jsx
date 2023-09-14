@@ -30,7 +30,7 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
 
         if (commentToDelete) {
             const commentDeletion = async () => {
-                const URL = "http://localhost:5011/api/blogs/comments/";
+                const URL = "https://devsquaredbe.onrender.com/api/blogs/comments/";
                 const config = {
                     headers: {
                         Authorization: `Bearer ${loggedIn.token}`
@@ -48,7 +48,7 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
         if (blogToDelete) {
             const blogDeletion = async () => {//TRY, LATER IF YOU CAN MAKE THIS CALL WITHOUT DECLARING A FUNCTION
                 // async () => {
-                const URL = "http://localhost:5011/api/blogs/";
+                const URL = "https://devsquaredbe.onrender.com/api/blogs/";
                 const config = {
                     headers: {
                         Authorization: `Bearer ${loggedIn.token}`
@@ -68,7 +68,7 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
             const blogLikeDeletion = async () => {
                 const blogLikeId = changeLike.blogId;
                 console.log("RUNNING THE BLOG-LIKE DELETE USEEFFECT METHOD WITH THE ID OF... ", blogLikeId);
-                const URL = `http://localhost:5011/api/likes/${blogLikeId}`;
+                const URL = `https://devsquaredbe.onrender.com/api/likes/${blogLikeId}`;
                 const config = {
                     headers: {
                         Authorization: `Bearer ${loggedIn.token}`
@@ -84,7 +84,7 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
 
         } else if (changeLike.action === "add" && changeLike.blogId) {
             const createBlogLike = async () => {
-                const URL = "http://localhost:5011/api/likes";
+                const URL = "https://devsquaredbe.onrender.com/api/likes";
                 const options = {
                     userName: changeLike.userName,
                     blogId: changeLike.blogId
@@ -106,7 +106,7 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
             const commentLikeDeletion = async () => {
                 const commentLikeId = changeLike.commentId;
                 console.log("RUNNING THE COMMENT-LIKE DELETE USEEFFECT METHOD WITH THE ID OF... ", commentLikeId);
-                const URL = `http://localhost:5011/api/likes/${commentLikeId}`;
+                const URL = `https://devsquaredbe.onrender.com/api/likes/${commentLikeId}`;
                 const config = {
                     headers: {
                         Authorization: `Bearer ${loggedIn.token}`
@@ -122,7 +122,7 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
 
         } else if (changeLike.action === "add" && changeLike.commentId) {
             const createCommentLike = async () => {
-                const URL = "http://localhost:5011/api/likes";
+                const URL = "https://devsquaredbe.onrender.com/api/likes";
                 const options = {
                     userName: changeLike.userName,
                     commentId: changeLike.commentId
