@@ -20,8 +20,10 @@ export default function App() {
   const backHome = useEffect;
 
   backToRegistration(() => {
-    localStorage.removeItem("Dev2User");
-    navigate("/sign-up");
+    if (!loggedIn) {
+      localStorage.removeItem("Dev2User");
+      navigate("/sign-up");
+    };
   }, [loggedIn]);
 
   backHome(() => {
