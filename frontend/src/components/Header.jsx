@@ -4,11 +4,14 @@ import { useLocation } from "react-router-dom";
 import { useState } from "react";
 
 
-export default function Header({ loggedIn, setCurrentBlog, setBlogId, logOut }) {
+export default function Header({ loggedIn, setLoggedIn, setBlogId }) {
+
+  const logOut =() => {
+    setLoggedIn(false);
+  };
 
   const backHome = () => {
     setBlogId("");
-    setCurrentBlog("");
   };
 
   // NECESSARY TO CHANGE THE "VIEW-POSTER" BUTTON TO "CHANGE-POSTER" WHEN ON POSTER PAGE
@@ -52,13 +55,13 @@ export default function Header({ loggedIn, setCurrentBlog, setBlogId, logOut }) 
     >
       <nav>
         <div className="banner" onClick={backHome}>
-          {/* <img className="logo" src={logo} alt="target" /> */}
+          {/* <img className="logo banner-title" src={logo} alt="target" /> */}
           <p className="banner-title">Dev^2</p>
         </div>
         <div className="nav-items">
             {
                 currentScreen === "/blog" &&
-                    <Link aria-label="On Click" to="/" className="button">Back to Blogs</Link>
+                    <Link aria-label="On Click" to="" onClick={backHome} className="button">Back to Blogs</Link>
             }
             {loggedIn ?
                 <Link onClick={logOut} className="button">Logout</Link>

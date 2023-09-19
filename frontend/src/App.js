@@ -16,31 +16,36 @@ export default function App() {
   const [allLikes, setAllLikes] = useState([]);
 
   const navigate = useNavigate();
-  const logOut = useEffect;
+  const backToRegistration = useEffect;
+  const backHome = useEffect;
 
-  logOut(() => {
+  backToRegistration(() => {
     localStorage.removeItem("Dev2User");
-    setLoggedIn(false);
     navigate("/sign-up");
-  },[]);
+  }, [loggedIn]);
+
+  backHome(() => {
+    if (loggedIn && !blogId) {
+      setCurrentBlog("");
+      navigate("/");
+    }
+  }, [loggedIn, blogId]);
 
   useEffect(() => {
-    const getCurrentBlog = async () => {
-      if (loggedIn && !blogId) {
-        setCurrentBlog("");
-        navigate("/");
-      } else if (blogId) {
+    if (loggedIn && blogId) {
+      const getCurrentBlog = async () => {
         // const URL = `https://devsquaredbe.onrender.com/api/blogs/${blogId}`;
         const URL = `http://localhost:5011/api/blogs/${blogId}`;
-        const response = await axios.get(URL);
         try {
-          await setCurrentBlog(response.data);
+          const response = await axios.get(URL);
+          setCurrentBlog(response.data);
         } catch (err) {
           alert("an Error occurred. Please try, again.")
           console.log(err);
         };
         navigate("/blog");
       };
+      getCurrentBlog();
     };
 
     const getRelevantComments = async () => {
@@ -56,7 +61,6 @@ export default function App() {
       };
     };
     getRelevantComments();
-    getCurrentBlog();
 
     // GET ALL LIKES
     const getAllLikes = async () => {
@@ -81,9 +85,8 @@ export default function App() {
     <>
       <Header
         loggedIn={loggedIn}
-        logOut={logOut}
+        setLoggedIn={setLoggedIn}
         setBlogId={setBlogId}
-        setCurrentBlog={setCurrentBlog}
       />
       <Routes>
         <Route path="/sign-in" element={<Login

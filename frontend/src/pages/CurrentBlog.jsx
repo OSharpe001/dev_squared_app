@@ -21,9 +21,9 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
 
     useEffect(() => {
 
-        if (loggedIn && !currentBlog) {
-            navigate("/");
-        };
+        // if (loggedIn && !currentBlog) {
+        //     navigate("/");
+        // };
 
         if (commentToDelete) {
             const commentDeletion = async () => {
