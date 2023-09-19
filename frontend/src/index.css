@@ -210,10 +210,20 @@ li {
   }
 }
 
-.banner-title{
+.banner-title {
   margin: 0;
   padding: 0;
   font-size: 20pt;
+  cursor: pointer;
+}
+
+.banner-title:hover {
+  box-shadow: -2px 2px 5px aliceblue;
+  text-decoration: underline;
+}
+
+.banner-title:active {
+  box-shadow: -1px 1px 3px aliceblue;
 }
 
 header nav {
