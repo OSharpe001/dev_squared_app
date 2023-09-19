@@ -21,7 +21,7 @@
 
 -The "Back to Blogs" button doesn't work. There are a lot of re-renders and client ends up back on the "Current Blog" page they were trying to leave.
 
-- After pressing the like button, the screen doesn't rerender to reflect the change. This allows a user to add multiple likes on the same blog or comment.
+- After pressing the like button, the screen doesn't rerender to reflect the change.
 
 ---
 
