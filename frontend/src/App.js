@@ -16,6 +16,13 @@ export default function App() {
   const [allLikes, setAllLikes] = useState([]);
 
   const navigate = useNavigate();
+  const logOut = useEffect;
+
+  logOut(() => {
+    localStorage.removeItem("Dev2User");
+    setLoggedIn(false);
+    navigate("/sign-up");
+  },[]);
 
   useEffect(() => {
     const getCurrentBlog = async () => {
@@ -73,9 +80,8 @@ export default function App() {
   return (
     <>
       <Header
-        navigate={navigate}
         loggedIn={loggedIn}
-        setLoggedIn={setLoggedIn}
+        logOut={logOut}
         setBlogId={setBlogId}
         setCurrentBlog={setCurrentBlog}
       />

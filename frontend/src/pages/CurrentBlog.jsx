@@ -20,9 +20,6 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
     });
 
     useEffect(() => {
-        if (!loggedIn) {
-            navigate("/sign-up");
-        };
 
         if (loggedIn && !currentBlog) {
             navigate("/");

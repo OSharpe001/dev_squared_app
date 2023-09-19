@@ -4,17 +4,11 @@ import { useLocation } from "react-router-dom";
 import { useState } from "react";
 
 
-export default function Header({ navigate, loggedIn, setLoggedIn, setCurrentBlog, setBlogId }) {
+export default function Header({ loggedIn, setCurrentBlog, setBlogId, logOut }) {
 
   const backHome = () => {
     setBlogId("");
     setCurrentBlog("");
-  };
-
-  const logOut = () => {
-    localStorage.removeItem("Dev2User");
-    setLoggedIn(false);
-    navigate("/sign-up");
   };
 
   // NECESSARY TO CHANGE THE "VIEW-POSTER" BUTTON TO "CHANGE-POSTER" WHEN ON POSTER PAGE
