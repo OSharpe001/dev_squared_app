@@ -10,6 +10,12 @@ const getAllLikes = asyncHandler(async (req, res) => {
 
 // SET LIKES (POST REQUEST - "/api/likes")
 const setLikes = asyncHandler(async (req, res) => {
+    const {userName, commentId, blogId } = req.body;
+    
+    // FIND THE LIKE BY COMMENT/BLOG AND USERNAME
+    const previousBlogLike = await Like.findOne({ userName, blogId });
+    const previousCommentLike = await Like.findOne({ userName, commentId });
+
     if (!req.body.userName) {
         res.status(400);
         throw new Error("Not Authorized...");
@@ -20,12 +26,14 @@ const setLikes = asyncHandler(async (req, res) => {
         throw new Error("No Blog or Comment. Denied...");
     };
 
-    const like = await Like.create({
-        user: req.user.id,
-        userName: req.body.userName,
-        blogId: req.body.blogId,
-        commentId: req.body.commentId
-    });
+    if (!previousBlogLike || !previousCommentLike) {
+        const like = await Like.create({
+            user: req.user.id,
+            userName: req.body.userName,
+            blogId: req.body.blogId,
+            commentId: req.body.commentId
+        });
+    };
 
     res.status(200).json(like);
 });
