@@ -33,7 +33,8 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
 
             if (formData.text) {
                 const updateComment = async () => {
-                    const URL = `https://devsquaredbe.onrender.com/api/blogs/comments/${commentToUpdate.id}`;
+                    // const URL = `https://devsquaredbe.onrender.com/api/blogs/comments/${commentToUpdate.id}`;
+                    const URL = `http://localhost:5011/api/blogs/comments/${commentToUpdate.id}`;
                     const config = {
                         headers: {
                             Authorization: `Bearer ${loggedIn.token}`
@@ -51,7 +52,8 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
 
         } else if (formData.text) {
             const createComment = async () => {
-                const URL = "https://devsquaredbe.onrender.com/api/blogs/comments";
+                // const URL = "https://devsquaredbe.onrender.com/api/blogs/comments";
+                const URL = "http://localhost:5011/api/blogs/comments";
                 const config = {
                     headers: {
                         Authorization: `Bearer ${loggedIn.token}`
