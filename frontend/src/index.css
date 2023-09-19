@@ -268,12 +268,12 @@ header nav {
 }
 
 .hero {
-  height: 35vh;
+  height: 283px;
   width: 90vw;
   display: flex;
   margin: 0 auto 40px;
   justify-content: space-around;
-  box-shadow: -2px 2px 5px aliceblue;
+  box-shadow: -2px 2px 7px aliceblue;
   border-radius: 7px;
   background-image: url("./assets/images/backdrop/hero_backdrop.jpg");
   background-repeat: no-repeat;
@@ -282,23 +282,26 @@ header nav {
 }
 
 .speech {
-  margin-top: 0;
+  margin: 0;
   padding: 0 5px;
-  height: 100%;
+  height: max-content;
   font-size: 14pt;
   line-height: 1.5;
   max-width: 325px;
-  overflow: scroll;
   background-color: rgba(0, 0, 0, 0.8);
   border-radius: 7px;
   border: 1.5px solid grey;
 }
 
 .meme-button {
-  height: 100%;
+  min-height: 100%;
   width: 20vw;
   background-color: grey;
   border: 1px solid blue;
+}
+
+.meme-button:hover {
+  background-color: aliceblue;
 }
 
 .meme-image {
