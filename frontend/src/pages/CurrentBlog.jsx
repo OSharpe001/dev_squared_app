@@ -78,6 +78,12 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
                 } catch (err) {
                     console.log("BLOG-LIKE DELETE FETCH ERROR: ", err);
                 };
+                setChangeLike({
+                    userName: loggedIn.userName,
+                    blogId: "",
+                    commentId: "",
+                    action: ""
+                });
             };
             blogLikeDeletion();
 
@@ -98,6 +104,12 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
                 } catch (err) {
                     console.log("ADD BLOG-LIKE FETCH ERROR: ", err);
                 };
+                setChangeLike({
+                    userName: loggedIn.userName,
+                    blogId: "",
+                    commentId: "",
+                    action: ""
+                });
             };
             createBlogLike();
 
@@ -116,6 +128,12 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
                 } catch (err) {
                     console.log("COMMENT-LIKE DELETE FETCH ERROR: ", err);
                 };
+                setChangeLike({
+                    userName: loggedIn.userName,
+                    blogId: "",
+                    commentId: "",
+                    action: ""
+                });
             };
             commentLikeDeletion();
 
@@ -136,6 +154,12 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
                 } catch (err) {
                     console.log("ADD COMMENT-LIKE FETCH ERROR: ", err);
                 };
+                setChangeLike({
+                    userName: loggedIn.userName,
+                    blogId: "",
+                    commentId: "",
+                    action: ""
+                });
             };
             createCommentLike();
         };
@@ -163,7 +187,7 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
         setChangeLike(prev => ({
             ...prev,
             action: action,
-            blogId: commentId
+            commentId: commentId
         }));
     };
 
