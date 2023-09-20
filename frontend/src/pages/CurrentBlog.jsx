@@ -31,11 +31,13 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
                 };
                 try {
                     await axios.delete(URL + commentToDelete, config);
+                    // setBlogId(currentBlog._id); // DIDN'T WORK (TRYING TO RE-RENDER THE CURRENT BLOG AFTER A COMMENT DELETION)
                 } catch (err) {
                     console.log("COMMENT DELETE FETCH ERROR: ", err);
                 };
             };
             commentDeletion();
+            // setBlogId(currentBlog._id); // DIDN'T WORK (TRYING TO RE-RENDER THE CURRENT BLOG AFTER A COMMENT DELETION)
         };
 
         if (blogToDelete) {
@@ -49,12 +51,12 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
                 };
                 try {
                     await axios.delete(URL + blogToDelete, config);
+                    setBlogId("");
                 } catch (err) {
                     console.log("BLOG DELETE FETCH ERROR: ", err);
                 };
             };
             blogDeletion();
-            setBlogId("");
         };
 
         if (changeLike.action === "delete" && changeLike.blogId) {
@@ -162,7 +164,7 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
             createCommentLike();
         };
 
-    }, [loggedIn, currentBlog, navigate, commentToDelete, commentToUpdate, blogToDelete, changeLike]);
+    }, [loggedIn, currentBlog, navigate, commentToDelete, blogToDelete, changeLike, setBlogId]);
 
     const startComment = () => {
         setCommentModalHidden(false);
@@ -198,6 +200,8 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
     );
 
     const disabled = !blogModalHidden || !commentModalHidden;
+
+    // console.log("CURRENTBLOG'S CURRENTBLOG INFO: ", currentBlog);
 
     return (
         <section className="current-blog-page">
@@ -265,6 +269,7 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
             <CommentModal
                 commentModalHidden={commentModalHidden}
                 setCommentModalHidden={setCommentModalHidden}
+                setBlogId={setBlogId}
                 loggedIn={loggedIn}
                 currentBlog={currentBlog}
                 commentToUpdate={commentToUpdate}
