@@ -14,6 +14,12 @@ export default function App() {
   const [blogComments, setBlogComments] = useState([]);
   const [blogModalHidden, setBlogModalHidden] = useState(true);
   const [allLikes, setAllLikes] = useState([]);
+  const [changeLike, setChangeLike] = useState({
+    userName: loggedIn.userName,
+    blogId: "",
+    commentId: "",
+    action: ""
+});
 
   const navigate = useNavigate();
   const backToRegistration = useEffect;
@@ -22,6 +28,7 @@ export default function App() {
   backToRegistration(() => {
     if (!loggedIn) {
       localStorage.removeItem("Dev2User");
+      setBlogId("");
       navigate("/sign-up");
     };
   }, [loggedIn]);
@@ -47,39 +54,74 @@ export default function App() {
         };
         navigate("/blog");
       };
+
+      const getRelevantComments = async () => {
+        // const URL = "https://devsquaredbe.onrender.com/api/blogs/comments/";
+        const URL = "http://localhost:5011/api/blogs/comments/";
+        const options = { method: "GET" };
+        try {
+          const response = await fetch(URL + blogId, options);
+          const data = await response.json();
+          setBlogComments(data.reverse());
+        } catch (err) {
+          console.log("RELEVANT COMMENTS FETCH ERROR: ", err)
+        };
+      };
+
       getCurrentBlog();
+      getRelevantComments();
+    } else {
+      setCurrentBlog("");
+      setBlogComments([]);
     };
 
-    const getRelevantComments = async () => {
-      // const URL = "https://devsquaredbe.onrender.com/api/blogs/comments/";
-      const URL = "http://localhost:5011/api/blogs/comments/";
-      const options = { method: "GET" };
-      try {
-        const response = await fetch(URL + blogId, options);
-        const data = await response.json();
-        setBlogComments(data.reverse());
-      } catch (err) {
-        console.log("RELEVANT COMMENTS FETCH ERROR: ", err)
-      };
-    };
-    getRelevantComments();
+    // if (blogId) {
+    //   const getRelevantComments = async () => {
+    //     // const URL = "https://devsquaredbe.onrender.com/api/blogs/comments/";
+    //     const URL = "http://localhost:5011/api/blogs/comments/";
+    //     const options = { method: "GET" };
+    //     try {
+    //       const response = await fetch(URL + blogId, options);
+    //       const data = await response.json();
+    //       setBlogComments(data.reverse());
+    //     } catch (err) {
+    //       console.log("RELEVANT COMMENTS FETCH ERROR: ", err)
+    //     };
+    //   };
+    //   getRelevantComments();
+    // };
 
     // GET ALL LIKES
-    const getAllLikes = async () => {
-      // const URL = "https://devsquaredbe.onrender.com/api/likes/";
-      const URL = "http://localhost:5011/api/likes/";
-      const options = { method: "GET" };
-      try {
-        const response = await fetch(URL, options);
-        const data = await response.json();
-        setAllLikes(data);
-      } catch (err) {
-        console.log("ALL LIKES FETCH ERROR: ", err)
+    if (changeLike.action) {
+      const getAllLikes = async () => {
+        // const URL = "https://devsquaredbe.onrender.com/api/likes/";
+        const URL = "http://localhost:5011/api/likes/";
+        const options = { method: "GET" };
+        try {
+          const response = await fetch(URL, options);
+          const data = await response.json();
+          setAllLikes(data);
+        } catch (err) {
+          console.log("ALL LIKES FETCH ERROR: ", err)
+        };
       };
+      getAllLikes();
     };
-    getAllLikes();
+    // const getAllLikes = async () => {
+    //   // const URL = "https://devsquaredbe.onrender.com/api/likes/";
+    //   const URL = "http://localhost:5011/api/likes/";
+    //   const options = { method: "GET" };
+    //   try {
+    //     const response = await fetch(URL, options);
+    //     const data = await response.json();
+    //     setAllLikes(data);
+    //   } catch (err) {
+    //     console.log("ALL LIKES FETCH ERROR: ", err)
+    //   };
+    // };
+    // getAllLikes();
 
-  }, [blogId, loggedIn, navigate]);
+  }, [blogId, loggedIn, navigate, changeLike]);
 
 
 
@@ -108,6 +150,8 @@ export default function App() {
           blogModalHidden={blogModalHidden}
           setBlogModalHidden={setBlogModalHidden}
           allLikes={allLikes}
+          changeLike={changeLike}
+          setChangeLike={setChangeLike}
         />} />
         <Route path="/" element={<HomePage
           navigate={navigate}
