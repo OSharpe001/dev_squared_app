@@ -38,7 +38,7 @@ export default function App() {
       setCurrentBlog("");
       navigate("/");
     }
-  }, [loggedIn, blogId]);
+  }, [/*loggedIn, */blogId]);
 
   useEffect(() => {
     if (loggedIn && blogId) {
@@ -70,7 +70,7 @@ export default function App() {
 
       getCurrentBlog();
       getRelevantComments();
-    } else {
+    } else if (!loggedIn) {
       setCurrentBlog("");
       setBlogComments([]);
     };
