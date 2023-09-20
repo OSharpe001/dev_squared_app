@@ -18,6 +18,7 @@ import pic17 from "../assets/images/memes/IMG_8107.jpg";
 import pic18 from "../assets/images/memes/IMG_8108.jpg";
 import pic19 from "../assets/images/memes/IMG_8109.jpg";
 import pic20 from "../assets/images/memes/IMG_8112.jpg";
+import pic21 from "../assets/images/memes/IMG_8199.jpg";
 
 export const images = [
     {
@@ -118,6 +119,11 @@ export const images = [
     {
         class: "meme-image",
         image: pic20,
+        alt: "meme"
+    },
+    {
+        class: "meme-image",
+        image: pic21,
         alt: "meme"
     },
 ];
