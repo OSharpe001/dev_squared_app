@@ -75,51 +75,20 @@ export default function App() {
       setBlogComments([]);
     };
 
-    // if (blogId) {
-    //   const getRelevantComments = async () => {
-    //     // const URL = "https://devsquaredbe.onrender.com/api/blogs/comments/";
-    //     const URL = "http://localhost:5011/api/blogs/comments/";
-    //     const options = { method: "GET" };
-    //     try {
-    //       const response = await fetch(URL + blogId, options);
-    //       const data = await response.json();
-    //       setBlogComments(data.reverse());
-    //     } catch (err) {
-    //       console.log("RELEVANT COMMENTS FETCH ERROR: ", err)
-    //     };
-    //   };
-    //   getRelevantComments();
-    // };
-
     // GET ALL LIKES
-    if (changeLike.action) {
-      const getAllLikes = async () => {
-        // const URL = "https://devsquaredbe.onrender.com/api/likes/";
-        const URL = "http://localhost:5011/api/likes/";
-        const options = { method: "GET" };
-        try {
-          const response = await fetch(URL, options);
-          const data = await response.json();
-          setAllLikes(data);
-        } catch (err) {
-          console.log("ALL LIKES FETCH ERROR: ", err)
-        };
+    const getAllLikes = async () => {
+      // const URL = "https://devsquaredbe.onrender.com/api/likes/";
+      const URL = "http://localhost:5011/api/likes/";
+      const options = { method: "GET" };
+      try {
+        const response = await fetch(URL, options);
+        const data = await response.json();
+        setAllLikes(data);
+      } catch (err) {
+        console.log("ALL LIKES FETCH ERROR: ", err)
       };
-      getAllLikes();
     };
-    // const getAllLikes = async () => {
-    //   // const URL = "https://devsquaredbe.onrender.com/api/likes/";
-    //   const URL = "http://localhost:5011/api/likes/";
-    //   const options = { method: "GET" };
-    //   try {
-    //     const response = await fetch(URL, options);
-    //     const data = await response.json();
-    //     setAllLikes(data);
-    //   } catch (err) {
-    //     console.log("ALL LIKES FETCH ERROR: ", err)
-    //   };
-    // };
-    // getAllLikes();
+    getAllLikes();
 
   }, [blogId, loggedIn, navigate, changeLike]);
 

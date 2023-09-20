@@ -20,11 +20,6 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
     });
 
     useEffect(() => {
-
-        // if (loggedIn && !currentBlog) {
-        //     navigate("/");
-        // };
-
         if (commentToDelete) {
             const commentDeletion = async () => {
                 // const URL = "https://devsquaredbe.onrender.com/api/blogs/comments/";
@@ -44,8 +39,7 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
         };
 
         if (blogToDelete) {
-            const blogDeletion = async () => {//TRY, LATER IF YOU CAN MAKE THIS CALL WITHOUT DECLARING A FUNCTION
-                // async () => {
+            const blogDeletion = async () => {
                 // const URL = "https://devsquaredbe.onrender.com/api/blogs/";
                 const URL = "http://localhost:5011/api/blogs/";
                 const config = {
@@ -59,8 +53,8 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
                     console.log("BLOG DELETE FETCH ERROR: ", err);
                 };
             };
-            blogDeletion();//
-        };//
+            blogDeletion();
+        };
 
         if (changeLike.action === "delete" && changeLike.blogId) {
             const blogLikeDeletion = async () => {
@@ -78,12 +72,12 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
                 } catch (err) {
                     console.log("BLOG-LIKE DELETE FETCH ERROR: ", err);
                 };
-                setChangeLike({
-                    userName: loggedIn.userName,
-                    blogId: "",
-                    commentId: "",
-                    action: ""
-                });
+                // setChangeLike({
+                //     userName: loggedIn.userName,
+                //     blogId: "",
+                //     commentId: "",
+                //     action: ""
+                // });
             };
             blogLikeDeletion();
 
@@ -105,12 +99,12 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
                 } catch (err) {
                     console.log("ADD BLOG-LIKE FETCH ERROR: ", err);
                 };
-                setChangeLike({
-                    userName: loggedIn.userName,
-                    blogId: "",
-                    commentId: "",
-                    action: ""
-                });
+                // setChangeLike({
+                //     userName: loggedIn.userName,
+                //     blogId: "",
+                //     commentId: "",
+                //     action: ""
+                // });
             };
             createBlogLike();
 
@@ -130,12 +124,12 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
                 } catch (err) {
                     console.log("COMMENT-LIKE DELETE FETCH ERROR: ", err);
                 };
-                setChangeLike({
-                    userName: loggedIn.userName,
-                    blogId: "",
-                    commentId: "",
-                    action: ""
-                });
+                // setChangeLike({
+                //     userName: loggedIn.userName,
+                //     blogId: "",
+                //     commentId: "",
+                //     action: ""
+                // });
             };
             commentLikeDeletion();
 
@@ -157,12 +151,12 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
                 } catch (err) {
                     console.log("ADD COMMENT-LIKE FETCH ERROR: ", err);
                 };
-                setChangeLike({
-                    userName: loggedIn.userName,
-                    blogId: "",
-                    commentId: "",
-                    action: ""
-                });
+                // setChangeLike({
+                //     userName: loggedIn.userName,
+                //     blogId: "",
+                //     commentId: "",
+                //     action: ""
+                // });
             };
             createCommentLike();
         };
