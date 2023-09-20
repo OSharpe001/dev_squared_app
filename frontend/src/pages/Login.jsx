@@ -24,6 +24,11 @@ export default function Login({ loggedIn, setLoggedIn, navigate }) {
     setPassword("");
   };
 
+  const resetLoginForm = () => {
+    resetAlias();
+    resetPassword();
+  };
+
   const submitForm = (e) => {
     e.preventDefault();
     if (alias.includes("@") && alias.includes(".")) {
@@ -58,30 +63,25 @@ export default function Login({ loggedIn, setLoggedIn, navigate }) {
       navigate("/");
     };
 
-    const resetLoginForm = () => {
-      resetAlias();
-      resetPassword();
-    };
-
-    const getMe = async () => {
-      // const URL = `https://devsquaredbe.onrender.com/api/users/login`;
-      const URL = `http://localhost:5011/api/users/login`;
-      if (formData.password) {
-        const response = await axios.post(URL, formData);
+    if (formData.password) {
+        const getMe = async () => {
+        // const URL = `https://devsquaredbe.onrender.com/api/users/login`;
+        const URL = `http://localhost:5011/api/users/login`;
         try {
+          const response = await axios.post(URL, formData);
           localStorage.setItem("Dev2User", JSON.stringify(response.data));
           setLoggedIn(JSON.parse(localStorage.getItem("Dev2User")));
+          resetLoginForm();
         } catch (err) {
           console.log(err);
+          alert("Please check your credentials and try again or register")
           resetPassword();
         };
-        return response.data
       };
-      resetLoginForm();
+      getMe();
     };
-    getMe();
 
-  }, [formData, loggedIn, setLoggedIn, navigate]);
+  }, [formData, loggedIn, setLoggedIn]);
 
   const errorHandling = ({ target }) => {
     if (target.name === "alias" && alias.length < 4) {
