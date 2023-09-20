@@ -121,6 +121,7 @@ export default function App() {
           allLikes={allLikes}
           changeLike={changeLike}
           setChangeLike={setChangeLike}
+          setBlogId={setBlogId}
         />} />
         <Route path="/" element={<HomePage
           navigate={navigate}

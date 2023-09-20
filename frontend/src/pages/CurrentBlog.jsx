@@ -6,7 +6,7 @@ import like from "../assets/images/icons/filled_red_heart.png";
 import dislike from "../assets/images/icons/heart_shell.png";
 
 
-export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navigate, blogModalHidden, setBlogModalHidden, allLikes }) {
+export default function CurrentBlog({ currentBlog, setBlogId, blogComments, loggedIn, navigate, blogModalHidden, setBlogModalHidden, allLikes }) {
 
     const [commentModalHidden, setCommentModalHidden] = useState(true);
     const [commentToDelete, setCommentToDelete] = useState("");
@@ -54,6 +54,7 @@ export default function CurrentBlog({ currentBlog, blogComments, loggedIn, navig
                 };
             };
             blogDeletion();
+            setBlogId("");
         };
 
         if (changeLike.action === "delete" && changeLike.blogId) {
