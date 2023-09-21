@@ -269,7 +269,7 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
             <CommentModal
                 commentModalHidden={commentModalHidden}
                 setCommentModalHidden={setCommentModalHidden}
-                setBlogId={setBlogId}
+                setBlogId={setBlogId} // SEEMS LIKE I WON'T NEED THE SETBLOGID FUNCTION SINCE IT'S NOT HELPING TO RE-RENDER/REDIRECT-TO THE "CURRENTBLOG" PAGE AFTER A COMMENT IS CREATED OR UPDATED...
                 loggedIn={loggedIn}
                 currentBlog={currentBlog}
                 commentToUpdate={commentToUpdate}
