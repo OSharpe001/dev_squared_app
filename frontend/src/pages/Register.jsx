@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 
-export default function Register({ loggedIn, setLoggedIn, navigate }) {
+export default function Register({ /*loggedIn,*/ setLoggedIn/*, navigate*/ }) {
 
   const [name, setName] = useState("");
   const [userName, setUserName] = useState("");
@@ -82,11 +82,13 @@ export default function Register({ loggedIn, setLoggedIn, navigate }) {
   };
 
   useEffect(() => {
-    if (loggedIn) {
-      navigate("/");
-    };
+    // if (loggedIn) {
+    //   console.log("REGISTER USEEFFECT'S IF LOGIN IS RUNNING");
+    //   navigate("/");
+    // };
 
     const resetLoginForm = () => {
+      console.log("REGISTER USEEFFECT'S RESETLOGINFORM IS RUNNING");
       resetName();
       resetUsername();
       resetEmail();
@@ -94,6 +96,7 @@ export default function Register({ loggedIn, setLoggedIn, navigate }) {
     };
 
     const getMe = async () => {
+      console.log("REGISTER USEEFFECT'S GETME IS RUNNING");
       // const URL = `https://devsquaredbe.onrender.com/api/users`;
       const URL = `http://localhost:5011/api/users`;
       if (formData.password) {
@@ -111,7 +114,7 @@ export default function Register({ loggedIn, setLoggedIn, navigate }) {
     };
     getMe();
 
-  }, [formData, loggedIn, setLoggedIn, navigate]);
+  }, [formData, /*loggedIn,*/ setLoggedIn/*, navigate*/]);
 
   const errorHandling = ({ target }) => {
     if (target.name === "name" && target.value.length < 4) {

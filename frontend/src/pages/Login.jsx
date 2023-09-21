@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 
-export default function Login({ loggedIn, setLoggedIn, navigate }) {
+export default function Login({ /*loggedIn,*/ setLoggedIn/*, navigate*/ }) {
 
   const [alias, setAlias] = useState("");
   const [password, setPassword] = useState("");
@@ -59,12 +59,13 @@ export default function Login({ loggedIn, setLoggedIn, navigate }) {
   };
 
   useEffect(() => {
-    if (loggedIn) {
-      navigate("/");
-    };
+    // if (loggedIn) {
+    //   navigate("/");
+    // };
 
     if (formData.password) {
         const getMe = async () => {
+          console.log("LOGIN USEEFFECT'S GETME IS RUNNING");
         // const URL = `https://devsquaredbe.onrender.com/api/users/login`;
         const URL = `http://localhost:5011/api/users/login`;
         try {
@@ -81,7 +82,7 @@ export default function Login({ loggedIn, setLoggedIn, navigate }) {
       getMe();
     };
 
-  }, [formData, loggedIn, setLoggedIn]);
+  }, [formData, /*loggedIn,*/ setLoggedIn]);
 
   const errorHandling = ({ target }) => {
     if (target.name === "alias" && alias.length < 4) {

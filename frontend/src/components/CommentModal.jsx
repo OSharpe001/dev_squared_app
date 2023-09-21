@@ -34,6 +34,7 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
 
             if (formData.text) {
                 const updateComment = async () => {
+                    console.log("COMMENTMODAL USEEFFECT'S UPDATECOMMENT IS RUNNING");
                     // const URL = `https://devsquaredbe.onrender.com/api/blogs/comments/${commentToUpdate.id}`;
                     const URL = `http://localhost:5011/api/blogs/comments/${commentToUpdate.id}`;
                     const config = {
@@ -50,13 +51,15 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
                     };
                 };
                 updateComment();
-                // setBlogId(formData.blogId); // setBlogId(formData.blogId); // RESETTING THE "CURRENT BLOG ID" AFTER THE COMMENT UPDATE DIDN'T WORK (TO MAKE THE PAGE REDIRECT BACK TO THE CURRENT BLOG)
+                setTimeout(setBlogId, 100, formData.blogId); // setBlogId(formData.blogId); // RESETTING THE "CURRENT BLOG ID" AFTER THE COMMENT UPDATE DIDN'T WORK (TO MAKE THE PAGE REDIRECT BACK TO THE CURRENT BLOG)
+                console.log("COMMENTMODAL AFTER-UPDATECOMMENT FORMDATA.BLOGID: ", formData.blogId);
                 // navigate("/blog"); // TRYING TO FORCE A REDIRECTION BACK TO THE CURRENT BLOG ONLY GETS REDIRECTED BACK SINCE DURING THE RE-RENDERS, THE BLOG.ID IS LOST (AUTO-HOME-RERENDER FUNCTION ON APP.JSX)
             };
 
         } else if (formData.text) {
             // setBlogId(formData.blogId);  // RESETTING THE "CURRENT BLOG ID" BEFORE THE COMMENT CREATE DIDN'T WORK (TO MAKE THE PAGE REDIRECT BACK TO THE CURRENT BLOG)
             const createComment = async () => {
+                console.log("COMMENTMODAL USEEFFECT'S CREATECOMMENT IS RUNNING");
                 // const URL = "https://devsquaredbe.onrender.com/api/blogs/comments";
                 const URL = "http://localhost:5011/api/blogs/comments";
                 const config = {
@@ -73,10 +76,11 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
                 };
             };
             createComment();
-            // setBlogId(formData.blogId); // RESETTING THE "CURRENT BLOG ID" AFTER THE COMMENT CREATE DIDN'T WORK (TO MAKE THE PAGE REDIRECT BACK TO THE CURRENT BLOG)
+            setTimeout(setBlogId, 100, formData.blogId); // RESETTING THE "CURRENT BLOG ID" AFTER THE COMMENT CREATE DIDN'T WORK (TO MAKE THE PAGE REDIRECT BACK TO THE CURRENT BLOG)
+            console.log("COMMENTMODAL AFTER-CREATECOMMENT FORMDATA.BLOGID: ", formData.blogId);
             // navigate("/blog"); // TRYING TO FORCE A REDIRECTION BACK TO THE CURRENT BLOG ONLY GETS REDIRECTED BACK SINCE DURING THE RE-RENDERS, THE BLOG.ID IS LOST (AUTO-HOME-RERENDER FUNCTION ON APP.JSX)
         };
-        console.log("COMMENTMODAL USEEFFECT'S FORMDATA.BLOGID: ", formData.blogId);
+        console.log("COMMENTMODAL END-OF-USEEFFECT'S FORMDATA.BLOGID: ", formData.blogId);
         // setBlogId(formData.blogId); // RESETTING THE "CURRENT BLOG ID" AFTER THE COMMENT CREATE/DELETE FUNCTIONS DIDN'T WORK (TO MAKE THE PAGE REDIRECT BACK TO THE CURRENT BLOG)
         // navigate("/blog"); // TRYING TO FORCE A REDIRECTION BACK TO THE CURRENT BLOG ONLY GETS REDIRECTED BACK SINCE DURING THE RE-RENDERS, THE BLOG.ID IS LOST (AUTO-HOME-RERENDER FUNCTION ON APP.JSX)
 

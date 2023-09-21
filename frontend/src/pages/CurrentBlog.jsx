@@ -22,6 +22,7 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
     useEffect(() => {
         if (commentToDelete) {
             const commentDeletion = async () => {
+                console.log("CURRENTBLOG USEEFFECT'S COMMENTDELETION IS RUNNING");
                 // const URL = "https://devsquaredbe.onrender.com/api/blogs/comments/";
                 const URL = "http://localhost:5011/api/blogs/comments/";
                 const config = {
@@ -42,6 +43,7 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
 
         if (blogToDelete) {
             const blogDeletion = async () => {
+                console.log("CURRENTBLOG USEEFFECT'S BLOGDELETION IS RUNNING");
                 // const URL = "https://devsquaredbe.onrender.com/api/blogs/";
                 const URL = "http://localhost:5011/api/blogs/";
                 const config = {
@@ -86,6 +88,7 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
 
         } else if (changeLike.action === "add" && changeLike.blogId) {
             const createBlogLike = async () => {
+                console.log("CURRENTBLOG USEEFFECT'S CREATEBLOGLIKE IS RUNNING");
                 // const URL = "https://devsquaredbe.onrender.com/api/likes";
                 const URL = "http://localhost:5011/api/likes";
                 const options = {
@@ -138,6 +141,7 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
 
         } else if (changeLike.action === "add" && changeLike.commentId) {
             const createCommentLike = async () => {
+                console.log("CURRENTBLOG USEEFFECT'S CREATECOMMENTLIKE IS RUNNING");
                 // const URL = "https://devsquaredbe.onrender.com/api/likes";
                 const URL = "http://localhost:5011/api/likes";
                 const options = {
@@ -273,7 +277,7 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
                 loggedIn={loggedIn}
                 currentBlog={currentBlog}
                 commentToUpdate={commentToUpdate}
-                navigate={navigate}
+                navigate={navigate} // SEEMS LIKE I WON'T NEED THE NAVIGATE FUNCTION SINCE IT'S NOT HELPING TO RE-RENDER/REDIRECT-TO THE "CURRENTBLOG" PAGE AFTER A COMMENT IS CREATED OR UPDATED...
             />
 
             <BlogModal

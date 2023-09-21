@@ -6,7 +6,7 @@ import { useState } from "react";
 
 export default function Header({ loggedIn, setLoggedIn, setBlogId }) {
 
-  const logOut =() => {
+  const logOut = () => {
     setLoggedIn(false);
   };
 

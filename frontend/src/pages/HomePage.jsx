@@ -10,11 +10,12 @@ export default function HomePage({ setBlogId, loggedIn, navigate, blogModalHidde
     const [blogs, setBlogs] = useState([]);
 
     useEffect(() => {
-        if (!loggedIn) {
-            navigate("/sign-up");
-        };
+        // if (!loggedIn) {
+        //     navigate("/sign-up");
+        // };
 
         const getAllBlogs = async () => {
+            console.log("HOMEPAGE USEEFFECT'S GETALLBLOGS IS RUNNING");
             try {
                 // const URL = "https://devsquaredbe.onrender.com/api/blogs";
                 const URL = "http://localhost:5011/api/blogs";
@@ -29,7 +30,7 @@ export default function HomePage({ setBlogId, loggedIn, navigate, blogModalHidde
         };
         getAllBlogs();
 
-    }, [loggedIn, navigate]);
+    }, [/*loggedIn/*, navigate*/]);
 
     const createBlog = () => {
         setBlogModalHidden(false);

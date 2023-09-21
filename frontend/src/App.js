@@ -26,23 +26,32 @@ export default function App() {
   const backHome = useEffect;
 
   backToRegistration(() => {
+    if (loggedIn) {
+      console.log("APP.JS USEEFFECT'S IF LOGGEDIN IS RUNNING");
+      navigate("/");
+    } else
     if (!loggedIn) {
+      console.log("APP.JS BACKTOREGISTRATION IS RUNNING");
       localStorage.removeItem("Dev2User");
       setBlogId("");
+      setCurrentBlog("");
+      setBlogComments([]);
       navigate("/sign-up");
     };
   }, [loggedIn]);
 
   backHome(() => {
     if (loggedIn && !blogId) {
+      console.log("APP.JS BACKHOME IS RUNNING");
       setCurrentBlog("");
       navigate("/");
     }
-  }, [/*loggedIn, */blogId]);
+  }, [blogId]);
 
   useEffect(() => {
     if (loggedIn && blogId) {
       const getCurrentBlog = async () => {
+        console.log("APP.JS USEEFFECT'S GETCURRENTBLOG IS RUNNING");
         // const URL = `https://devsquaredbe.onrender.com/api/blogs/${blogId}`;
         const URL = `http://localhost:5011/api/blogs/${blogId}`;
         try {
@@ -56,6 +65,7 @@ export default function App() {
       };
 
       const getRelevantComments = async () => {
+        console.log("APP.JS USEEFFECT'S GETRELEVANTCOMMENTS IS RUNNING");
         // const URL = "https://devsquaredbe.onrender.com/api/blogs/comments/";
         const URL = "http://localhost:5011/api/blogs/comments/";
         const options = { method: "GET" };
@@ -70,13 +80,11 @@ export default function App() {
 
       getCurrentBlog();
       getRelevantComments();
-    } else if (!loggedIn) {
-      setCurrentBlog("");
-      setBlogComments([]);
     };
 
     // GET ALL LIKES
     const getAllLikes = async () => {
+      console.log("APP.JS USEEFFECT'S GETALLLIKES IS RUNNING");
       // const URL = "https://devsquaredbe.onrender.com/api/likes/";
       const URL = "http://localhost:5011/api/likes/";
       const options = { method: "GET" };
@@ -90,7 +98,7 @@ export default function App() {
     };
     getAllLikes();
 
-  }, [blogId, loggedIn, navigate, changeLike]);
+  }, [blogId, loggedIn, changeLike]);
 
 
 
@@ -104,12 +112,11 @@ export default function App() {
       <Routes>
         <Route path="/sign-in" element={<Login
           setLoggedIn={setLoggedIn}
-          loggedIn={loggedIn}
-          navigate={navigate}
+          navigate={navigate}  // LOOKS LIKE I WON'T NEED NAVIGATE FUNCTION ON LOGIN TO SEND USER TO HOME PAGE AFTER LOGGING IN
         />} />
         <Route path="/sign-up" element={<Register
           setLoggedIn={setLoggedIn}
-          navigate={navigate}
+          navigate={navigate}  // LOOKS LIKE I WON'T NEED NAVIGATE FUNCTION ON REGISTER TO SEND USER TO HOME PAGE AFTER REGISTERING
         />} />
         <Route path="/blog" element={<CurrentBlog
           currentBlog={currentBlog}
@@ -124,7 +131,7 @@ export default function App() {
           setBlogId={setBlogId}
         />} />
         <Route path="/" element={<HomePage
-          navigate={navigate}
+          navigate={navigate} // LOOKS LIKE I WON'T NEED NAVIGATE FUNCTION ON HOMEPAGE TO SEND USER BACK TO REGISTER PAGE IF !LOGGEDIN
           loggedIn={loggedIn}
           setBlogId={setBlogId}
           blogModalHidden={blogModalHidden}
