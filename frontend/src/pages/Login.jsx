@@ -70,7 +70,6 @@ export default function Login({ setLoggedIn }) {
           const response = await axios.post(URL, formData);
           localStorage.setItem("Dev2User", JSON.stringify(response.data));
           setLoggedIn(JSON.parse(localStorage.getItem("Dev2User")));
-          // resetLoginForm();
         } catch (err) {
           console.log(err);
           alert("Please check your credentials and try again or register")
@@ -78,7 +77,6 @@ export default function Login({ setLoggedIn }) {
         };
       };
       getMe();
-      // resetLoginForm();
     };
 
   }, [formData, setLoggedIn]);
