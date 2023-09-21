@@ -112,11 +112,9 @@ export default function App() {
       <Routes>
         <Route path="/sign-in" element={<Login
           setLoggedIn={setLoggedIn}
-          navigate={navigate}  // LOOKS LIKE I WON'T NEED NAVIGATE FUNCTION ON LOGIN TO SEND USER TO HOME PAGE AFTER LOGGING IN
         />} />
         <Route path="/sign-up" element={<Register
           setLoggedIn={setLoggedIn}
-          navigate={navigate}  // LOOKS LIKE I WON'T NEED NAVIGATE FUNCTION ON REGISTER TO SEND USER TO HOME PAGE AFTER REGISTERING
         />} />
         <Route path="/blog" element={<CurrentBlog
           currentBlog={currentBlog}

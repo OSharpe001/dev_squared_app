@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 
-export default function Login({ /*loggedIn,*/ setLoggedIn/*, navigate*/ }) {
+export default function Login({ setLoggedIn }) {
 
   const [alias, setAlias] = useState("");
   const [password, setPassword] = useState("");
@@ -42,6 +42,7 @@ export default function Login({ /*loggedIn,*/ setLoggedIn/*, navigate*/ }) {
         password: password
       });
     };
+    resetLoginForm();
   };
 
   const handleChange = ({ target }) => {
@@ -59,9 +60,6 @@ export default function Login({ /*loggedIn,*/ setLoggedIn/*, navigate*/ }) {
   };
 
   useEffect(() => {
-    // if (loggedIn) {
-    //   navigate("/");
-    // };
 
     if (formData.password) {
         const getMe = async () => {
@@ -72,7 +70,7 @@ export default function Login({ /*loggedIn,*/ setLoggedIn/*, navigate*/ }) {
           const response = await axios.post(URL, formData);
           localStorage.setItem("Dev2User", JSON.stringify(response.data));
           setLoggedIn(JSON.parse(localStorage.getItem("Dev2User")));
-          resetLoginForm();
+          // resetLoginForm();
         } catch (err) {
           console.log(err);
           alert("Please check your credentials and try again or register")
@@ -80,9 +78,10 @@ export default function Login({ /*loggedIn,*/ setLoggedIn/*, navigate*/ }) {
         };
       };
       getMe();
+      // resetLoginForm();
     };
 
-  }, [formData, /*loggedIn,*/ setLoggedIn]);
+  }, [formData, setLoggedIn]);
 
   const errorHandling = ({ target }) => {
     if (target.name === "alias" && alias.length < 4) {

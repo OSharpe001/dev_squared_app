@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 
-export default function Register({ /*loggedIn,*/ setLoggedIn/*, navigate*/ }) {
+export default function Register({ setLoggedIn }) {
 
   const [name, setName] = useState("");
   const [userName, setUserName] = useState("");
@@ -82,10 +82,6 @@ export default function Register({ /*loggedIn,*/ setLoggedIn/*, navigate*/ }) {
   };
 
   useEffect(() => {
-    // if (loggedIn) {
-    //   console.log("REGISTER USEEFFECT'S IF LOGIN IS RUNNING");
-    //   navigate("/");
-    // };
 
     const resetLoginForm = () => {
       console.log("REGISTER USEEFFECT'S RESETLOGINFORM IS RUNNING");
@@ -114,7 +110,7 @@ export default function Register({ /*loggedIn,*/ setLoggedIn/*, navigate*/ }) {
     };
     getMe();
 
-  }, [formData, /*loggedIn,*/ setLoggedIn/*, navigate*/]);
+  }, [formData, setLoggedIn]);
 
   const errorHandling = ({ target }) => {
     if (target.name === "name" && target.value.length < 4) {
