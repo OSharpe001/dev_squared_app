@@ -129,7 +129,6 @@ export default function App() {
           setBlogId={setBlogId}
         />} />
         <Route path="/" element={<HomePage
-          navigate={navigate} // LOOKS LIKE I WON'T NEED NAVIGATE FUNCTION ON HOMEPAGE TO SEND USER BACK TO REGISTER PAGE IF !LOGGEDIN
           loggedIn={loggedIn}
           setBlogId={setBlogId}
           blogModalHidden={blogModalHidden}

@@ -5,14 +5,11 @@ import BlogModal from '../components/BlogModal';
 import like from "../assets/images/icons/filled_red_heart.png";
 
 
-export default function HomePage({ setBlogId, loggedIn, navigate, blogModalHidden, setBlogModalHidden, allLikes }) {
+export default function HomePage({ setBlogId, loggedIn, blogModalHidden, setBlogModalHidden, allLikes }) {
 
     const [blogs, setBlogs] = useState([]);
 
     useEffect(() => {
-        // if (!loggedIn) {
-        //     navigate("/sign-up");
-        // };
 
         const getAllBlogs = async () => {
             console.log("HOMEPAGE USEEFFECT'S GETALLBLOGS IS RUNNING");
@@ -30,7 +27,7 @@ export default function HomePage({ setBlogId, loggedIn, navigate, blogModalHidde
         };
         getAllBlogs();
 
-    }, [/*loggedIn/*, navigate*/]);
+    }, []);
 
     const createBlog = () => {
         setBlogModalHidden(false);
