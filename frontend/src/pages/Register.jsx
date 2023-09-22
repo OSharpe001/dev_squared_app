@@ -38,6 +38,14 @@ export default function Register({ setLoggedIn }) {
     setPassword2("");
   };
 
+  const resetLoginForm = () => {
+    console.log("REGISTER USEEFFECT'S RESETLOGINFORM IS RUNNING");
+    resetName();
+    resetUsername();
+    resetEmail();
+    resetPassword();
+  };
+
   const submitForm = (e) => {
     e.preventDefault();
     if (incomplete) {
@@ -49,6 +57,7 @@ export default function Register({ setLoggedIn }) {
         email: email,
         password: password1
       });
+      resetLoginForm();
     };
   };
 
@@ -83,32 +92,25 @@ export default function Register({ setLoggedIn }) {
 
   useEffect(() => {
 
-    const resetLoginForm = () => {
-      console.log("REGISTER USEEFFECT'S RESETLOGINFORM IS RUNNING");
-      resetName();
-      resetUsername();
-      resetEmail();
-      resetPassword();
-    };
-
-    const getMe = async () => {
-      console.log("REGISTER USEEFFECT'S GETME IS RUNNING");
-      // const URL = `https://devsquaredbe.onrender.com/api/users`;
-      const URL = `http://localhost:5011/api/users`;
-      if (formData.password) {
-        const response = await axios.post(URL, formData);
-        try {
-          localStorage.setItem("Dev2User", JSON.stringify(response.data));
-          await setLoggedIn(JSON.parse(localStorage.getItem("Dev2User")));
-        } catch (err) {
-          alert("an Error occurred. Please try, again.");
-          console.log(err);
-          resetPassword();
+    if (formData.name && formData.userName && formData.email && formData.password) {
+      const getMe = async () => {
+        console.log("REGISTER USEEFFECT'S GETME IS RUNNING");
+        // const URL = `https://devsquaredbe.onrender.com/api/users`;
+        const URL = `http://localhost:5011/api/users`;
+        if (formData.password) {
+          const response = await axios.post(URL, formData);
+          try {
+            localStorage.setItem("Dev2User", JSON.stringify(response.data));
+            await setLoggedIn(JSON.parse(localStorage.getItem("Dev2User")));
+          } catch (err) {
+            alert("an Error occurred. Please try, again.");
+            console.log(err);
+            resetPassword();
+          };
         };
       };
-      resetLoginForm();
+      getMe();
     };
-    getMe();
 
   }, [formData, setLoggedIn]);
 
