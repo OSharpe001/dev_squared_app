@@ -11,22 +11,20 @@
 
 ## Issues I couldn't (yet) resolve:
 
-- Staying on the Current Blog page after updating a blog with no rerender.
+- Staying on the Current Blog page after updating a blog with no re-render.
 
 - Making the screen re-render to show the updated list of comments after adding, editing or deleting one.
 
-- There is a large amount of rapid re-renders when logging-out.
-
 - After editing/deleting a comment/blog, the screen does not refresh. Making it look like the comment/blog wasn't edited/deleted (but it was).
 
--The "Back to Blogs" button doesn't work. There are a lot of re-renders and client ends up back on the "Current Blog" page they were trying to leave.
+- After pressing the like button, the screen doesn't re-render to reflect the change.
 
-- After pressing the like button, the screen doesn't rerender to reflect the change.
+- Since I have to use my computers developer tools to disable CORS to allow the app to work, the app currently cannot run on my iphone.
 
 ---
 
 ## Future Enhancements
-- I had Big Dreams for this app but knew that there was no way to complete it all in a week. Here are a few of them...
+- I have Big Dreams for this app but knew that there was no way to complete it all in a week. Here are a few of them...
 
 1. **Make app responsive for mobile.**
 
