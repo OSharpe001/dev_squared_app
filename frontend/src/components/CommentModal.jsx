@@ -36,8 +36,8 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
             if (formData.text) {
                 const updateComment = async () => {
                     console.log("COMMENTMODAL USEEFFECT'S UPDATECOMMENT IS RUNNING");
-                    // const URL = `https://devsquaredbe.onrender.com/api/blogs/comments/${commentToUpdate.id}`;
-                    const URL = `http://localhost:5011/api/blogs/comments/${commentToUpdate.id}`;
+                    const URL = `https://devsquaredbe.onrender.com/api/blogs/comments/${commentToUpdate.id}`;
+                    // const URL = `http://localhost:5011/api/blogs/comments/${commentToUpdate.id}`;
                     const config = {
                         headers: {
                             Authorization: `Bearer ${loggedIn.token}`
@@ -63,8 +63,8 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
             // setBlogId(formData.blogId);  // RESETTING THE "CURRENT BLOG ID" BEFORE THE COMMENT CREATE DIDN'T WORK (TO MAKE THE PAGE REDIRECT BACK TO THE CURRENT BLOG)
             const createComment = async () => {
                 console.log("COMMENTMODAL USEEFFECT'S CREATECOMMENT IS RUNNING");
-                // const URL = "https://devsquaredbe.onrender.com/api/blogs/comments";
-                const URL = "http://localhost:5011/api/blogs/comments";
+                const URL = "https://devsquaredbe.onrender.com/api/blogs/comments";
+                // const URL = "http://localhost:5011/api/blogs/comments";
                 const config = {
                     headers: {
                         Authorization: `Bearer ${loggedIn.token}`

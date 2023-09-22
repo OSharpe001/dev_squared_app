@@ -52,8 +52,8 @@ export default function App() {
     if (loggedIn && blogId) {
       const getCurrentBlog = async () => {
         console.log("APP.JS USEEFFECT'S GETCURRENTBLOG IS RUNNING");
-        // const URL = `https://devsquaredbe.onrender.com/api/blogs/${blogId}`;
-        const URL = `http://localhost:5011/api/blogs/${blogId}`;
+        const URL = `https://devsquaredbe.onrender.com/api/blogs/${blogId}`;
+        // const URL = `http://localhost:5011/api/blogs/${blogId}`;
         try {
           const response = await axios.get(URL);
           setCurrentBlog(response.data);
@@ -66,8 +66,8 @@ export default function App() {
 
       const getRelevantComments = async () => {
         console.log("APP.JS USEEFFECT'S GETRELEVANTCOMMENTS IS RUNNING");
-        // const URL = "https://devsquaredbe.onrender.com/api/blogs/comments/";
-        const URL = "http://localhost:5011/api/blogs/comments/";
+        const URL = "https://devsquaredbe.onrender.com/api/blogs/comments/";
+        // const URL = "http://localhost:5011/api/blogs/comments/";
         const options = { method: "GET" };
         try {
           const response = await fetch(URL + blogId, options);
@@ -85,8 +85,8 @@ export default function App() {
     // GET ALL LIKES
     const getAllLikes = async () => {
       console.log("APP.JS USEEFFECT'S GETALLLIKES IS RUNNING");
-      // const URL = "https://devsquaredbe.onrender.com/api/likes/";
-      const URL = "http://localhost:5011/api/likes/";
+      const URL = "https://devsquaredbe.onrender.com/api/likes/";
+      // const URL = "http://localhost:5011/api/likes/";
       const options = { method: "GET" };
       try {
         const response = await fetch(URL, options);

@@ -23,8 +23,8 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
         if (commentToDelete) {
             const commentDeletion = async () => {
                 console.log("CURRENTBLOG USEEFFECT'S COMMENTDELETION IS RUNNING");
-                // const URL = "https://devsquaredbe.onrender.com/api/blogs/comments/";
-                const URL = "http://localhost:5011/api/blogs/comments/";
+                const URL = "https://devsquaredbe.onrender.com/api/blogs/comments/";
+                // const URL = "http://localhost:5011/api/blogs/comments/";
                 const config = {
                     headers: {
                         Authorization: `Bearer ${loggedIn.token}`
@@ -44,8 +44,8 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
         if (blogToDelete) {
             const blogDeletion = async () => {
                 console.log("CURRENTBLOG USEEFFECT'S BLOGDELETION IS RUNNING");
-                // const URL = "https://devsquaredbe.onrender.com/api/blogs/";
-                const URL = "http://localhost:5011/api/blogs/";
+                const URL = "https://devsquaredbe.onrender.com/api/blogs/";
+                // const URL = "http://localhost:5011/api/blogs/";
                 const config = {
                     headers: {
                         Authorization: `Bearer ${loggedIn.token}`
@@ -65,8 +65,8 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
             const blogLikeDeletion = async () => {
                 const blogLikeId = changeLike.blogId;
                 console.log("RUNNING THE BLOG-LIKE DELETE USEEFFECT METHOD WITH THE ID OF... ", blogLikeId);
-                // const URL = `https://devsquaredbe.onrender.com/api/likes/${blogLikeId}`;
-                const URL = `http://localhost:5011/api/likes/${blogLikeId}`;
+                const URL = `https://devsquaredbe.onrender.com/api/likes/${blogLikeId}`;
+                // const URL = `http://localhost:5011/api/likes/${blogLikeId}`;
                 const config = {
                     headers: {
                         Authorization: `Bearer ${loggedIn.token}`
@@ -89,8 +89,8 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
         } else if (changeLike.action === "add" && changeLike.blogId) {
             const createBlogLike = async () => {
                 console.log("CURRENTBLOG USEEFFECT'S CREATEBLOGLIKE IS RUNNING");
-                // const URL = "https://devsquaredbe.onrender.com/api/likes";
-                const URL = "http://localhost:5011/api/likes";
+                const URL = "https://devsquaredbe.onrender.com/api/likes";
+                // const URL = "http://localhost:5011/api/likes";
                 const options = {
                     userName: changeLike.userName,
                     blogId: changeLike.blogId
@@ -118,8 +118,8 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
             const commentLikeDeletion = async () => {
                 const commentLikeId = changeLike.commentId;
                 console.log("RUNNING THE COMMENT-LIKE DELETE USEEFFECT METHOD WITH THE ID OF... ", commentLikeId);
-                // const URL = `https://devsquaredbe.onrender.com/api/likes/${commentLikeId}`;
-                const URL = `http://localhost:5011/api/likes/${commentLikeId}`;
+                const URL = `https://devsquaredbe.onrender.com/api/likes/${commentLikeId}`;
+                // const URL = `http://localhost:5011/api/likes/${commentLikeId}`;
                 const config = {
                     headers: {
                         Authorization: `Bearer ${loggedIn.token}`
@@ -142,8 +142,8 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
         } else if (changeLike.action === "add" && changeLike.commentId) {
             const createCommentLike = async () => {
                 console.log("CURRENTBLOG USEEFFECT'S CREATECOMMENTLIKE IS RUNNING");
-                // const URL = "https://devsquaredbe.onrender.com/api/likes";
-                const URL = "http://localhost:5011/api/likes";
+                const URL = "https://devsquaredbe.onrender.com/api/likes";
+                // const URL = "http://localhost:5011/api/likes";
                 const options = {
                     userName: changeLike.userName,
                     commentId: changeLike.commentId

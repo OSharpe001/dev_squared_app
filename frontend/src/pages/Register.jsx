@@ -95,8 +95,8 @@ export default function Register({ setLoggedIn }) {
     if (formData.name && formData.userName && formData.email && formData.password) {
       const getMe = async () => {
         console.log("REGISTER USEEFFECT'S GETME IS RUNNING");
-        // const URL = `https://devsquaredbe.onrender.com/api/users`;
-        const URL = `http://localhost:5011/api/users`;
+        const URL = `https://devsquaredbe.onrender.com/api/users`;
+        // const URL = `http://localhost:5011/api/users`;
         if (formData.password) {
           const response = await axios.post(URL, formData);
           try {
