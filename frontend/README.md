@@ -13,11 +13,7 @@
 
 - Staying on the Current Blog page after updating a blog with no re-render.
 
-- Making the screen re-render to show the updated list of comments after adding, editing or deleting one.
-
-- After editing/deleting a comment/blog, the screen does not refresh. Making it look like the comment/blog wasn't edited/deleted (but it was).
-
-- After pressing the like button, the screen doesn't re-render to reflect the change.
+- Making the screen re-render to show the updated list of comments after deleting one.
 
 - Since I have to use my computers developer tools to disable CORS to allow the app to work, the app currently cannot run on my iphone.
 
