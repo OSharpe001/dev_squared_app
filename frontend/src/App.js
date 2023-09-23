@@ -19,7 +19,8 @@ export default function App() {
     blogId: "",
     commentId: "",
     action: ""
-});
+  });
+
 
   const navigate = useNavigate();
   const backToRegistration = useEffect;
@@ -80,6 +81,114 @@ export default function App() {
 
       getCurrentBlog();
       getRelevantComments();
+    };
+
+    // GIVING AND TAKING-BACK "LIKES" (BLOGS AND COMMENTS) FUNCTIONS
+    if (changeLike.action === "delete" && changeLike.blogId) {
+      const blogLikeDeletion = async () => {
+        const blogLikeId = changeLike.blogId;
+        console.log("RUNNING THE BLOG-LIKE DELETE USEEFFECT METHOD WITH THE ID OF... ", blogLikeId);
+        const URL = `https://devsquaredbe.onrender.com/api/likes/${blogLikeId}`;
+        // const URL = `http://localhost:5011/api/likes/${blogLikeId}`;
+        const config = {
+          headers: {
+            Authorization: `Bearer ${loggedIn.token}`
+          },
+        };
+        try {
+          await axios.delete(URL, config);
+        } catch (err) {
+          console.log("BLOG-LIKE DELETE FETCH ERROR: ", err);
+        };
+        setChangeLike({
+          userName: loggedIn.userName,
+          blogId: "",
+          commentId: "",
+          action: ""
+        });
+      };
+      blogLikeDeletion();
+
+    } else if (changeLike.action === "add" && changeLike.blogId) {
+      const createBlogLike = async () => {
+        console.log("CURRENTBLOG USEEFFECT'S CREATEBLOGLIKE IS RUNNING");
+        const URL = "https://devsquaredbe.onrender.com/api/likes";
+        // const URL = "http://localhost:5011/api/likes";
+        const options = {
+          userName: changeLike.userName,
+          blogId: changeLike.blogId
+        };
+        const config = {
+          headers: {
+            Authorization: `Bearer ${loggedIn.token}`
+          },
+        };
+        try {
+          await axios.post(URL, options, config);
+        } catch (err) {
+          console.log("ADD BLOG-LIKE FETCH ERROR: ", err);
+        };
+        setChangeLike({
+          userName: loggedIn.userName,
+          blogId: "",
+          commentId: "",
+          action: ""
+        });
+      };
+      createBlogLike();
+
+    } else if (changeLike.action === "delete" && changeLike.commentId) {
+      const commentLikeDeletion = async () => {
+        const commentLikeId = changeLike.commentId;
+        console.log("RUNNING THE COMMENT-LIKE DELETE USEEFFECT METHOD WITH THE ID OF... ", commentLikeId);
+        const URL = `https://devsquaredbe.onrender.com/api/likes/${commentLikeId}`;
+        // const URL = `http://localhost:5011/api/likes/${commentLikeId}`;
+        const config = {
+          headers: {
+            Authorization: `Bearer ${loggedIn.token}`
+          },
+        };
+        try {
+          await axios.delete(URL, config);
+        } catch (err) {
+          console.log("COMMENT-LIKE DELETE FETCH ERROR: ", err);
+        };
+        setChangeLike({
+          userName: loggedIn.userName,
+          blogId: "",
+          commentId: "",
+          action: ""
+        });
+      };
+      commentLikeDeletion();
+
+    } else if (changeLike.action === "add" && changeLike.commentId) {
+      const createCommentLike = async () => {
+        console.log("CURRENTBLOG USEEFFECT'S CREATECOMMENTLIKE IS RUNNING");
+        const URL = "https://devsquaredbe.onrender.com/api/likes";
+        // const URL = "http://localhost:5011/api/likes";
+        const options = {
+          userName: changeLike.userName,
+          commentId: changeLike.commentId
+        };
+        const config = {
+          headers: {
+            Authorization: `Bearer ${loggedIn.token}`
+          },
+        };
+        try {
+          await axios.post(URL, options, config);
+        } catch (err) {
+          console.log("ADD COMMENT-LIKE FETCH ERROR: ", err);
+        };
+        setChangeLike({
+          userName: loggedIn.userName,
+          blogId: "",
+          commentId: "",
+          action: ""
+        });
+      };
+      createCommentLike();
     };
 
     // GET ALL LIKES
