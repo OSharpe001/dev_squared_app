@@ -1,4 +1,4 @@
-// import logo from "../assets/images/logo.png";
+import logo from "../assets/images/logo.png";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
@@ -55,8 +55,8 @@ export default function Header({ loggedIn, setLoggedIn, setBlogId }) {
     >
       <nav>
         <div className="banner" onClick={backHome}>
-          {/* <img className="logo banner-title" src={logo} alt="target" /> */}
-          <p className="banner-title">Dev^2</p>
+          <img className="logo banner-title" src={logo} alt="target" />
+          {/* <p className="banner-title logo-name">Dev^2</p> */}
         </div>
         <div className="nav-items">
             {

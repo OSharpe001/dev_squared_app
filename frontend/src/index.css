@@ -209,7 +209,11 @@ li {
     top: -100px;
   }
 }
-
+.banner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 .banner-title {
   margin: 0;
   padding: 0;
@@ -217,13 +221,22 @@ li {
   cursor: pointer;
 }
 
-.banner-title:hover {
+.banner:hover {
   box-shadow: -2px 2px 5px aliceblue;
   text-decoration: underline;
 }
 
-.banner-title:active {
+.banner:active {
   box-shadow: -1px 1px 3px aliceblue;
+}
+
+.logo {
+  width: 6vh;
+  height: 6vh;
+}
+
+.logo-name {
+  margin-left: 10px
 }
 
 header nav {
