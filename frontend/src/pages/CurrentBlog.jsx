@@ -26,13 +26,11 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
                 };
                 try {
                     await axios.delete(URL + commentToDelete, config);
-                    // setBlogId(currentBlog._id); // DIDN'T WORK (TRYING TO RE-RENDER THE CURRENT BLOG AFTER A COMMENT DELETION)
                 } catch (err) {
                     console.log("COMMENT DELETE FETCH ERROR: ", err);
                 };
             };
             commentDeletion();
-            // setBlogId(currentBlog._id); // DIDN'T WORK (TRYING TO RE-RENDER THE CURRENT BLOG AFTER A COMMENT DELETION)
         };
 
         if (blogToDelete) {
@@ -90,9 +88,13 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
         allLikes.filter(like => like.commentId === commentId && like.userName === loggedIn.userName)[0]._id
     );
 
-    const disabled = !blogModalHidden || !commentModalHidden;
+    const deleteComment = (comment, blog) => {
+        setCommentToDelete(comment);
+        setBlogId("");
+        setTimeout(setBlogId, 80, blog);
+    };
 
-    // console.log("CURRENTBLOG'S CURRENTBLOG INFO: ", currentBlog);
+    const disabled = !blogModalHidden || !commentModalHidden;
 
     return (
         <section className="current-blog-page">
@@ -140,7 +142,7 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
                             {comment.userName === loggedIn.userName ?
                                 <div className='ud-buttons'>
                                     <button onClick={() => updateComment({ text: comment.text, id: comment._id })} disabled={disabled}>Edit</button>
-                                    <button onClick={() => setCommentToDelete(comment._id)} disabled={disabled}>Delete</button>
+                                    <button onClick={() => deleteComment(comment._id, currentBlog._id)} disabled={disabled}>Delete</button>
                                 </div>
                                 :
                                 <>
@@ -160,11 +162,9 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
             <CommentModal
                 commentModalHidden={commentModalHidden}
                 setCommentModalHidden={setCommentModalHidden}
-                setBlogId={setBlogId} // SEEMS LIKE I WON'T NEED THE SETBLOGID FUNCTION SINCE IT'S NOT HELPING TO RE-RENDER/REDIRECT-TO THE "CURRENTBLOG" PAGE AFTER A COMMENT IS CREATED OR UPDATED...
                 loggedIn={loggedIn}
                 currentBlog={currentBlog}
                 commentToUpdate={commentToUpdate}
-                navigate={navigate} // SEEMS LIKE I WON'T NEED THE NAVIGATE FUNCTION SINCE IT'S NOT HELPING TO RE-RENDER/REDIRECT-TO THE "CURRENTBLOG" PAGE AFTER A COMMENT IS CREATED OR UPDATED...
             />
 
             <BlogModal
@@ -172,7 +172,6 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
                 blogModalHidden={blogModalHidden}
                 currentBlog={currentBlog}
                 setBlogModalHidden={setBlogModalHidden}
-                navigate={navigate}
             />
         </section>
     );
