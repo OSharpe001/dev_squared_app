@@ -11,11 +11,9 @@
 
 ## Issues I couldn't (yet) resolve:
 
-- Staying on the Current Blog page after updating a blog with no re-render.
+- Staying on the Current Blog page after creating a comment.
 
-- Making the screen re-render to show the updated list of comments after deleting one.
-
-- Since I have to use my computers developer tools to disable CORS to allow the app to work, the app currently cannot run on my iphone.
+- Staying on the Current Blog page after updating a blog or comment.
 
 ---
 
