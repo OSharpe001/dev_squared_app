@@ -99,7 +99,8 @@ export default function Login({ setLoggedIn }) {
 
   return (
     <div className='login-page'>
-      <h1 className="title">Login <span className="underlined">or</span> <Link aria-label="On Click" to="/sign-up">Register</Link></h1>
+      <h1 className="welcome">Welcome back to Dev Squared!</h1>
+      <h1 className="direct">Login <span className="underlined">or</span> <Link aria-label="On Click" to="/sign-up">Register</Link></h1>
       <form>
         <label htmlFor="alias">UserName <span className='underlined'>or</span> Email:</label>
         <input onChange={handleChange} onBlur={errorHandling} type="text" name="alias" id="alias" placeholder='jd@email.com' value={alias} />

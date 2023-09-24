@@ -155,7 +155,8 @@ export default function Register({ setLoggedIn }) {
 
   return (
     <div className='register-page'>
-      <h1 className="title">Register <span className="underlined">or</span> <Link aria-label="On Click" to="/sign-in">LogIn</Link></h1>
+      <h1 className="welcome">Welcome to Dev Squared!</h1>
+      <h1 className="direct">Register <span className="underlined">or</span> <Link aria-label="On Click" to="/sign-in">LogIn</Link></h1>
       <form>
         <label htmlFor="name">Name:</label>
         <input onChange={handleChange} onBlur={errorHandling} type="text" name="name" id="name" placeholder='Sam Smith' value={name} />
