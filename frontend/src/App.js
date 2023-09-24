@@ -21,7 +21,6 @@ export default function App() {
     action: ""
   });
 
-
   const navigate = useNavigate();
   const backToRegistration = useEffect;
   const backHome = useEffect;

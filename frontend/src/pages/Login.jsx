@@ -96,7 +96,6 @@ export default function Login({ setLoggedIn }) {
 
   const incomplete = aliasErrorMessage || passwordErrorMessage || !alias || !password;
 
-
   return (
     <div className='login-page'>
       <h1 className="welcome">Welcome back to Dev Squared!</h1>

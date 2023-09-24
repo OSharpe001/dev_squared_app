@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 
-export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedIn, currentBlog, navigate }) {
+export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedIn, currentBlog }) {
 
     const [blogTitle, setBlogTitle] = useState("");
     const [blogText, setBlogText] = useState("");
