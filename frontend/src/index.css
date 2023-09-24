@@ -35,11 +35,17 @@ button:active, .button:active {
   box-shadow: -1px 1px 3px aliceblue;
 }
 
-.title {
+.welcome {
   text-align: center;
-  margin: 0;
-  padding: 20px 0 30px;
+  padding-top: 10px;
+  margin: 0 0 10px;
   font-size: 28pt;
+}
+
+.direct {
+  text-align: center;
+  margin: 10px 0;
+  font-size: 20pt;
 }
 
 .underlined {
@@ -58,13 +64,14 @@ a:hover {
 label {
   display: block;
   font-size: 16pt;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 input {
   display: block;
   font-size: 14pt;
-  margin-bottom: 2px;
+  width: 33ch;
+  margin: 0 auto 2px;
   line-height: 1.5;
   box-shadow: 1px 1px 7px aliceblue;
   border: blue;
@@ -76,7 +83,7 @@ input {
   font-size: 16pt;
   height: 2.3ch;
   text-shadow: 1px 1px 1px aliceblue;
-  margin: 4px auto 30px;
+  margin: 4px auto 10px;
 }
 
 li {
@@ -270,6 +277,16 @@ header nav {
   padding: 0 30px;
 }
 
+.register-page form {
+  margin: auto;
+  padding: 20px 80px  0 80px;
+  text-align: center;
+  width: max-content;
+  border-radius: 7px;
+  border: 2px solid blue;
+  box-shadow: -2px 2px 5px aliceblue;
+}
+
 .register-page button {
   margin-bottom: 20px;
 }
@@ -280,6 +297,20 @@ header nav {
   color: aliceblue;
   background-color: #2A4365;
   padding: 0 30px;
+}
+
+.login-page form {
+  margin: auto;
+  padding: 20px 80px  0 80px;
+  text-align: center;
+  width: max-content;
+  border-radius: 7px;
+  border: 2px solid blue;
+  box-shadow: -2px 2px 5px aliceblue;
+}
+
+.login-page button {
+  margin-bottom: 20px;
 }
 
 /* HOMEPAGE STYLES */
