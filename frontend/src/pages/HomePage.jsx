@@ -50,7 +50,7 @@ export default function HomePage({ setBlogId, loggedIn, blogModalHidden, setBlog
 
     return (
         <div className='home-page'>
-            <h1 className='title'>Welcome Back to Dev^2, {loggedIn.userName}!</h1>
+            <h1 className='welcome'>Welcome Back to Dev^2, {loggedIn.userName}!</h1>
 
             <Hero />
             <ul>
