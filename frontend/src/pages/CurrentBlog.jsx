@@ -16,7 +16,6 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
     useEffect(() => {
         if (commentToDelete) {
             const commentDeletion = async () => {
-                console.log("CURRENTBLOG USEEFFECT'S COMMENTDELETION IS RUNNING");
                 const URL = "https://devsquaredbe.onrender.com/api/blogs/comments/";
                 // const URL = "http://localhost:5011/api/blogs/comments/";
                 const config = {
@@ -27,7 +26,7 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
                 try {
                     await axios.delete(URL + commentToDelete, config);
                 } catch (err) {
-                    console.log("COMMENT DELETE FETCH ERROR: ", err);
+                    console.log(err);
                 };
             };
             commentDeletion();
@@ -35,7 +34,6 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
 
         if (blogToDelete) {
             const blogDeletion = async () => {
-                console.log("CURRENTBLOG USEEFFECT'S BLOGDELETION IS RUNNING");
                 const URL = "https://devsquaredbe.onrender.com/api/blogs/";
                 // const URL = "http://localhost:5011/api/blogs/";
                 const config = {
@@ -47,7 +45,7 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
                     await axios.delete(URL + blogToDelete, config);
                     setBlogId("");
                 } catch (err) {
-                    console.log("BLOG DELETE FETCH ERROR: ", err);
+                    console.log(err);
                 };
             };
             blogDeletion();

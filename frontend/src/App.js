@@ -27,11 +27,9 @@ export default function App() {
 
   backToRegistration(() => {
     if (loggedIn) {
-      console.log("APP.JS USEEFFECT'S IF LOGGEDIN IS RUNNING");
       navigate("/");
     } else
     if (!loggedIn) {
-      console.log("APP.JS BACKTOREGISTRATION IS RUNNING");
       localStorage.removeItem("Dev2User");
       setBlogId("");
       setCurrentBlog("");
@@ -42,7 +40,6 @@ export default function App() {
 
   backHome(() => {
     if (loggedIn && !blogId) {
-      console.log("APP.JS BACKHOME IS RUNNING");
       setCurrentBlog("");
       navigate("/");
     }
@@ -51,7 +48,6 @@ export default function App() {
   useEffect(() => {
     if (loggedIn && blogId) {
       const getCurrentBlog = async () => {
-        console.log("APP.JS USEEFFECT'S GETCURRENTBLOG IS RUNNING");
         const URL = `https://devsquaredbe.onrender.com/api/blogs/${blogId}`;
         // const URL = `http://localhost:5011/api/blogs/${blogId}`;
         try {
@@ -65,7 +61,6 @@ export default function App() {
       };
 
       const getRelevantComments = async () => {
-        console.log("APP.JS USEEFFECT'S GETRELEVANTCOMMENTS IS RUNNING");
         const URL = "https://devsquaredbe.onrender.com/api/blogs/comments/";
         // const URL = "http://localhost:5011/api/blogs/comments/";
         const options = { method: "GET" };
@@ -74,7 +69,7 @@ export default function App() {
           const data = await response.json();
           setBlogComments(data.reverse());
         } catch (err) {
-          console.log("RELEVANT COMMENTS FETCH ERROR: ", err)
+          console.log(err)
         };
       };
 
@@ -86,7 +81,6 @@ export default function App() {
     if (changeLike.action === "delete" && changeLike.blogId) {
       const blogLikeDeletion = async () => {
         const blogLikeId = changeLike.blogId;
-        console.log("RUNNING THE BLOG-LIKE DELETE USEEFFECT METHOD WITH THE ID OF... ", blogLikeId);
         const URL = `https://devsquaredbe.onrender.com/api/likes/${blogLikeId}`;
         // const URL = `http://localhost:5011/api/likes/${blogLikeId}`;
         const config = {
@@ -97,7 +91,7 @@ export default function App() {
         try {
           await axios.delete(URL, config);
         } catch (err) {
-          console.log("BLOG-LIKE DELETE FETCH ERROR: ", err);
+          console.log(err);
         };
         setChangeLike({
           userName: loggedIn.userName,
@@ -110,7 +104,6 @@ export default function App() {
 
     } else if (changeLike.action === "add" && changeLike.blogId) {
       const createBlogLike = async () => {
-        console.log("CURRENTBLOG USEEFFECT'S CREATEBLOGLIKE IS RUNNING");
         const URL = "https://devsquaredbe.onrender.com/api/likes";
         // const URL = "http://localhost:5011/api/likes";
         const options = {
@@ -125,7 +118,7 @@ export default function App() {
         try {
           await axios.post(URL, options, config);
         } catch (err) {
-          console.log("ADD BLOG-LIKE FETCH ERROR: ", err);
+          console.log(err);
         };
         setChangeLike({
           userName: loggedIn.userName,
@@ -139,7 +132,6 @@ export default function App() {
     } else if (changeLike.action === "delete" && changeLike.commentId) {
       const commentLikeDeletion = async () => {
         const commentLikeId = changeLike.commentId;
-        console.log("RUNNING THE COMMENT-LIKE DELETE USEEFFECT METHOD WITH THE ID OF... ", commentLikeId);
         const URL = `https://devsquaredbe.onrender.com/api/likes/${commentLikeId}`;
         // const URL = `http://localhost:5011/api/likes/${commentLikeId}`;
         const config = {
@@ -150,7 +142,7 @@ export default function App() {
         try {
           await axios.delete(URL, config);
         } catch (err) {
-          console.log("COMMENT-LIKE DELETE FETCH ERROR: ", err);
+          console.log(err);
         };
         setChangeLike({
           userName: loggedIn.userName,
@@ -163,7 +155,6 @@ export default function App() {
 
     } else if (changeLike.action === "add" && changeLike.commentId) {
       const createCommentLike = async () => {
-        console.log("CURRENTBLOG USEEFFECT'S CREATECOMMENTLIKE IS RUNNING");
         const URL = "https://devsquaredbe.onrender.com/api/likes";
         // const URL = "http://localhost:5011/api/likes";
         const options = {
@@ -178,7 +169,7 @@ export default function App() {
         try {
           await axios.post(URL, options, config);
         } catch (err) {
-          console.log("ADD COMMENT-LIKE FETCH ERROR: ", err);
+          console.log(err);
         };
         setChangeLike({
           userName: loggedIn.userName,
@@ -192,7 +183,6 @@ export default function App() {
 
     // GET ALL LIKES
     const getAllLikes = async () => {
-      console.log("APP.JS USEEFFECT'S GETALLLIKES IS RUNNING");
       const URL = "https://devsquaredbe.onrender.com/api/likes/";
       // const URL = "http://localhost:5011/api/likes/";
       const options = { method: "GET" };
@@ -201,7 +191,7 @@ export default function App() {
         const data = await response.json();
         setAllLikes(data);
       } catch (err) {
-        console.log("ALL LIKES FETCH ERROR: ", err)
+        console.log(err)
       };
     };
     getAllLikes();

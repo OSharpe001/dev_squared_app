@@ -63,7 +63,6 @@ export default function Login({ setLoggedIn }) {
 
     if (formData.password) {
         const getMe = async () => {
-          console.log("LOGIN USEEFFECT'S GETME IS RUNNING");
         const URL = `https://devsquaredbe.onrender.com/api/users/login`;
         // const URL = `http://localhost:5011/api/users/login`;
         try {

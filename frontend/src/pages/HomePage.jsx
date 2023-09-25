@@ -12,7 +12,6 @@ export default function HomePage({ setBlogId, loggedIn, blogModalHidden, setBlog
     useEffect(() => {
 
         const getAllBlogs = async () => {
-            console.log("HOMEPAGE USEEFFECT'S GETALLBLOGS IS RUNNING");
             try {
                 const URL = "https://devsquaredbe.onrender.com/api/blogs";
                 // const URL = "http://localhost:5011/api/blogs";
@@ -22,7 +21,7 @@ export default function HomePage({ setBlogId, loggedIn, blogModalHidden, setBlog
                 const data = await response.json();
                 setBlogs(data.reverse());
             } catch (err) {
-                console.log("GET BLOGS FETCH ERROR: ", err);
+                console.log(err);
             };
         };
         getAllBlogs();

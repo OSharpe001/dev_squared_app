@@ -33,7 +33,6 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
             setCommentText(commentToUpdate.text);
             if (formData.text) {
                 const updateComment = async () => {
-                    console.log("COMMENTMODAL USEEFFECT'S UPDATECOMMENT IS RUNNING");
                     const URL = `https://devsquaredbe.onrender.com/api/blogs/comments/${commentToUpdate.id}`;
                     // const URL = `http://localhost:5011/api/blogs/comments/${commentToUpdate.id}`;
                     const config = {
@@ -44,7 +43,7 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
                     try {
                         await axios.put(URL, formData, config);
                     } catch (err) {
-                        console.log("UPDATE FETCH ERROR: ", err);
+                        console.log(err);
                     };
                 };
                 updateComment();
@@ -52,7 +51,6 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
 
         } else if (formData.text) {
             const createComment = async () => {
-                console.log("COMMENTMODAL USEEFFECT'S CREATECOMMENT IS RUNNING");
                 const URL = "https://devsquaredbe.onrender.com/api/blogs/comments";
                 // const URL = "http://localhost:5011/api/blogs/comments";
                 const config = {
@@ -63,7 +61,7 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
                 try {
                     await axios.post(URL, formData, config);
                 } catch (err) {
-                    console.log("FETCH ERROR: ", err);
+                    console.log(err);
                 };
             };
             createComment();

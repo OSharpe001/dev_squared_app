@@ -45,7 +45,6 @@ export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedI
             setBlogText(currentBlog.text);
             if (formData.ready) {
                 const updateBlog = async () => {
-                    console.log("BLOGMODAL USEEFFECT'S UPDATEBLOG IS RUNNING");
                     const URL = `https://devsquaredbe.onrender.com/api/blogs/${currentBlog._id}`;
                     // const URL = `http://localhost:5011/api/blogs/${currentBlog._id}`;
                     const config = {
@@ -54,17 +53,15 @@ export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedI
                         },
                     };
                     try {
-                        const response = await axios.put(URL, formData, config);
-                        console.log("WHY ISN'T THE UPDATE FORM WORKING??: ", response);
+                        await axios.put(URL, formData, config);
                     } catch (err) {
-                        console.log("UPDATE BLOG ERROR: ", err);
+                        console.log(err);
                     };
                 };
                 updateBlog();
             };
         } else if (formData.title && formData.text) {
             const createBlog = async () => {
-                console.log("BLOGMODAL USEEFFECT'S CREATEBLOG IS RUNNING");
                 const URL = "https://devsquaredbe.onrender.com/api/blogs/";
                 // const URL = "http://localhost:5011/api/blogs/";
                 const config = {
@@ -75,7 +72,7 @@ export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedI
                 try {
                     await axios.post(URL, formData, config);
                 } catch (err) {
-                    console.log("FETCH ERROR: ", err);
+                    console.log(err);
                 };
             };
             createBlog();

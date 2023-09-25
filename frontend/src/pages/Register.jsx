@@ -39,7 +39,6 @@ export default function Register({ setLoggedIn }) {
   };
 
   const resetLoginForm = () => {
-    console.log("REGISTER USEEFFECT'S RESETLOGINFORM IS RUNNING");
     resetName();
     resetUsername();
     resetEmail();
@@ -94,7 +93,6 @@ export default function Register({ setLoggedIn }) {
 
     if (formData.name && formData.userName && formData.email && formData.password) {
       const getMe = async () => {
-        console.log("REGISTER USEEFFECT'S GETME IS RUNNING");
         const URL = `https://devsquaredbe.onrender.com/api/users`;
         // const URL = `http://localhost:5011/api/users`;
         if (formData.password) {
