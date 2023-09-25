@@ -88,8 +88,9 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
 
     const deleteComment = (comment, blog) => {
         setCommentToDelete(comment);
-        setBlogId("");
-        setTimeout(setBlogId, 80, blog);
+        // setBlogId("");
+        setTimeout(setBlogId, 163, "");
+        setTimeout(setBlogId, 165, blog);
     };
 
     const disabled = !blogModalHidden || !commentModalHidden;
