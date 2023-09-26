@@ -32,18 +32,18 @@ app.use("/api/blogs/comments", require("./routes/commentRoutes"));
 // USE ROUTES/LIKESROUTES TO HANDLE ANY ENDPOINTS THAT END WITH /API/LIKES
 app.use("/api/likes", require("./routes/likesRoutes"));
 
-// Serve frontend
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../frontend/build')));
+// // Serve frontend
+// if (process.env.NODE_ENV === 'production') {
+//     app.use(express.static(path.join(__dirname, '../frontend/build')));
 
-    app.get('*', (req, res) =>
-        res.sendFile(
-        path.resolve(__dirname, '../', 'frontend', 'build', 'index.html')
-        )
-    );
-} else {
-    app.get('/', (req, res) => res.send('Please set to production'));
-};
+//     app.get('*', (req, res) =>
+//         res.sendFile(
+//         path.resolve(__dirname, '../', 'frontend', 'build', 'index.html')
+//         )
+//     );
+// } else {
+//     app.get('/', (req, res) => res.send('Please set to production'));
+// };
 
 // HANDLING ERRORS AND ASSOCIATED MESSAGES
 app.use(errorHandler);
