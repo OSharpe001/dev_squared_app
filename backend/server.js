@@ -13,7 +13,7 @@ connectDB();
 // SETTING UP CORS OPTIONS TO AVOID ACCESS-CONTROL-ALLOW-ORIGIN ISSUES **THIS MUST BE PLACE ABOVE ALL OTHER MIDDLEWARE FUNCTIONS!**
 const corsOption = {
     origin: "*",
-    methods: "GET, PUT, POST, DELETE",
+    methods: "GET, PUT, POST, DELETE, PATCH, OPTIONS",
     credentials: true,
     exposeHeaders: ["X-auth-token"],
 };
