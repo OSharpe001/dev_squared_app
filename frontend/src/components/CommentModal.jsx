@@ -29,6 +29,7 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
 
     useEffect(() => {
         if (commentToUpdate.text) {
+            // console.log("13");
             // REFILLS COMMENT MODAL WITH THE PREVIOUS TEXT OF THE COMMENT THAT NEEDS UPDATING
             setCommentText(commentToUpdate.text);
             if (formData.text) {
@@ -50,6 +51,7 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
             };
 
         } else if (formData.text) {
+            // console.log("14");
             const createComment = async () => {
                 const URL = "https://devsquaredbe.onrender.com/api/blogs/comments";
                 // const URL = "http://localhost:5011/api/blogs/comments";
@@ -67,7 +69,7 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
             createComment();
         };
 
-    }, [formData, commentToUpdate]);
+    }, [formData, commentToUpdate, loggedIn.token]);
 
     return (
         <form className={commentModalHidden ? "hidden" : "comment-modal modal"}>

@@ -13,9 +13,9 @@ connectDB();
 // SETTING UP CORS OPTIONS TO AVOID ACCESS-CONTROL-ALLOW-ORIGIN ISSUES **THIS MUST BE PLACE ABOVE ALL OTHER MIDDLEWARE FUNCTIONS!**
 const corsOption = {
     origin: "*",
-    methods: "GET, PUT, POST, DELETE, PATCH, OPTIONS",
+    methods: "POST, PUT, PATCH, GET, DELETE, OPTIONS",
     credentials: true,
-    exposeHeaders: ["X-auth-token"],
+    exposeHeaders: ["X-auth-token", "*"],
 };
 // TO AVOID THE ACCESS-CONTROL-ALLOW-ORIGIN ISSUE
 app.use(cors(corsOption));
@@ -31,19 +31,6 @@ app.use("/api/blogs", require("./routes/blogRoutes"));
 app.use("/api/blogs/comments", require("./routes/commentRoutes"));
 // USE ROUTES/LIKESROUTES TO HANDLE ANY ENDPOINTS THAT END WITH /API/LIKES
 app.use("/api/likes", require("./routes/likesRoutes"));
-
-// // Serve frontend
-// if (process.env.NODE_ENV === 'production') {
-//     app.use(express.static(path.join(__dirname, '../frontend/build')));
-
-//     app.get('*', (req, res) =>
-//         res.sendFile(
-//         path.resolve(__dirname, '../', 'frontend', 'build', 'index.html')
-//         )
-//     );
-// } else {
-//     app.get('/', (req, res) => res.send('Please set to production'));
-// };
 
 // HANDLING ERRORS AND ASSOCIATED MESSAGES
 app.use(errorHandler);

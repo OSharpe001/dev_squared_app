@@ -90,8 +90,8 @@ export default function Register({ setLoggedIn }) {
   };
 
   useEffect(() => {
-
     if (formData.name && formData.userName && formData.email && formData.password) {
+      // console.log("18");
       const getMe = async () => {
         const URL = `https://devsquaredbe.onrender.com/api/users`;
         // const URL = `http://localhost:5011/api/users`;

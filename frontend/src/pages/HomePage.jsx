@@ -12,6 +12,7 @@ export default function HomePage({ setBlogId, loggedIn, blogModalHidden, setBlog
     useEffect(() => {
 
         const getAllBlogs = async () => {
+            // console.log("10");
             try {
                 const URL = "https://devsquaredbe.onrender.com/api/blogs";
                 // const URL = "http://localhost:5011/api/blogs";

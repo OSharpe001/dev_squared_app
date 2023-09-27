@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 
-export default function Login({ setLoggedIn }) {
+export default function Login({ setLoggedIn/*, navigate*/ }) {
 
   const [alias, setAlias] = useState("");
   const [password, setPassword] = useState("");
@@ -62,6 +62,7 @@ export default function Login({ setLoggedIn }) {
   useEffect(() => {
 
     if (formData.password) {
+      // console.log("17");
         const getMe = async () => {
         const URL = `https://devsquaredbe.onrender.com/api/users/login`;
         // const URL = `http://localhost:5011/api/users/login`;
@@ -69,6 +70,7 @@ export default function Login({ setLoggedIn }) {
           const response = await axios.post(URL, formData);
           localStorage.setItem("Dev2User", JSON.stringify(response.data));
           setLoggedIn(JSON.parse(localStorage.getItem("Dev2User")));
+          // navigate("/");
         } catch (err) {
           console.log(err);
           alert("Please check your credentials and try again or register")
@@ -78,7 +80,7 @@ export default function Login({ setLoggedIn }) {
       getMe();
     };
 
-  }, [formData, setLoggedIn]);
+  }, [formData, setLoggedIn/*, navigate*/]);
 
   const errorHandling = ({ target }) => {
     if (target.name === "alias" && alias.length < 4) {

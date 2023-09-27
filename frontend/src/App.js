@@ -23,13 +23,11 @@ export default function App() {
 
   const navigate = useNavigate();
   const backToRegistration = useEffect;
-  const backHome = useEffect;
+  // const backHome = useEffect;
 
   backToRegistration(() => {
-    if (loggedIn) {
-      navigate("/");
-    } else
     if (!loggedIn) {
+      // console.log("1");
       localStorage.removeItem("Dev2User");
       setBlogId("");
       setCurrentBlog("");
@@ -38,16 +36,18 @@ export default function App() {
     };
   }, [loggedIn]);
 
-  backHome(() => {
-    if (loggedIn && !blogId) {
-      setCurrentBlog("");
-      navigate("/");
-    }
-  }, [blogId]);
+  // backHome(() => {
+  //   if (loggedIn && !blogId) {
+  //     console.log("2");
+  //     // setCurrentBlog("");
+  //     // navigate("/");
+  //   }
+  // }, [blogId]);
 
   useEffect(() => {
     if (loggedIn && blogId) {
       const getCurrentBlog = async () => {
+        // console.log("2");
         const URL = `https://devsquaredbe.onrender.com/api/blogs/${blogId}`;
         // const URL = `http://localhost:5011/api/blogs/${blogId}`;
         try {
@@ -61,6 +61,7 @@ export default function App() {
       };
 
       const getRelevantComments = async () => {
+        // console.log("3");
         const URL = "https://devsquaredbe.onrender.com/api/blogs/comments/";
         // const URL = "http://localhost:5011/api/blogs/comments/";
         const options = { method: "GET" };
@@ -72,13 +73,17 @@ export default function App() {
           console.log(err)
         };
       };
-
       getCurrentBlog();
       getRelevantComments();
+    } else if (loggedIn && !blogId) {
+      // console.log("4");
+      setCurrentBlog("");
+      navigate("/");
     };
 
     // GIVING AND TAKING-BACK "LIKES" (BLOGS AND COMMENTS) FUNCTIONS
     if (changeLike.action === "delete" && changeLike.blogId) {
+      // console.log("5");
       const blogLikeDeletion = async () => {
         const blogLikeId = changeLike.blogId;
         const URL = `https://devsquaredbe.onrender.com/api/likes/${blogLikeId}`;
@@ -103,6 +108,7 @@ export default function App() {
       blogLikeDeletion();
 
     } else if (changeLike.action === "add" && changeLike.blogId) {
+      // console.log("6");
       const createBlogLike = async () => {
         const URL = "https://devsquaredbe.onrender.com/api/likes";
         // const URL = "http://localhost:5011/api/likes";
@@ -130,6 +136,7 @@ export default function App() {
       createBlogLike();
 
     } else if (changeLike.action === "delete" && changeLike.commentId) {
+      // console.log("7");
       const commentLikeDeletion = async () => {
         const commentLikeId = changeLike.commentId;
         const URL = `https://devsquaredbe.onrender.com/api/likes/${commentLikeId}`;
@@ -154,6 +161,7 @@ export default function App() {
       commentLikeDeletion();
 
     } else if (changeLike.action === "add" && changeLike.commentId) {
+      // console.log("8");
       const createCommentLike = async () => {
         const URL = "https://devsquaredbe.onrender.com/api/likes";
         // const URL = "http://localhost:5011/api/likes";
@@ -183,6 +191,7 @@ export default function App() {
 
     // GET ALL LIKES
     const getAllLikes = async () => {
+      // console.log("9");
       const URL = "https://devsquaredbe.onrender.com/api/likes/";
       // const URL = "http://localhost:5011/api/likes/";
       const options = { method: "GET" };
@@ -196,7 +205,7 @@ export default function App() {
     };
     getAllLikes();
 
-  }, [blogId, loggedIn, changeLike]);
+  }, [blogId, loggedIn, changeLike, navigate]);
 
 
 
@@ -210,21 +219,24 @@ export default function App() {
       <Routes>
         <Route path="/sign-in" element={<Login
           setLoggedIn={setLoggedIn}
+          // navigate={navigate}
         />} />
         <Route path="/sign-up" element={<Register
           setLoggedIn={setLoggedIn}
+          // navigate={navigate}
         />} />
         <Route path="/blog" element={<CurrentBlog
           currentBlog={currentBlog}
-          navigate={navigate}
           loggedIn={loggedIn}
           blogComments={blogComments}
           blogModalHidden={blogModalHidden}
           setBlogModalHidden={setBlogModalHidden}
           allLikes={allLikes}
-          changeLike={changeLike}
           setChangeLike={setChangeLike}
           setBlogId={setBlogId}
+
+          navigate={navigate}
+          changeLike={changeLike}
         />} />
         <Route path="/" element={<HomePage
           loggedIn={loggedIn}
