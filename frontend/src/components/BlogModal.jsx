@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 
 export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedIn, currentBlog }) {
 
+    const autoFocus = useEffect;
+    const blogTitleInput = useRef();
     const [blogTitle, setBlogTitle] = useState("");
     const [blogText, setBlogText] = useState("");
 
@@ -39,12 +41,19 @@ export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedI
         }));
     };
 
+    autoFocus(()=> {
+        if (!blogModalHidden) {
+            blogTitleInput.current.focus();
+        };
+      }, [blogModalHidden]);
+
     useEffect(() => {
         if (currentBlog) {
             // console.log("15");
             setBlogTitle(currentBlog.title);
             setBlogText(currentBlog.text);
             if (formData.ready) {
+                blogTitleInput.current.focus();
                 // console.log("15.5");
                 const updateBlog = async () => {
                     const URL = `https://devsquaredbe.onrender.com/api/blogs/${currentBlog._id}`;
@@ -85,7 +94,7 @@ export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedI
 
     return (
         <form className={blogModalHidden ? "hidden" : "blog-modal modal"}>
-            <input type="text" className="modal-title" onChange={handleTitleChange} value={blogTitle} placeholder="Title" />
+            <input ref={blogTitleInput} type="text" className="modal-title" onChange={handleTitleChange} value={blogTitle} placeholder="Title" />
             <textarea className="modal-blog" onChange={handleTextChange} value={blogText} placeholder="What are your thoughts" />
             <button className="submit-text" onClick={submitForm}>submit</button>
             <button className="cancel" onClick={cancelBlog}>Cancel</button>

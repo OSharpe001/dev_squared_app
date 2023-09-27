@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 
 export default function CommentModal({ commentModalHidden, setCommentModalHidden, currentBlog, loggedIn, commentToUpdate }) {
 
+    const autoFocus = useEffect;
+    const commentInput = useRef();
     const [commentText, setCommentText] = useState("");
     const [formData, setFormData] = useState({
         text: "",
@@ -27,6 +29,12 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
         }));
     };
 
+    autoFocus(()=> {
+        if (!commentModalHidden) {
+            commentInput.current.focus();
+        };
+      }, [commentModalHidden]);
+
     useEffect(() => {
         if (commentToUpdate.text) {
             // console.log("13");
@@ -41,13 +49,8 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
                             Authorization: `Bearer ${loggedIn.token}`
                         },
                     };
-                    // ***********************
-                    const options = { method: "PUT" };
                     try {
-                        await fetch(URL, options, formData, config);
-                    // ***********************
-                    // try {
-                    //     await axios.put(URL, formData, config);
+                        await axios.put(URL, formData, config);
                     } catch (err) {
                         console.log(err);
                     };
@@ -78,7 +81,7 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
 
     return (
         <form className={commentModalHidden ? "hidden" : "comment-modal modal"}>
-            <textarea className="modal-comment" autoFocus={!commentModalHidden} value={commentText} onChange={handleTextChange} placeholder="Leave a comment..." />
+            <textarea ref={commentInput} className="modal-comment" autoFocus={!commentModalHidden} value={commentText} onChange={handleTextChange} placeholder="Leave a comment..." />
             <button className="submit-text" onClick={submitForm}>Submit</button>
             <button className="cancel" onClick={cancelComment}>Cancel</button>
         </form>
