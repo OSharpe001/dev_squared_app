@@ -41,8 +41,13 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
                             Authorization: `Bearer ${loggedIn.token}`
                         },
                     };
+                    // ***********************
+                    const options = { method: "PUT" };
                     try {
-                        await axios.put(URL, formData, config);
+                        await fetch(URL, options, formData, config);
+                    // ***********************
+                    // try {
+                    //     await axios.put(URL, formData, config);
                     } catch (err) {
                         console.log(err);
                     };
