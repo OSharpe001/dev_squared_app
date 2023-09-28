@@ -17,10 +17,17 @@ const corsOption = {
     allowedHeaders: "Content-Type, Accept, Origin, X-Requested-With",
     // exposedHeaders: "Content-Range,X-Content-Range",
     credentials: true,
-    preflightContinue: false,
+    // preflightContinue: false,
     exposeHeaders: ["X-auth-token"],
-    optionsSuccessStatus: 200
+    // optionsSuccessStatus: 200
 };
+// **ORIGINAL SET OF CORS OPTIONS
+// const corsOption = {
+//     origin: "*",
+//     methods: "GET, PUT, POST, DELETE",
+//     credentials: true,
+//     exposeHeaders: ["X-auth-token"],
+// };
 // TO AVOID THE ACCESS-CONTROL-ALLOW-ORIGIN ISSUE
 app.use(cors(corsOption));
 
