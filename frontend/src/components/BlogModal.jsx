@@ -52,12 +52,12 @@ export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedI
 
     useEffect(() => {
         if (currentBlog) {
-            // console.log("15");
+            console.log("15");
             setBlogTitle(currentBlog.title);
             setBlogText(currentBlog.text);
             if (formData.ready) {
                 blogTitleInput.current.focus();
-                // console.log("15.5");
+                console.log("15.5");
                 const updateBlog = async () => {
                     const URL = `https://devsquaredbe.onrender.com/api/blogs/${currentBlog._id}`;
                     // const URL = `http://localhost:5011/api/blogs/${currentBlog._id}`;
@@ -75,7 +75,7 @@ export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedI
                 updateBlog();
             };
         } else if (formData.title && formData.text) {
-            // console.log("16");
+            console.log("16");
             const createBlog = async () => {
                 const URL = "https://devsquaredbe.onrender.com/api/blogs/";
                 // const URL = "http://localhost:5011/api/blogs/";

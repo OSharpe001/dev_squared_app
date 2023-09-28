@@ -15,7 +15,7 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
 
     useEffect(() => {
         if (commentToDelete) {
-            // console.log("11");
+            console.log("11");
             const commentDeletion = async () => {
                 const URL = "https://devsquaredbe.onrender.com/api/blogs/comments/";
                 // const URL = "http://localhost:5011/api/blogs/comments/";
@@ -34,7 +34,7 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
         };
 
         if (blogToDelete) {
-            // console.log("12");
+            console.log("12");
             const blogDeletion = async () => {
                 const URL = "https://devsquaredbe.onrender.com/api/blogs/";
                 // const URL = "http://localhost:5011/api/blogs/";
