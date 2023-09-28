@@ -29,7 +29,8 @@ const corsOption = {
 //     exposeHeaders: ["X-auth-token"],
 // };
 // TO AVOID THE ACCESS-CONTROL-ALLOW-ORIGIN ISSUE
-app.use(cors(corsOption));
+// app.use(cors(corsOption));
+app.use(cors());
 
 // TO ALLOW THE BODY OF A POST REQUEST
 app.use(express.json());
