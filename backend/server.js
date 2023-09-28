@@ -16,7 +16,7 @@ const corsOption = {
     methods: "POST, PUT, PATCH, GET, DELETE, OPTIONS",
     allowedHeaders: "Content-Type, Accept, Origin, X-Requested-With",
     // exposedHeaders: "Content-Range,X-Content-Range",
-    credentials: true,
+    credentials: false,
     // preflightContinue: false,
     exposeHeaders: ["X-auth-token"],
     // optionsSuccessStatus: 200
