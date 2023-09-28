@@ -12,13 +12,12 @@ connectDB();
 // MIDDLEWARE-- //
 // SETTING UP CORS OPTIONS TO AVOID ACCESS-CONTROL-ALLOW-ORIGIN ISSUES **THIS MUST BE PLACE ABOVE ALL OTHER MIDDLEWARE FUNCTIONS!**
 // const corsOption = {
-//     origin: "*",
-//     methods: "POST, PUT, PATCH, GET, DELETE, OPTIONS",
+//     *origin: "*",
+//     *methods: "POST, PUT, PATCH, GET, DELETE, OPTIONS",
 //     allowedHeaders: "Content-Type, Accept, Origin, X-Requested-With",
-//     // exposedHeaders: "Content-Range,X-Content-Range",
-//     credentials: false,
+//     *credentials: false,
 //     // preflightContinue: false,
-//     exposeHeaders: ["X-auth-token"],
+//     *exposeHeaders: ["X-auth-token"],
 //     // optionsSuccessStatus: 200
 // };
 // **ORIGINAL SET OF CORS OPTIONS
@@ -27,6 +26,7 @@ const corsOption = {
     methods: "POST, PUT, PATCH, GET, DELETE, OPTIONS",
     credentials: true,
     exposeHeaders: ["X-auth-token"],
+    preflightContinue: true,
 };
 // TO AVOID THE ACCESS-CONTROL-ALLOW-ORIGIN ISSUE
 app.use(cors(corsOption));
