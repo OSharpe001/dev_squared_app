@@ -11,17 +11,24 @@ connectDB();
 
 // MIDDLEWARE-- //
 // SETTING UP CORS OPTIONS TO AVOID ACCESS-CONTROL-ALLOW-ORIGIN ISSUES **THIS MUST BE PLACE ABOVE ALL OTHER MIDDLEWARE FUNCTIONS!**
-const corsOption = {
-    origin: "*",
-    methods: "POST, PUT, PATCH, GET, DELETE, OPTIONS",
-    credentials: true,
-    exposeHeaders: ["X-auth-token"],
-};
-// TO AVOID THE ACCESS-CONTROL-ALLOW-ORIGIN ISSUE
-app.use(cors(corsOption));
+// const corsOption = {
+//     origin: "*",
+//     methods: "POST, PUT, PATCH, GET, DELETE, OPTIONS",
+//     credentials: true,
+//     exposeHeaders: ["X-auth-token"],
+// };
+// // TO AVOID THE ACCESS-CONTROL-ALLOW-ORIGIN ISSUE
+// app.use(cors(corsOption));
 // app.use(cors());
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", '*');
+    // **************
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    /**
+        res.setHeader("Access-Control-Allow-Credentials", "false");
+        res.setHeader("Access-Control-Expose-Headers", "");
+        res.setHeader("Access-Control-Max-Age", "");
+     */
     res.setHeader('Access-Control-Allow-Methods', 'POST, PUT, PATCH, GET, DELETE, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, X-auth-token');
     // res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Accept');
