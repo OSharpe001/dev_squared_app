@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 
-export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedIn, currentBlog, setBlogId }) {
+export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedIn, currentBlog }) {
 
     const autoFocus = useEffect;
     const blogTitleInput = useRef();
@@ -39,9 +39,6 @@ export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedI
             text: blogText,
             ready: true
         }));
-        if  (currentBlog) {
-            setTimeout(setBlogId, 165, currentBlog._id);
-        };
     };
 
     autoFocus(()=> {

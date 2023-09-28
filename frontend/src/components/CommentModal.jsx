@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 
-export default function CommentModal({ commentModalHidden, setCommentModalHidden, currentBlog, loggedIn, commentToUpdate, setBlogId }) {
+export default function CommentModal({ commentModalHidden, setCommentModalHidden, currentBlog, loggedIn, commentToUpdate }) {
 
     const autoFocus = useEffect;
     const commentInput = useRef();
@@ -27,7 +27,6 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
             ...prev,
             text: commentText
         }));
-        setTimeout(setBlogId, 165, currentBlog._id);
     };
 
     autoFocus(()=> {
