@@ -17,7 +17,7 @@ const corsOption = {
     allowedHeaders: "Content-Type, Accept, Origin, X-Requested-With",
     // exposedHeaders: "Content-Range,X-Content-Range",
     credentials: true,
-    preflightContinue: true,
+    preflightContinue: false,
     exposeHeaders: ["X-auth-token"],
     optionsSuccessStatus: 200
 };
