@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { CurrentBlog, HomePage, Login, Register } from "./pages";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -21,9 +21,9 @@ export default function App() {
     action: ""
   });
 
+  const currentScreen = useLocation().pathname;
   const navigate = useNavigate();
   const backToRegistration = useEffect;
-  // const backHome = useEffect;
 
   backToRegistration(() => {
     if (!loggedIn) {
@@ -35,14 +35,6 @@ export default function App() {
       navigate("/sign-up");
     };
   }, [loggedIn]);
-
-  // backHome(() => {
-  //   if (loggedIn && !blogId) {
-  //     console.log("2");
-  //     // setCurrentBlog("");
-  //     // navigate("/");
-  //   }
-  // }, [blogId]);
 
   useEffect(() => {
     if (loggedIn && blogId) {
@@ -219,11 +211,11 @@ export default function App() {
       <Routes>
         <Route path="/sign-in" element={<Login
           setLoggedIn={setLoggedIn}
-          // navigate={navigate}
+          currentScreen={currentScreen}
         />} />
         <Route path="/sign-up" element={<Register
           setLoggedIn={setLoggedIn}
-          // navigate={navigate}
+          currentScreen={currentScreen}
         />} />
         <Route path="/blog" element={<CurrentBlog
           currentBlog={currentBlog}

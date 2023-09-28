@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from "react-router-dom";
 import axios from "axios";
 
 
-export default function Login({ setLoggedIn/*, navigate*/ }) {
+export default function Login({ setLoggedIn, currentScreen }) {
 
+  const autoFocus = useEffect;
+  const aliasInput = useRef();
   const [alias, setAlias] = useState("");
   const [password, setPassword] = useState("");
   const [aliasErrorMessage, setAliasErrorMessage] = useState("");
@@ -59,8 +61,13 @@ export default function Login({ setLoggedIn/*, navigate*/ }) {
     };
   };
 
-  useEffect(() => {
+  autoFocus(()=> {
+    if (currentScreen === "/sign-in") {
+        aliasInput.current.focus();
+    };
+  }, [currentScreen]);
 
+  useEffect(() => {
     if (formData.password) {
       console.log("17");
         const getMe = async () => {
@@ -70,7 +77,6 @@ export default function Login({ setLoggedIn/*, navigate*/ }) {
           const response = await axios.post(URL, formData);
           localStorage.setItem("Dev2User", JSON.stringify(response.data));
           setLoggedIn(JSON.parse(localStorage.getItem("Dev2User")));
-          // navigate("/");
         } catch (err) {
           console.log(err);
           alert("Please check your credentials and try again or register")
@@ -80,7 +86,7 @@ export default function Login({ setLoggedIn/*, navigate*/ }) {
       getMe();
     };
 
-  }, [formData, setLoggedIn/*, navigate*/]);
+  }, [formData, setLoggedIn]);
 
   const errorHandling = ({ target }) => {
     if (target.name === "alias" && alias.length < 4) {
@@ -103,7 +109,7 @@ export default function Login({ setLoggedIn/*, navigate*/ }) {
       <h1 className="direct">Login <span className="underlined">or</span> <Link aria-label="On Click" to="/sign-up">Register</Link></h1>
       <form>
         <label htmlFor="alias">UserName <span className='underlined'>or</span> Email:</label>
-        <input onChange={handleChange} onBlur={errorHandling} type="text" name="alias" id="alias" placeholder='jd@email.com' value={alias} />
+        <input ref={aliasInput} onChange={handleChange} onBlur={errorHandling} type="text" name="alias" id="alias" placeholder='jd@email.com' value={alias} />
         <p className="error-message">{aliasErrorMessage}</p>
 
         <label htmlFor="password">Password:</label>

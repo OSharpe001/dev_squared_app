@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from "react-router-dom";
 import axios from "axios";
 
 
-export default function Register({ setLoggedIn }) {
+export default function Register({ setLoggedIn, currentScreen }) {
 
+  const autoFocus = useEffect;
+  const nameInput = useRef();
   const [name, setName] = useState("");
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
@@ -89,6 +91,12 @@ export default function Register({ setLoggedIn }) {
     };
   };
 
+  autoFocus(()=> {
+    if (currentScreen === "/sign-up") {
+        nameInput.current.focus();
+    };
+  }, [currentScreen]);
+
   useEffect(() => {
     if (formData.name && formData.userName && formData.email && formData.password) {
       console.log("18");
@@ -157,7 +165,7 @@ export default function Register({ setLoggedIn }) {
       <h1 className="direct">Register <span className="underlined">or</span> <Link aria-label="On Click" to="/sign-in">LogIn</Link></h1>
       <form>
         <label htmlFor="name">Name:</label>
-        <input onChange={handleChange} onBlur={errorHandling} type="text" name="name" id="name" placeholder='Sam Smith' value={name} />
+        <input ref={nameInput}onChange={handleChange} onBlur={errorHandling} type="text" name="name" id="name" placeholder='Sam Smith' value={name} />
         <p className="error-message">{nameErrorMessage}</p>
 
         <label htmlFor="userName">UserName:</label>
