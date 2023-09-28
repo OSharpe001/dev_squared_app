@@ -27,7 +27,7 @@ const corsOption = {
     credentials: true,
     exposeHeaders: ["X-auth-token"],
     preflightContinue: true,
-    allowedHeaders: "Content-Type, Accept, Authorization, Origin, X-Requested-With",
+    allowedHeaders: "Content-Type, Accept, Authorization, X-auth-token, Origin, X-Requested-With",
 };
 // TO AVOID THE ACCESS-CONTROL-ALLOW-ORIGIN ISSUE
 app.use(cors(corsOption));
