@@ -27,6 +27,7 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
             ...prev,
             text: commentText
         }));
+        setTimeout(setBlogId, 165, currentBlog._id);
     };
 
     autoFocus(()=> {
@@ -56,7 +57,6 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
                     };
                 };
                 updateComment();
-                setBlogId(formData.blogId);
             };
 
         } else if (formData.text) {
@@ -76,10 +76,9 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
                 };
             };
             createComment();
-            setBlogId(formData.blogId);
         };
 
-    }, [formData, commentToUpdate, loggedIn.token, setBlogId]);
+    }, [formData, commentToUpdate, loggedIn.token]);
 
     return (
         <form className={commentModalHidden ? "hidden" : "comment-modal modal"}>

@@ -39,6 +39,9 @@ export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedI
             text: blogText,
             ready: true
         }));
+        if  (currentBlog) {
+            setTimeout(setBlogId, 165, currentBlog._id);
+        };
     };
 
     autoFocus(()=> {
@@ -70,7 +73,6 @@ export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedI
                     };
                 };
                 updateBlog();
-                setBlogId(currentBlog._id);
             };
         } else if (formData.title && formData.text) {
             // console.log("16");
