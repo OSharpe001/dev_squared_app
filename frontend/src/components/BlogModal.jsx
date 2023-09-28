@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 
-export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedIn, currentBlog }) {
+export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedIn, currentBlog, setBlogId }) {
 
     const autoFocus = useEffect;
     const blogTitleInput = useRef();
@@ -70,6 +70,7 @@ export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedI
                     };
                 };
                 updateBlog();
+                setBlogId(currentBlog._id);
             };
         } else if (formData.title && formData.text) {
             // console.log("16");

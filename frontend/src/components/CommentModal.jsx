@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 
-export default function CommentModal({ commentModalHidden, setCommentModalHidden, currentBlog, loggedIn, commentToUpdate }) {
+export default function CommentModal({ commentModalHidden, setCommentModalHidden, currentBlog, loggedIn, commentToUpdate, setBlogId }) {
 
     const autoFocus = useEffect;
     const commentInput = useRef();
@@ -56,6 +56,7 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
                     };
                 };
                 updateComment();
+                setBlogId(formData.blogId);
             };
 
         } else if (formData.text) {
@@ -75,9 +76,10 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
                 };
             };
             createComment();
+            setBlogId(formData.blogId);
         };
 
-    }, [formData, commentToUpdate, loggedIn.token]);
+    }, [formData, commentToUpdate, loggedIn.token, setBlogId]);
 
     return (
         <form className={commentModalHidden ? "hidden" : "comment-modal modal"}>

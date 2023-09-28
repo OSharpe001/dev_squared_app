@@ -165,6 +165,7 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
                 loggedIn={loggedIn}
                 currentBlog={currentBlog}
                 commentToUpdate={commentToUpdate}
+                setBlogId={setBlogId}
             />
 
             <BlogModal
@@ -172,6 +173,7 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
                 blogModalHidden={blogModalHidden}
                 currentBlog={currentBlog}
                 setBlogModalHidden={setBlogModalHidden}
+                setBlogId={setBlogId}
             />
         </section>
     );
