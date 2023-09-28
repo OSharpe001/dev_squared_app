@@ -14,7 +14,7 @@ connectDB();
 // const corsOption = {
 //     *origin: "*",
 //     *methods: "POST, PUT, PATCH, GET, DELETE, OPTIONS",
-//     allowedHeaders: "Content-Type, Accept, Origin, X-Requested-With",
+    // *allowedHeaders: "Content-Type, Accept, Origin, X-Requested-With",
 //     *credentials: false,
 //     *// preflightContinue: false,
 //     *exposeHeaders: ["X-auth-token"],
@@ -27,7 +27,7 @@ const corsOption = {
     credentials: true,
     exposeHeaders: ["X-auth-token"],
     preflightContinue: true,
-    allowedHeaders: "Content-Type, Accept, Origin, X-Requested-With",
+    allowedHeaders: "Content-Type, Accept, Authorization, Origin, X-Requested-With",
 };
 // TO AVOID THE ACCESS-CONTROL-ALLOW-ORIGIN ISSUE
 app.use(cors(corsOption));
