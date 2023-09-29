@@ -23,6 +23,9 @@ import pic22 from "../assets/images/memes/IMG_8201.jpg";
 import pic23 from "../assets/images/memes/IMG_8208.jpg";
 import pic24 from "../assets/images/memes/IMG_8209.jpg";
 import pic25 from "../assets/images/memes/IMG_8210.jpg";
+import pic26 from "../assets/images/memes/IMG_8275.jpg";
+import pic27 from "../assets/images/memes/IMG_8287.jpg";
+import pic28 from "../assets/images/memes/IMG_8288.jpg";
 
 export const images = [
     {
@@ -148,6 +151,21 @@ export const images = [
     {
         class: "meme-image",
         image: pic25,
+        alt: "meme"
+    },
+    {
+        class: "meme-image",
+        image: pic26,
+        alt: "meme"
+    },
+    {
+        class: "meme-image",
+        image: pic27,
+        alt: "meme"
+    },
+    {
+        class: "meme-image",
+        image: pic28,
         alt: "meme"
     },
 ];
