@@ -8,7 +8,7 @@ const connectDB = require("./config/database");
 const app = express();
 
 connectDB();
-
+app.options("*", cors({ origin: '*', optionsSuccessStatus: 200 }))
 // MIDDLEWARE-- //
 // SETTING UP CORS OPTIONS TO AVOID ACCESS-CONTROL-ALLOW-ORIGIN ISSUES **THIS MUST BE PLACE ABOVE ALL OTHER MIDDLEWARE FUNCTIONS!**
 const corsOption = {
