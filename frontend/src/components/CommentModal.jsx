@@ -46,7 +46,8 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
                     // const URL = `http://localhost:5011/api/blogs/comments/${commentToUpdate.id}`;
                     const config = {
                         headers: {
-                            Authorization: `Bearer ${loggedIn.token}`
+                            Authorization: `Bearer ${loggedIn.token}`,
+                            "Content-Type": "application/json",
                         },
                     };
                     try {
@@ -65,7 +66,8 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
                 // const URL = "http://localhost:5011/api/blogs/comments";
                 const config = {
                     headers: {
-                        Authorization: `Bearer ${loggedIn.token}`
+                        Authorization: `Bearer ${loggedIn.token}`,
+                        "Content-Type": "application/json",
                     },
                 };
                 try {
