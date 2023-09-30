@@ -80,7 +80,7 @@ import pic79 from "../assets/images/memes/IMG_8374.jpg";
 import pic80 from "../assets/images/memes/IMG_8375.jpg";
 import pic81 from "../assets/images/memes/IMG_8376.jpg";
 import pic82 from "../assets/images/memes/IMG_8378.jpg";
-import pic83 from "../assets/images/memes/IMG_8379.jpg";
+import pic83 from "../assets/images/memes/IMG_8393.WEBP";
 import pic84 from "../assets/images/memes/IMG_8380.jpg";
 import pic85 from "../assets/images/memes/IMG_8382.WEBP";
 import pic86 from "../assets/images/memes/IMG_8384.jpg";
@@ -91,7 +91,6 @@ import pic90 from "../assets/images/memes/IMG_8389.jpg";
 import pic91 from "../assets/images/memes/IMG_8390.WEBP";
 import pic92 from "../assets/images/memes/IMG_8391.jpg";
 import pic93 from "../assets/images/memes/IMG_8392.WEBP";
-import pic94 from "../assets/images/memes/IMG_8393.WEBP";
 
 export const images = [
     {
@@ -559,9 +558,5 @@ export const images = [
         image: pic93,
         alt: "meme"
     },
-    {
-        class: "meme-image",
-        image: pic94,
-        alt: "meme"
-    },
+    
 ];
