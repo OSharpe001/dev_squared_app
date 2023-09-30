@@ -2,17 +2,20 @@ import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 
-export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedIn, currentBlog }) {
+export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedIn, currentBlog, blogToUpdate }) {
 
     const autoFocus = useEffect;
+    const updateBlogFill = useEffect;
     const blogTitleInput = useRef();
     const [blogTitle, setBlogTitle] = useState("");
     const [blogText, setBlogText] = useState("");
 
-    const [formData, setFormData] = useState({
+    const [blogFormData, setBlogFormData] = useState({
         blogTitle: "",
         blogText: "",
-        userName: loggedIn.userName
+        userName: loggedIn.userName,
+        update: false,
+        ready: false,
     });
 
     const handleTitleChange = ({ target }) => {
@@ -24,22 +27,37 @@ export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedI
     };
 
     const cancelBlog = () => {
-        setFormData(prev => ({
+        setBlogFormData(prev => ({
             ...prev,
             blogTitle: "",
-            blogText: ""
+            blogText: "",
+            update: false,
+            ready: false,
         }));
         setBlogModalHidden(true);
     };
 
     const submitForm = () => {
-        setFormData(prev => ({
+        setBlogFormData(prev => ({
             ...prev,
             title: blogTitle,
             text: blogText,
-            ready: true
+            ready: true,
         }));
     };
+
+    // ************************
+    updateBlogFill(() => {
+        if (blogToUpdate) {
+            // console.log("15");
+            setBlogTitle(blogToUpdate.title);
+            setBlogText(blogToUpdate.text);
+            setBlogFormData(prev => ({
+                ...prev,
+                update: true,
+            }));
+        };
+    }, [blogToUpdate]);
 
     autoFocus(()=> {
         if (!blogModalHidden) {
@@ -48,13 +66,8 @@ export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedI
       }, [blogModalHidden]);
 
     useEffect(() => {
-        if (currentBlog) {
-            console.log("15");
-            setBlogTitle(currentBlog.title);
-            setBlogText(currentBlog.text);
-            if (formData.ready) {
-                blogTitleInput.current.focus();
-                console.log("15.5");
+            if (blogFormData.ready && blogFormData.update) {
+                console.log("15");
                 const updateBlog = async () => {
                     const URL = `https://devsquaredbe.onrender.com/api/blogs/${currentBlog._id}`;
                     // const URL = `http://localhost:5011/api/blogs/${currentBlog._id}`;
@@ -64,15 +77,29 @@ export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedI
                             "Content-Type": "application/json",
                         },
                     };
+                    const blogData = {
+                        title: blogFormData.title,
+                        text: blogFormData.text,
+                        userName: blogFormData.userName
+                    };
+                    console.log("------updateBlog INFO------");
+                    console.log("blogData: ", blogData);
+                    console.log("currentBlog._id: ", currentBlog._id);
+                    console.log("blogData.title: ", blogData.title);
+                    console.log("blogData.text: ", blogData.text);
+                    console.log("blogData.userName: ", blogData.userName);
+                    console.log("loggedIn.token: ", loggedIn.token);
+                    console.log("blogFormData.ready: ", blogFormData.ready);
+                    console.log("blogFormData.update: ", blogFormData.update);
                     try {
-                        await axios.put(URL, formData, config);
+                        await axios.put(URL, blogData, config);
                     } catch (err) {
                         console.log(err);
                     };
                 };
                 updateBlog();
-            };
-        } else if (formData.title && formData.text) {
+
+        } else if (blogFormData.ready && !blogFormData.update) {
             console.log("16");
             const createBlog = async () => {
                 const URL = "https://devsquaredbe.onrender.com/api/blogs/";
@@ -83,8 +110,21 @@ export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedI
                         "Content-Type": "application/json",
                     },
                 };
+                const blogData = {
+                    title: blogFormData.title,
+                    text: blogFormData.text,
+                    userName: blogFormData.userName
+                };
+                console.log("------createBlog INFO------");
+                console.log("blogData: ", blogData);
+                console.log("blogData.title: ", blogData.title);
+                console.log("blogData.text: ", blogData.text);
+                console.log("blogData.userName: ", blogData.userName);
+                console.log("loggedIn.token: ", loggedIn.token);
+                console.log("blogFormData.ready: ", blogFormData.ready);
+                console.log("blogFormData.update: ", blogFormData.update);
                 try {
-                    await axios.post(URL, formData, config);
+                    await axios.post(URL, blogData, config);
                 } catch (err) {
                     console.log(err);
                 };
@@ -92,7 +132,10 @@ export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedI
             createBlog();
         };
 
-    }, [formData, loggedIn, currentBlog]);
+    }, [blogFormData/*, loggedIn/*, currentBlog*/]);
+
+    // console.log("BLOGFORMDATA: ", blogFormData);
+    // console.log("BLOGTOUPDATE INFO: ", blogToUpdate);
 
     return (
         <form className={blogModalHidden ? "hidden" : "blog-modal modal"}>

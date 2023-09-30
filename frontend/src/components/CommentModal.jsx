@@ -5,12 +5,15 @@ import axios from 'axios';
 export default function CommentModal({ commentModalHidden, setCommentModalHidden, currentBlog, loggedIn, commentToUpdate }) {
 
     const autoFocus = useEffect;
+    const updateCommentFill = useEffect;
     const commentInput = useRef();
     const [commentText, setCommentText] = useState("");
-    const [formData, setFormData] = useState({
+    const [commentFormData, setCommentFormData] = useState({
         text: "",
         userName: loggedIn.userName,
-        blogId: currentBlog._id
+        blogId: currentBlog._id,
+        update: false,
+        ready: false
     });
 
     const cancelComment = () => {
@@ -23,11 +26,25 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
     };
 
     const submitForm = () => {
-        setFormData(prev => ({
+        setCommentFormData(prev => ({
             ...prev,
-            text: commentText
+            text: commentText,
+            ready: true,
         }));
     };
+    // ******************
+    updateCommentFill(() => {
+        if (commentToUpdate.text) {
+            // console.log("13");
+            // REFILLS COMMENT MODAL WITH THE PREVIOUS TEXT OF THE COMMENT THAT NEEDS UPDATING
+            setCommentText(commentToUpdate.text);
+            setCommentFormData(prev => ({
+                ...prev,
+                update: true,
+            }));
+        };
+    }, [commentToUpdate]);
+    // ******************
 
     autoFocus(()=> {
         if (!commentModalHidden) {
@@ -36,30 +53,41 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
       }, [commentModalHidden]);
 
     useEffect(() => {
-        if (commentToUpdate.text) {
-            console.log("13");
-            // REFILLS COMMENT MODAL WITH THE PREVIOUS TEXT OF THE COMMENT THAT NEEDS UPDATING
-            setCommentText(commentToUpdate.text);
-            if (formData.text) {
+        if (commentFormData.update && commentFormData.ready) {
+                console.log("13");
                 const updateComment = async () => {
                     const URL = `https://devsquaredbe.onrender.com/api/blogs/comments/${commentToUpdate.id}`;
                     // const URL = `http://localhost:5011/api/blogs/comments/${commentToUpdate.id}`;
                     const config = {
                         headers: {
                             Authorization: `Bearer ${loggedIn.token}`,
-                            "Content-Type": "application/json",
+                            "Content-Type": "application/json, multipart/form-data",
+                            Accept: "application/json, text/plain, /"
                         },
                     };
+                    const commentData = {
+                        text: commentFormData.text,
+                        userName: commentFormData.userName,
+                        blogId: commentFormData.blogId,
+                    };
+                    console.log("------updateComment INFO------");
+                    console.log("commentData: ", commentData);
+                    console.log("commentToUpdate.id: ", commentToUpdate.id);
+                    console.log("commentData.blogId: ", commentData.blogId);
+                    console.log("commentData.text: ", commentData.text);
+                    console.log("commentData.userName: ", commentData.userName);
+                    console.log("loggedIn.token: ", loggedIn.token);
+                    console.log("commentData.ready: ", commentFormData.ready);
+                    console.log("commentData.update: ", commentFormData.update);
                     try {
-                        await axios.put(URL, formData, config);
+                        await axios.put(URL, commentData, config);
                     } catch (err) {
                         console.log(err);
                     };
                 };
                 updateComment();
-            };
 
-        } else if (formData.text) {
+        } else if (!commentFormData.update && commentFormData.ready) {
             console.log("14");
             const createComment = async () => {
                 const URL = "https://devsquaredbe.onrender.com/api/blogs/comments/";
@@ -67,19 +95,43 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
                 const config = {
                     headers: {
                         Authorization: `Bearer ${loggedIn.token}`,
-                        "Content-Type": "application/json",
+                        "Content-Type": "application/json, multipart/form-data, application/x-www-form-urlencoded",
+                        // Accept: "application/json, text/plain, /",
+                        Accept: "*/*",
                     },
                 };
+                const commentData = {
+                    text: commentFormData.text,
+                    userName: commentFormData.userName,
+                    blogId: commentFormData.blogId,
+                };
+                console.log("------createComment INFO------");
+                console.log("commentData: ", commentData);
+                console.log("commentData.blogId: ", commentData.blogId);
+                console.log("commentData.text: ", commentData.text);
+                console.log("commentData.userName: ", commentData.userName);
+                console.log("loggedIn.token: ", loggedIn.token);
+                console.log("commentData.ready: ", commentFormData.ready);
+                console.log("commentData.update: ", commentFormData.update);
                 try {
-                    await axios.post(URL, formData, config);
+                    await axios.post(URL, commentData, config);
                 } catch (err) {
                     console.log(err);
                 };
+                // setCommentFormData({
+                //     text: "",
+                //     userName: loggedIn.userName,
+                //     blogId: currentBlog._id,
+                //     update: false,
+                //     ready: false
+                // });
             };
             createComment();
         };
 
-    }, [formData, commentToUpdate, loggedIn.token]);
+    }, [commentFormData/*, commentToUpdate, loggedIn.token*/]);
+
+    console.log("COMMENTFORMDATA: ", commentFormData);
 
     return (
         <form className={commentModalHidden ? "hidden" : "comment-modal modal"}>

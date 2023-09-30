@@ -12,6 +12,7 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
     const [commentToDelete, setCommentToDelete] = useState("");
     const [blogToDelete, setBlogToDelete] = useState("");
     const [commentToUpdate, setCommentToUpdate] = useState("");
+    const [blogToUpdate, setBlogToUpdate] = useState("");
 
     useEffect(() => {
         if (commentToDelete) {
@@ -59,9 +60,14 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
         setCommentModalHidden(false);
     };
 
-    const updateComment = (info) => {
-        setCommentToUpdate(info);
+    const updateComment = (commentInfo) => {
+        setCommentToUpdate(commentInfo);
         setCommentModalHidden(false);
+    };
+
+    const updateBlog = (blogInfo) => {
+        setBlogToUpdate(blogInfo);
+        setBlogModalHidden(false);
     };
 
     const changeLikeBlog = (action, blogId) => {
@@ -112,7 +118,7 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
                 {loggedIn._id === currentBlog.user ?
                     <>
                         <button onClick={() => setBlogToDelete(currentBlog._id)} disabled={disabled}>Delete</button>
-                        <button onClick={() => setBlogModalHidden(false)} disabled={disabled}>Edit</button>
+                        <button onClick={() => updateBlog({ title: currentBlog.title, text: currentBlog.text, id: currentBlog._id })} disabled={disabled}>Edit</button>
                     </>
                     :
                     <>
@@ -172,6 +178,7 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
                 blogModalHidden={blogModalHidden}
                 currentBlog={currentBlog}
                 setBlogModalHidden={setBlogModalHidden}
+                blogToUpdate={blogToUpdate}
             />
         </section>
     );
