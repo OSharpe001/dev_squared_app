@@ -46,10 +46,8 @@ export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedI
         }));
     };
 
-    // ************************
     updateBlogFill(() => {
         if (blogToUpdate) {
-            // console.log("15");
             setBlogTitle(blogToUpdate.title);
             setBlogText(blogToUpdate.text);
             setBlogFormData(prev => ({
@@ -94,6 +92,7 @@ export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedI
                     try {
                         await axios.put(URL, blogData, config);
                     } catch (err) {
+                        console.log("ERR.CONFIG: ", err.config);
                         console.log(err);
                     };
                 };
@@ -126,6 +125,7 @@ export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedI
                 try {
                     await axios.post(URL, blogData, config);
                 } catch (err) {
+                    console.log("ERR.CONFIG: ", err.config);
                     console.log(err);
                 };
             };

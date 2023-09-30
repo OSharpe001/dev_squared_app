@@ -61,8 +61,8 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
                     const config = {
                         headers: {
                             Authorization: `Bearer ${loggedIn.token}`,
-                            "Content-Type": "application/json, multipart/form-data",
-                            Accept: "application/json, text/plain, /"
+                            // "Content-Type": "application/json, multipart/form-data",
+                            // Accept: "application/json, text/plain, /"
                         },
                     };
                     const commentData = {
@@ -82,6 +82,7 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
                     try {
                         await axios.put(URL, commentData, config);
                     } catch (err) {
+                        console.log("ERR.CONFIG: ", err.config);
                         console.log(err);
                     };
                 };
@@ -95,9 +96,9 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
                 const config = {
                     headers: {
                         Authorization: `Bearer ${loggedIn.token}`,
-                        "Content-Type": "application/json, multipart/form-data, application/x-www-form-urlencoded",
-                        // Accept: "application/json, text/plain, /",
-                        Accept: "*/*",
+                        // "Content-Type": "application/json, multipart/form-data, application/x-www-form-urlencoded",
+                        // // Accept: "application/json, text/plain, /",
+                        // Accept: "*/*",
                     },
                 };
                 const commentData = {
@@ -116,6 +117,7 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
                 try {
                     await axios.post(URL, commentData, config);
                 } catch (err) {
+                    console.log("ERR.CONFIG: ", err.config);
                     console.log(err);
                 };
                 // setCommentFormData({

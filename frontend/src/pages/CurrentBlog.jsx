@@ -54,7 +54,7 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
             blogDeletion();
         };
 
-    }, [loggedIn, commentToDelete, blogToDelete, setBlogId]);
+    }, [/*loggedIn,*/ commentToDelete, blogToDelete/*, setBlogId*/]);
 
     const startComment = () => {
         setCommentModalHidden(false);

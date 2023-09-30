@@ -182,22 +182,24 @@ export default function App() {
     };
 
     // GET ALL LIKES
-    const getAllLikes = async () => {
-      console.log("9");
-      const URL = "https://devsquaredbe.onrender.com/api/likes/";
-      // const URL = "http://localhost:5011/api/likes/";
-      const options = { method: "GET" };
-      try {
-        const response = await fetch(URL, options);
-        const data = await response.json();
-        setAllLikes(data);
-      } catch (err) {
-        console.log(err)
+    if (loggedIn) {
+      const getAllLikes = async () => {
+        console.log("9");
+        const URL = "https://devsquaredbe.onrender.com/api/likes/";
+        // const URL = "http://localhost:5011/api/likes/";
+        const options = { method: "GET" };
+        try {
+          const response = await fetch(URL, options);
+          const data = await response.json();
+          setAllLikes(data);
+        } catch (err) {
+          console.log(err)
+        };
       };
+      getAllLikes();
     };
-    getAllLikes();
 
-  }, [blogId, loggedIn, changeLike, navigate]);
+  }, [blogId, loggedIn, changeLike/*, navigate*/]);
 
 
 
