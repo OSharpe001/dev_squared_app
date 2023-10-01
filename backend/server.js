@@ -16,7 +16,7 @@ const corsOption = {
     methods: "POST, PUT, PATCH, GET, DELETE, OPTIONS",
     credentials: true,
     exposeHeaders: ["X-auth-token"],
-    preflightContinue: true,
+    preflightContinue: false,
     // allowedHeaders: "Content-Type, Accept, Authorization, X-auth-token, Origin, X-Requested-With",
     allowedHeaders: "*",
     maxAge: 86400,
