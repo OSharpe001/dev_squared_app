@@ -17,7 +17,8 @@ const corsOption = {
     credentials: true,
     exposeHeaders: ["X-auth-token"],
     preflightContinue: true,
-    allowedHeaders: "Content-Type, Accept, Authorization, X-auth-token, Origin, X-Requested-With",
+    // allowedHeaders: "Content-Type, Accept, Authorization, X-auth-token, Origin, X-Requested-With",
+    allowedHeaders: "*",
     maxAge: 86400,
 };
 // TO AVOID THE ACCESS-CONTROL-ALLOW-ORIGIN ISSUE
