@@ -14,47 +14,41 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
     const [commentToUpdate, setCommentToUpdate] = useState("");
     const [blogToUpdate, setBlogToUpdate] = useState("");
 
-    useEffect(() => {
-        if (commentToDelete) {
-            console.log("11");
-            const commentDeletion = async () => {
-                const URL = "https://devsquaredbe.onrender.com/api/blogs/comments/";
-                // const URL = "http://localhost:5011/api/blogs/comments/";
-                const config = {
-                    headers: {
-                        Authorization: `Bearer ${loggedIn.token}`
-                    },
-                };
-                try {
-                    await axios.delete(URL + commentToDelete, config);
-                } catch (err) {
-                    console.log(err);
-                };
-            };
-            commentDeletion();
-        };
+    const updateCommentFill = useEffect;
+    const [commentFormData, setCommentFormData] = useState({
+        text: "",
+        userName: loggedIn.userName,
+        blogId: currentBlog._id,
+        update: false,
+        ready: false
+    });
 
-        if (blogToDelete) {
-            console.log("12");
-            const blogDeletion = async () => {
-                const URL = "https://devsquaredbe.onrender.com/api/blogs/";
-                // const URL = "http://localhost:5011/api/blogs/";
-                const config = {
-                    headers: {
-                        Authorization: `Bearer ${loggedIn.token}`
-                    },
-                };
-                try {
-                    await axios.delete(URL + blogToDelete, config);
-                    setBlogId("");
-                } catch (err) {
-                    console.log(err);
-                };
-            };
-            blogDeletion();
-        };
+    const handleCommentTextChange = ({ target }) => {
+        setCommentFormData(prev => ({
+            ...prev,
+            text: target.value
+        }));
+    };
 
-    }, [/*loggedIn,*/ commentToDelete, blogToDelete/*, setBlogId*/]);
+    const submitCommentForm = () => {
+        setCommentFormData(prev => ({
+            ...prev,
+            ready: true
+        }));
+        setTimeout(setBlogId, 195, "");
+        setTimeout(setBlogId, 200, currentBlog._id);
+    };
+    // console.log("COMMENTMODAL'S CURRENTBLOG INFO: ", currentBlog);
+
+    updateCommentFill(() => {
+        if (commentToUpdate.text) {
+            setCommentFormData(prev => ({
+                ...prev,
+                text: commentToUpdate.text,
+                update: true
+            }));
+        };
+    }, [commentToUpdate]);
 
     const startComment = () => {
         setCommentModalHidden(false);
@@ -100,6 +94,116 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
         setTimeout(setBlogId, 200, blog);
     };
 
+    const deleteBlog = (blog) => {
+        setBlogToDelete(blog);
+        setTimeout(setBlogId, 100, "");
+    };
+
+    useEffect(() => {
+        if (commentToDelete) {
+            console.log("11");
+            const commentDeletion = async () => {
+                const URL = "https://devsquaredbe.onrender.com/api/blogs/comments/";
+                // const URL = "http://localhost:5011/api/blogs/comments/";
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${loggedIn.token}`
+                    },
+                };
+                try {
+                    await axios.delete(URL + commentToDelete, config);
+                } catch (err) {
+                    console.log(err);
+                };
+            };
+            commentDeletion();
+        };
+
+        if (blogToDelete) {
+            console.log("12");
+            const blogDeletion = async () => {
+                const URL = "https://devsquaredbe.onrender.com/api/blogs/";
+                // const URL = "http://localhost:5011/api/blogs/";
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${loggedIn.token}`
+                    },
+                };
+                try {
+                    await axios.delete(URL + blogToDelete, config);
+                } catch (err) {
+                    console.log(err);
+                };
+            };
+            blogDeletion();
+        };
+
+        if (commentFormData.update && commentFormData.ready) {
+                console.log("13");
+                const updateComment = async () => {
+                    const URL = `https://devsquaredbe.onrender.com/api/blogs/comments/${commentToUpdate.id}`;
+                    // const URL = `http://localhost:5011/api/blogs/comments/${commentToUpdate.id}`;
+                    const config = {
+                        headers: {
+                            Authorization: `Bearer ${loggedIn.token}`,
+                        },
+                    };
+                    const commentData = {
+                        text: commentFormData.text,
+                        userName: commentFormData.userName,
+                        blogId: commentFormData.blogId,
+                    };
+                    // console.log("------updateComment INFO------");
+                    // console.log("commentData: ", commentData);
+                    // console.log("commentToUpdate.id: ", commentToUpdate.id);
+                    // console.log("commentData.blogId: ", commentData.blogId);
+                    // console.log("commentData.text: ", commentData.text);
+                    // console.log("commentData.userName: ", commentData.userName);
+                    // console.log("loggedIn.token: ", loggedIn.token);
+                    // console.log("commentData.ready: ", commentFormData.ready);
+                    // console.log("commentData.update: ", commentFormData.update);
+                    try {
+                        await axios.put(URL, commentData, config);
+                    } catch (err) {
+                        console.log(err);
+                    };
+                };
+                updateComment();
+
+        } else if (!commentFormData.update && commentFormData.ready) {
+            console.log("14");
+            const createComment = async () => {
+                const URL = "https://devsquaredbe.onrender.com/api/blogs/comments/";
+                // const URL = "http://localhost:5011/api/blogs/comments";
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${loggedIn.token}`
+                    },
+                };
+                const commentData = {
+                    text: commentFormData.text,
+                    userName: commentFormData.userName,
+                    blogId: commentFormData.blogId,
+                };
+                // console.log("------createComment INFO------");
+                // console.log("commentData: ", commentData);
+                // console.log("commentData.blogId: ", commentData.blogId);
+                // console.log("commentData.text: ", commentData.text);
+                // console.log("commentData.userName: ", commentData.userName);
+                // console.log("loggedIn.token: ", loggedIn.token);
+                // console.log("commentData.ready: ", commentFormData.ready);
+                // console.log("commentData.update: ", commentFormData.update);
+                try {
+                    await axios.post(URL, commentData, config);
+                } catch (err) {
+                    console.log(err);
+                };
+            };
+            createComment();
+        };
+
+    }, [commentToDelete, blogToDelete, commentFormData.ready]);
+
     const disabled = !blogModalHidden || !commentModalHidden;
 
     return (
@@ -117,7 +221,8 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
                 <button onClick={startComment} disabled={disabled}>Comment</button>
                 {loggedIn._id === currentBlog.user ?
                     <>
-                        <button onClick={() => setBlogToDelete(currentBlog._id)} disabled={disabled}>Delete</button>
+                        {/* <button onClick={() => setBlogToDelete(currentBlog._id)} disabled={disabled}>Delete</button> */}
+                        <button onClick={() => deleteBlog(currentBlog._id)} disabled={disabled}>Delete</button>
                         <button onClick={() => updateBlog({ title: currentBlog.title, text: currentBlog.text, id: currentBlog._id })} disabled={disabled}>Edit</button>
                     </>
                     :
@@ -171,6 +276,9 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
                 loggedIn={loggedIn}
                 currentBlog={currentBlog}
                 commentToUpdate={commentToUpdate}
+                commentFormData={commentFormData}
+                submitCommentForm={submitCommentForm}
+                handleCommentTextChange={handleCommentTextChange}
                 setBlogId={setBlogId}
             />
 
