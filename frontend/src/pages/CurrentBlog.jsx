@@ -6,13 +6,12 @@ import like from "../assets/images/icons/filled_red_heart.png";
 import dislike from "../assets/images/icons/heart_shell.png";
 
 
-export default function CurrentBlog({ currentBlog, setBlogId, blogComments, loggedIn, navigate, blogModalHidden, setBlogModalHidden, allLikes, changeLike, setChangeLike }) {
+export default function CurrentBlog({ currentBlog, setBlogId, blogComments, loggedIn, blogModalHidden, setBlogModalHidden, allLikes, setChangeLike, blogToUpdate, updateBlog, handleBlogTitleChange, handleBlogTextChange, cancelBlog, submitBlogForm, blogFormData }) {
 
     const [commentModalHidden, setCommentModalHidden] = useState(true);
     const [commentToDelete, setCommentToDelete] = useState("");
     const [blogToDelete, setBlogToDelete] = useState("");
     const [commentToUpdate, setCommentToUpdate] = useState("");
-    const [blogToUpdate, setBlogToUpdate] = useState("");
 
     const updateCommentFill = useEffect;
     const [commentFormData, setCommentFormData] = useState({
@@ -57,11 +56,6 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
     const updateComment = (commentInfo) => {
         setCommentToUpdate(commentInfo);
         setCommentModalHidden(false);
-    };
-
-    const updateBlog = (blogInfo) => {
-        setBlogToUpdate(blogInfo);
-        setBlogModalHidden(false);
     };
 
     const changeLikeBlog = (action, blogId) => {
@@ -221,7 +215,6 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
                 <button onClick={startComment} disabled={disabled}>Comment</button>
                 {loggedIn._id === currentBlog.user ?
                     <>
-                        {/* <button onClick={() => setBlogToDelete(currentBlog._id)} disabled={disabled}>Delete</button> */}
                         <button onClick={() => deleteBlog(currentBlog._id)} disabled={disabled}>Delete</button>
                         <button onClick={() => updateBlog({ title: currentBlog.title, text: currentBlog.text, id: currentBlog._id })} disabled={disabled}>Edit</button>
                     </>
@@ -289,6 +282,11 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
                 setBlogModalHidden={setBlogModalHidden}
                 blogToUpdate={blogToUpdate}
                 setBlogId={setBlogId}
+                handleBlogTitleChange={handleBlogTitleChange}
+                cancelBlog={cancelBlog}
+                submitBlogForm={submitBlogForm}
+                blogFormData={blogFormData}
+                handleBlogTextChange={handleBlogTextChange}
             />
         </section>
     );

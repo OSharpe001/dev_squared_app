@@ -5,7 +5,7 @@ import BlogModal from '../components/BlogModal';
 import like from "../assets/images/icons/filled_red_heart.png";
 
 
-export default function HomePage({ setBlogId, loggedIn, blogModalHidden, setBlogModalHidden, allLikes, currentScreen }) {
+export default function HomePage({ setBlogId, loggedIn, blogModalHidden, setBlogModalHidden, allLikes, currentScreen, blogFormData, handleBlogTitleChange, handleBlogTextChange, cancelBlog, submitBlogForm }) {
 
     const [blogs, setBlogs] = useState([]);
 
@@ -75,6 +75,11 @@ export default function HomePage({ setBlogId, loggedIn, blogModalHidden, setBlog
                     loggedIn={loggedIn}
                     blogModalHidden={blogModalHidden}
                     setBlogModalHidden={setBlogModalHidden}
+                    blogFormData={blogFormData}
+                    handleBlogTitleChange={handleBlogTitleChange}
+                    handleBlogTextChange={handleBlogTextChange}
+                    cancelBlog={cancelBlog}
+                    submitBlogForm={submitBlogForm}
                 />
         </div>
     );

@@ -14,6 +14,8 @@ export default function App() {
   const [blogComments, setBlogComments] = useState([]);
   const [blogModalHidden, setBlogModalHidden] = useState(true);
   const [allLikes, setAllLikes] = useState([]);
+  const [blogToUpdate, setBlogToUpdate] = useState("");
+
   const [changeLike, setChangeLike] = useState({
     userName: loggedIn.userName,
     blogId: "",
@@ -21,9 +23,71 @@ export default function App() {
     action: ""
   });
 
+  const updateBlog = (blogInfo) => {
+    setBlogToUpdate(blogInfo);
+    setBlogModalHidden(false);
+};
+
+  const [blogFormData, setBlogFormData] = useState({
+    title: "",
+    text: "",
+    userName: loggedIn.userName,
+    update: false,
+    ready: false,
+  });
+
   const currentScreen = useLocation().pathname;
   const navigate = useNavigate();
   const backToRegistration = useEffect;
+  const updateBlogFill = useEffect;
+
+  const handleBlogTitleChange = ({ target }) => {
+    setBlogFormData(prev => ({
+        ...prev,
+        title: target.value
+    }));
+};
+
+const handleBlogTextChange = ({ target }) => {
+    setBlogFormData(prev => ({
+        ...prev,
+        text: target.value
+    }))
+};
+
+const cancelBlog = () => {
+    setBlogFormData(prev => ({
+        ...prev,
+        title: "",
+        text: "",
+        update: false,
+        ready: false,
+    }));
+    setBlogModalHidden(true);
+};
+
+const submitBlogForm = () => {
+    setBlogFormData(prev => ({
+        ...prev,
+        ready: true,
+    }));
+    if (currentBlog._id) {
+        setTimeout(setBlogId, 195, "");
+        setTimeout(setBlogId, 200, currentBlog._id);
+    };
+};
+// console.log("BLOGMODAL'S CURRENTBLOG INFO: ", currentBlog);
+
+updateBlogFill(() => {
+    if (blogToUpdate) {
+        setBlogFormData(prev => ({
+            ...prev,
+            title: blogToUpdate.title,
+            text: blogToUpdate.text,
+            update: true,
+        }));
+    };
+}, [blogToUpdate]);
 
   backToRegistration(() => {
     if (!loggedIn) {
@@ -46,7 +110,6 @@ export default function App() {
           const response = await axios.get(URL);
           setCurrentBlog(response.data);
         } catch (err) {
-          alert("an Error occurred. Please try, again.")
           console.log(err);
         };
         navigate("/blog");
@@ -199,7 +262,71 @@ export default function App() {
       getAllLikes();
     };
 
-  }, [blogId, loggedIn.name, changeLike.action/*, navigate*/]);
+    if (blogFormData.ready && blogFormData.update) {
+      console.log("15");
+      const updateBlog = async () => {
+        const URL = `https://devsquaredbe.onrender.com/api/blogs/${currentBlog._id}`;
+        // const URL = `http://localhost:5011/api/blogs/${currentBlog._id}`;
+        const config = {
+          headers: {
+              Authorization: `Bearer ${loggedIn.token}`,
+          },
+        };
+        const blogData = {
+          title: blogFormData.title,
+          text: blogFormData.text,
+          userName: blogFormData.userName
+        };
+        // console.log("------updateBlog INFO------");
+        // console.log("blogData: ", blogData);
+        // console.log("currentBlog._id: ", currentBlog._id);
+        // console.log("blogData.title: ", blogData.title);
+        // console.log("blogData.text: ", blogData.text);
+        // console.log("blogData.userName: ", blogData.userName);
+        // console.log("loggedIn.token: ", loggedIn.token);
+        // console.log("blogFormData.ready: ", blogFormData.ready);
+        // console.log("blogFormData.update: ", blogFormData.update);
+        try {
+          await axios.put(URL, blogData, config);
+        } catch (err) {
+          console.log(err);
+        };
+      };
+      updateBlog();
+
+    } else if (blogFormData.ready && !blogFormData.update) {
+      console.log("16");
+      const createBlog = async () => {
+        const URL = "https://devsquaredbe.onrender.com/api/blogs/";
+        // const URL = "http://localhost:5011/api/blogs/";
+        const config = {
+          headers: {
+              Authorization: `Bearer ${loggedIn.token}`,
+          },
+        };
+        const blogData = {
+          title: blogFormData.title,
+          text: blogFormData.text,
+          userName: blogFormData.userName
+        };
+        // console.log("------createBlog INFO------");
+        // console.log("blogData: ", blogData);
+        // console.log("blogData.title: ", blogData.title);
+        // console.log("blogData.text: ", blogData.text);
+        // console.log("blogData.userName: ", blogData.userName);
+        // console.log("loggedIn.token: ", loggedIn.token);
+        // console.log("blogFormData.ready: ", blogFormData.ready);
+        // console.log("blogFormData.update: ", blogFormData.update);
+        try {
+          await axios.post(URL, blogData, config);
+        } catch (err) {
+          console.log(err);
+        };
+      };
+      createBlog();
+    };
+
+  }, [blogId, loggedIn.name, changeLike.action, blogFormData.ready]);
 
 
 
@@ -228,6 +355,13 @@ export default function App() {
           allLikes={allLikes}
           setChangeLike={setChangeLike}
           setBlogId={setBlogId}
+          blogFormData={blogFormData}
+          blogToUpdate={blogToUpdate}
+          updateBlog={updateBlog}
+          handleBlogTitleChange={handleBlogTitleChange}
+          handleBlogTextChange={handleBlogTextChange}
+          cancelBlog={cancelBlog}
+          submitBlogForm={submitBlogForm}
 
           navigate={navigate}
           changeLike={changeLike}
@@ -237,8 +371,13 @@ export default function App() {
           setBlogId={setBlogId}
           blogModalHidden={blogModalHidden}
           setBlogModalHidden={setBlogModalHidden}
+          blogFormData={blogFormData}
           allLikes={allLikes}
           currentScreen={currentScreen}
+          handleBlogTitleChange={handleBlogTitleChange}
+          handleBlogTextChange={handleBlogTextChange}
+          cancelBlog={cancelBlog}
+          submitBlogForm={submitBlogForm}
         />} />
       </Routes>
       <Footer />
