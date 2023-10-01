@@ -96,8 +96,8 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
 
     const deleteComment = (comment, blog) => {
         setCommentToDelete(comment);
-        setTimeout(setBlogId, 495, "");
-        setTimeout(setBlogId, 500, blog);
+        setTimeout(setBlogId, 195, "");
+        setTimeout(setBlogId, 200, blog);
     };
 
     const disabled = !blogModalHidden || !commentModalHidden;
@@ -171,6 +171,7 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
                 loggedIn={loggedIn}
                 currentBlog={currentBlog}
                 commentToUpdate={commentToUpdate}
+                setBlogId={setBlogId}
             />
 
             <BlogModal
@@ -179,6 +180,7 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
                 currentBlog={currentBlog}
                 setBlogModalHidden={setBlogModalHidden}
                 blogToUpdate={blogToUpdate}
+                setBlogId={setBlogId}
             />
         </section>
     );

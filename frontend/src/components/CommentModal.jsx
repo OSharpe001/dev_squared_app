@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 
-export default function CommentModal({ commentModalHidden, setCommentModalHidden, currentBlog, loggedIn, commentToUpdate }) {
+export default function CommentModal({ commentModalHidden, setCommentModalHidden, currentBlog, loggedIn, commentToUpdate, setBlogId }) {
 
     const autoFocus = useEffect;
     const updateCommentFill = useEffect;
@@ -26,12 +26,15 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
         }));
     };
 
-    const submitForm = () => {
+    const submitCommentForm = () => {
         setCommentFormData(prev => ({
             ...prev,
             ready: true
         }));
+        setTimeout(setBlogId, 195, "");
+        setTimeout(setBlogId, 200, currentBlog._id);
     };
+    console.log("COMMENTMODAL'S CURRENTBLOG INFO: ", currentBlog);
 
     updateCommentFill(() => {
         if (commentToUpdate.text) {
@@ -123,7 +126,7 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
     return (
         <form className={commentModalHidden ? "hidden" : "comment-modal modal"}>
             <textarea ref={commentInput} className="modal-comment" autoFocus={!commentModalHidden} value={commentFormData.text} onChange={handleTextChange} placeholder="Leave a comment..." />
-            <button className="submit-text" onClick={submitForm}>Submit</button>
+            <button className="submit-text" onClick={submitCommentForm}>Submit</button>
             <button className="cancel" onClick={cancelComment}>Cancel</button>
         </form>
     );

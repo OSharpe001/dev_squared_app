@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 
-export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedIn, currentBlog, blogToUpdate }) {
+export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedIn, currentBlog, blogToUpdate, setBlogId }) {
 
     const autoFocus = useEffect;
     const updateBlogFill = useEffect;
@@ -33,20 +33,25 @@ export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedI
     const cancelBlog = () => {
         setBlogFormData(prev => ({
             ...prev,
-            blogTitle: "",
-            blogText: "",
+            title: "",
+            text: "",
             update: false,
             ready: false,
         }));
         setBlogModalHidden(true);
     };
 
-    const submitForm = () => {
+    const submitBlogForm = () => {
         setBlogFormData(prev => ({
             ...prev,
             ready: true,
         }));
+        if (currentBlog._id) {
+            setTimeout(setBlogId, 195, "");
+            setTimeout(setBlogId, 200, currentBlog._id);
+        };
     };
+    console.log("BLOGMODAL'S CURRENTBLOG INFO: ", currentBlog);
 
     updateBlogFill(() => {
         if (blogToUpdate) {
@@ -139,7 +144,7 @@ export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedI
         <form className={blogModalHidden ? "hidden" : "blog-modal modal"}>
             <input ref={blogTitleInput} type="text" className="modal-title" onChange={handleTitleChange} value={blogFormData.title} placeholder="Title" />
             <textarea className="modal-blog" onChange={handleTextChange} value={blogFormData.text} placeholder="What are your thoughts" />
-            <button className="submit-text" onClick={submitForm}>submit</button>
+            <button className="submit-text" onClick={submitBlogForm}>submit</button>
             <button className="cancel" onClick={cancelBlog}>Cancel</button>
         </form>
     );
