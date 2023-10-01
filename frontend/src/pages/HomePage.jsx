@@ -5,29 +5,29 @@ import BlogModal from '../components/BlogModal';
 import like from "../assets/images/icons/filled_red_heart.png";
 
 
-export default function HomePage({ setBlogId, loggedIn, blogModalHidden, setBlogModalHidden, allLikes }) {
+export default function HomePage({ setBlogId, loggedIn, blogModalHidden, setBlogModalHidden, allLikes, currentScreen }) {
 
     const [blogs, setBlogs] = useState([]);
 
     useEffect(() => {
+        if (currentScreen === "/") {
+            const getAllBlogs = async () => {
+                console.log("10");
+                try {
+                    const URL = "https://devsquaredbe.onrender.com/api/blogs";
+                    // const URL = "http://localhost:5011/api/blogs";
+                    const options = { method: "GET" };
 
-        const getAllBlogs = async () => {
-            console.log("10");
-            try {
-                const URL = "https://devsquaredbe.onrender.com/api/blogs";
-                // const URL = "http://localhost:5011/api/blogs";
-                const options = { method: "GET" };
-
-                const response = await fetch(URL, options);
-                const data = await response.json();
-                setBlogs(data.reverse());
-            } catch (err) {
-                console.log(err);
+                    const response = await fetch(URL, options);
+                    const data = await response.json();
+                    setBlogs(data.reverse());
+                } catch (err) {
+                    console.log(err);
+                };
             };
+            getAllBlogs();
         };
-        getAllBlogs();
-
-    }, []);
+    }, [currentScreen]);
 
     const createBlog = () => {
         setBlogModalHidden(false);

@@ -67,7 +67,7 @@ export default function App() {
       };
       getCurrentBlog();
       getRelevantComments();
-    } else if (loggedIn && !blogId) {
+    } else if (loggedIn.name && !blogId) {
       console.log("4");
       setCurrentBlog("");
       navigate("/");
@@ -182,7 +182,7 @@ export default function App() {
     };
 
     // GET ALL LIKES
-    if (loggedIn) {
+    if (loggedIn.name) {
       const getAllLikes = async () => {
         console.log("9");
         const URL = "https://devsquaredbe.onrender.com/api/likes/";
@@ -199,7 +199,7 @@ export default function App() {
       getAllLikes();
     };
 
-  }, [blogId, loggedIn, changeLike/*, navigate*/]);
+  }, [blogId, loggedIn.name, changeLike.action/*, navigate*/]);
 
 
 
@@ -238,6 +238,7 @@ export default function App() {
           blogModalHidden={blogModalHidden}
           setBlogModalHidden={setBlogModalHidden}
           allLikes={allLikes}
+          currentScreen={currentScreen}
         />} />
       </Routes>
       <Footer />
