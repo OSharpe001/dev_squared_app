@@ -107,9 +107,7 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
                 // console.log("commentData.ready: ", commentFormData.ready);
                 // console.log("commentData.update: ", commentFormData.update);
                 try {
-                    const options = { method: "POST" };
-                    await fetch(URL, options, commentData, config);
-                    // await axios.post(URL, commentData, config);
+                    await axios.post(URL, commentData, config);
                 } catch (err) {
                     console.log(err);
                 };
