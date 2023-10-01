@@ -11,18 +11,19 @@ connectDB();
 app.options("*", cors({ origin: '*', optionsSuccessStatus: 200 }))
 // MIDDLEWARE-- //
 // SETTING UP CORS OPTIONS TO AVOID ACCESS-CONTROL-ALLOW-ORIGIN ISSUES **THIS MUST BE PLACE ABOVE ALL OTHER MIDDLEWARE FUNCTIONS!**
-const corsOption = {
-    origin: "*",
-    methods: "POST, PUT, PATCH, GET, DELETE, OPTIONS",
-    credentials: true,
-    exposeHeaders: ["X-auth-token"],
-    preflightContinue: false,
-    // allowedHeaders: "Content-Type, Accept, Authorization, X-auth-token, Origin, X-Requested-With",
-    allowedHeaders: "*",
-    maxAge: 86400,
-};
-// TO AVOID THE ACCESS-CONTROL-ALLOW-ORIGIN ISSUE
-app.use(cors(corsOption));
+// const corsOption = {
+//     origin: "*",
+//     methods: "POST, PUT, PATCH, GET, DELETE, OPTIONS",
+//     credentials: true,
+//     exposeHeaders: ["X-auth-token"],
+//     preflightContinue: false,
+//     // allowedHeaders: "Content-Type, Accept, Authorization, X-auth-token, Origin, X-Requested-With",
+//     allowedHeaders: "*",
+//     maxAge: 86400,
+// };
+// // TO AVOID THE ACCESS-CONTROL-ALLOW-ORIGIN ISSUE
+// app.use(cors(corsOption));
+app.use(cors());
 
 // TO ALLOW THE BODY OF A POST REQUEST
 app.use(express.json());
