@@ -6,7 +6,7 @@ import like from "../assets/images/icons/filled_red_heart.png";
 import dislike from "../assets/images/icons/heart_shell.png";
 
 
-export default function CurrentBlog({ currentBlog, setBlogId, blogComments, loggedIn, blogModalHidden, setBlogModalHidden, allLikes, setChangeLike, blogToUpdate, updateBlog, handleBlogTitleChange, handleBlogTextChange, cancelBlog, submitBlogForm, blogFormData }) {
+export default function CurrentBlog({ currentBlog, setBlogId, blogComments, loggedIn, blogModalHidden, setBlogModalHidden, allLikes, setChangeLike, blogToUpdate, updateBlog, handleBlogTitleChange, handleBlogTextChange, cancelBlog, submitBlogForm, blogFormData, navigate }) {
 
     const [commentModalHidden, setCommentModalHidden] = useState(true);
     const [commentToDelete, setCommentToDelete] = useState("");
@@ -94,6 +94,10 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
     };
 
     useEffect(() => {
+        if (!currentBlog) {
+            console.log("10.99");
+            navigate("/");
+          };
         if (commentToDelete) {
             console.log("11");
             const commentDeletion = async () => {
