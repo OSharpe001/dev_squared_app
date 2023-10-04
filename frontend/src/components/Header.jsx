@@ -61,7 +61,7 @@ export default function Header({ loggedIn, setLoggedIn, setBlogId }) {
         <div className="nav-items">
             {
                 currentScreen === "/blog" &&
-                    <Link aria-label="On Click" to="" onClick={backHome} className="button">Back to Blogs</Link>
+                    <Link aria-label="On Click" to="" onClick={backHome} className="button">Blogs</Link>
             }
             {loggedIn ?
                 <Link onClick={logOut} className="button">Logout</Link>
