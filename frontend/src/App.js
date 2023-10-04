@@ -328,7 +328,7 @@ updateBlogFill(() => {
 
   }, [blogId, loggedIn.name, changeLike.action, blogFormData.ready]);
 
-
+console.log("CURRENT SCREEN: ", currentScreen)
 
   return (
     <>
