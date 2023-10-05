@@ -203,6 +203,7 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
     }, [commentToDelete, blogToDelete, commentFormData.ready]);
 
     const disabled = !blogModalHidden || !commentModalHidden;
+    console.log("CURRENTBLOG VALUE: ", currentBlog);
 
     return (
         <section className="current-blog-page">
