@@ -70,7 +70,7 @@ export default function Register({ setLoggedIn, currentScreen }) {
       };
     } else if (target.name === "userName") {
       setUserName(target.value);
-      if (target.value.length >= 3 && !target.value.includes("@")) {
+      if (target.value.length >= 3 && target.value.length <= 18 && !target.value.includes("@")) {
         setUserNameErrorMessage("");
       };
     } else if (target.name === "email") {
@@ -127,8 +127,8 @@ export default function Register({ setLoggedIn, currentScreen }) {
       setNameErrorMessage("");
     };
 
-    if (target.name === "userName" && target.value.length < 3) {
-      setUserNameErrorMessage("UserName must have at least 2 characters");
+    if (target.name === "userName" && (target.value.length < 3 || target.value.length > 18)) {
+      setUserNameErrorMessage("UserName must be between 3 to 18 characters");
     } else if (userName.includes("@")) {
       setUserNameErrorMessage('UserName can not have an "@" character');
     } else if (userName.length >= 2 && !userName.includes("@")) {
