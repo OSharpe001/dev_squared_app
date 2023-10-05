@@ -62,10 +62,12 @@ export default function HomePage({ setBlogId, loggedIn, blogModalHidden, setBlog
                     <div key={blog._id} >
                         <li className='homepage-blog'>
                             <button className="blog-item" disabled={disabled} onClick={() => goToBlog(blog._id)}>{blog.title}</button>
-
-                            <p className="author underlined">By: {blog.userName}</p>
-                            <p className="created">{new Date(blog.updatedAt).toLocaleString().split(",")[0]}</p>
-                            <p className="likes"><img src={like} alt="likes-heart" className="heart"/> {allLikes.filter(like => (like.blogId === blog._id)).length}</p>
+                            <div className="blog-item-info">
+                                <p className="author underlined">By: {blog.userName}</p>
+                                <p className="created">{new Date(blog.updatedAt).toLocaleString().split(",")[0]}</p>
+                                <p className="likes"><img src={like} alt="likes-heart" className="heart"/> {allLikes.filter(like => (like.blogId === blog._id)).length}</p>
+                            </div>
+                            
                         </li>
                     </div>
                 ))}

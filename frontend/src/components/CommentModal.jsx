@@ -21,8 +21,10 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
     return (
         <form className={commentModalHidden ? "hidden" : "comment-modal modal"}>
             <textarea ref={commentInput} className="modal-comment" autoFocus={!commentModalHidden} value={commentFormData.text} onChange={handleCommentTextChange} placeholder="Leave a comment..." />
-            <button className="submit-text" onClick={submitCommentForm}>Submit</button>
-            <button className="cancel" onClick={cancelComment}>Cancel</button>
+            <div className="modal-buttons">
+                <button className="submit-text" onClick={submitCommentForm}>Submit</button>
+                <button className="cancel" onClick={cancelComment}>Cancel</button>
+            </div>
         </form>
     );
 };

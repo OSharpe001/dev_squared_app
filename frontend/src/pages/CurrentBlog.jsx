@@ -249,7 +249,7 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
                                 <p className="comment">{comment.text}</p>
                             </div>
                             {comment.userName === loggedIn.userName ?
-                                <div className='ud-buttons'>
+                                <div className='update-delete-like-buttons'>
                                     <button onClick={() => updateComment({ text: comment.text, id: comment._id })} disabled={disabled}>Edit</button>
                                     <button onClick={() => deleteComment(comment._id, currentBlog._id)} disabled={disabled}>Delete</button>
                                 </div>
