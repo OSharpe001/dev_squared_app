@@ -12,7 +12,7 @@ connectDB();
 // MIDDLEWARE-- //
 // SETTING UP CORS OPTIONS TO AVOID ACCESS-CONTROL-ALLOW-ORIGIN ISSUES **THIS MUST BE PLACE ABOVE ALL OTHER MIDDLEWARE FUNCTIONS!**
 const corsOption = {
-    origin: "*",
+    origin: ["*", "https://devsquared.onrender.com"],
     methods: "POST, PUT, PATCH, GET, DELETE, OPTIONS",
     credentials: true,
     exposeHeaders: ["X-auth-token"],
