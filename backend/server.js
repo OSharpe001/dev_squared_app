@@ -8,17 +8,16 @@ const connectDB = require("./config/database");
 const app = express();
 
 connectDB();
-// app.options("*", cors({ origin: '*', optionsSuccessStatus: 200 }))
+
 // MIDDLEWARE-- //
 // SETTING UP CORS OPTIONS TO AVOID ACCESS-CONTROL-ALLOW-ORIGIN ISSUES **THIS MUST BE PLACE ABOVE ALL OTHER MIDDLEWARE FUNCTIONS!**
 const corsOption = {
     origin: ["*", "https://devsquared.onrender.com"],
-    methods: "POST, PUT, PATCH, GET, DELETE, OPTIONS",
+    methods: ["POST", "PUT", "PATCH", "GET", "DELETE", "OPTIONS"],
     credentials: true,
     exposeHeaders: ["X-auth-token"],
     preflightContinue: false,
-    // allowedHeaders: "Content-Type, Accept, Authorization, X-auth-token, Origin, X-Requested-With",
-    allowedHeaders: "*",
+    allowedHeaders: ["Content-Type", "Accept", "Authorization", "X-auth-token", "Origin", "X-Requested-With"],
     maxAge: 86400,
 };
 // TO AVOID THE ACCESS-CONTROL-ALLOW-ORIGIN ISSUE
