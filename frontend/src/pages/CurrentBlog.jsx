@@ -101,7 +101,8 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
         if (commentToDelete) {
             console.log("11");
             const commentDeletion = async () => {
-                const URL = "https://devsquaredbe.onrender.com/api/blogs/comments/";
+                const URL = "/api/blogs/comments/";
+                // const URL = "https://devsquaredbe.onrender.com/api/blogs/comments/";
                 // const URL = "http://localhost:5011/api/blogs/comments/";
                 const config = {
                     headers: {
@@ -120,7 +121,8 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
         if (blogToDelete) {
             console.log("12");
             const blogDeletion = async () => {
-                const URL = "https://devsquaredbe.onrender.com/api/blogs/";
+                const URL = "/api/blogs/";
+                // const URL = "https://devsquaredbe.onrender.com/api/blogs/";
                 // const URL = "http://localhost:5011/api/blogs/";
                 const config = {
                     headers: {
@@ -139,7 +141,8 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
         if (commentFormData.update && commentFormData.ready) {
                 console.log("13");
                 const updateComment = async () => {
-                    const URL = `https://devsquaredbe.onrender.com/api/blogs/comments/${commentToUpdate.id}`;
+                    const URL = `/api/blogs/comments/${commentToUpdate.id}`;
+                    // const URL = `https://devsquaredbe.onrender.com/api/blogs/comments/${commentToUpdate.id}`;
                     // const URL = `http://localhost:5011/api/blogs/comments/${commentToUpdate.id}`;
                     const config = {
                         headers: {
@@ -171,7 +174,8 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
         } else if (!commentFormData.update && commentFormData.ready) {
             console.log("14");
             const createComment = async () => {
-                const URL = "https://devsquaredbe.onrender.com/api/blogs/comments/";
+                const URL = "/api/blogs/comments/";
+                // const URL = "https://devsquaredbe.onrender.com/api/blogs/comments/";
                 // const URL = "http://localhost:5011/api/blogs/comments";
                 const config = {
                     headers: {

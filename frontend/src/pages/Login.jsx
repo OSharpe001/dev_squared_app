@@ -71,7 +71,8 @@ export default function Login({ setLoggedIn, currentScreen }) {
     if (formData.password) {
       console.log("17");
         const getMe = async () => {
-        const URL = `https://devsquaredbe.onrender.com/api/users/login`;
+        const URL = `/api/users/login`;
+        // const URL = `https://devsquaredbe.onrender.com/api/users/login`;
         // const URL = `http://localhost:5011/api/users/login`;
         try {
           const response = await axios.post(URL, formData);

@@ -14,7 +14,8 @@ export default function HomePage({ setBlogId, loggedIn, blogModalHidden, setBlog
             const getAllBlogs = async () => {
                 console.log("10");
                 try {
-                    const URL = "https://devsquaredbe.onrender.com/api/blogs";
+                    const URL = "/api/blogs";
+                    // const URL = "https://devsquaredbe.onrender.com/api/blogs";
                     // const URL = "http://localhost:5011/api/blogs";
                     const options = { method: "GET" };
                     const response = await fetch(URL, options);

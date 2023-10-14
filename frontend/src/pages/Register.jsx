@@ -101,7 +101,8 @@ export default function Register({ setLoggedIn, currentScreen }) {
     if (formData.name && formData.userName && formData.email && formData.password) {
       console.log("18");
       const getMe = async () => {
-        const URL = `https://devsquaredbe.onrender.com/api/users`;
+        const URL = `/api/users`;
+        // const URL = `https://devsquaredbe.onrender.com/api/users`;
         // const URL = `http://localhost:5011/api/users`;
         if (formData.password) {
           const response = await axios.post(URL, formData);

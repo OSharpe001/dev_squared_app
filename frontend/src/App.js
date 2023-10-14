@@ -104,7 +104,8 @@ updateBlogFill(() => {
     if (loggedIn && blogId) {
       const getCurrentBlog = async () => {
         console.log("2");
-        const URL = `https://devsquaredbe.onrender.com/api/blogs/${blogId}`;
+        const URL = `/api/blogs/${blogId}`;
+        // const URL = `https://devsquaredbe.onrender.com/api/blogs/${blogId}`;
         // const URL = `http://localhost:5011/api/blogs/${blogId}`;
         try {
           const response = await axios.get(URL);
@@ -117,7 +118,8 @@ updateBlogFill(() => {
 
       const getRelevantComments = async () => {
         console.log("3");
-        const URL = "https://devsquaredbe.onrender.com/api/blogs/comments/";
+        const URL = "/api/blogs/comments/";
+        // const URL = "https://devsquaredbe.onrender.com/api/blogs/comments/";
         // const URL = "http://localhost:5011/api/blogs/comments/";
         const options = { method: "GET" };
         try {
@@ -141,7 +143,8 @@ updateBlogFill(() => {
       console.log("5");
       const blogLikeDeletion = async () => {
         const blogLikeId = changeLike.blogId;
-        const URL = `https://devsquaredbe.onrender.com/api/likes/${blogLikeId}`;
+        const URL = `/api/likes/${blogLikeId}`;
+        // const URL = `https://devsquaredbe.onrender.com/api/likes/${blogLikeId}`;
         // const URL = `http://localhost:5011/api/likes/${blogLikeId}`;
         const config = {
           headers: {
@@ -165,7 +168,8 @@ updateBlogFill(() => {
     } else if (changeLike.action === "add" && changeLike.blogId) {
       console.log("6");
       const createBlogLike = async () => {
-        const URL = "https://devsquaredbe.onrender.com/api/likes";
+        const URL = "/api/likes";
+        // const URL = "https://devsquaredbe.onrender.com/api/likes";
         // const URL = "http://localhost:5011/api/likes";
         const options = {
           userName: changeLike.userName,
@@ -194,7 +198,8 @@ updateBlogFill(() => {
       console.log("7");
       const commentLikeDeletion = async () => {
         const commentLikeId = changeLike.commentId;
-        const URL = `https://devsquaredbe.onrender.com/api/likes/${commentLikeId}`;
+        const URL = `/api/likes/${commentLikeId}`;
+        // const URL = `https://devsquaredbe.onrender.com/api/likes/${commentLikeId}`;
         // const URL = `http://localhost:5011/api/likes/${commentLikeId}`;
         const config = {
           headers: {
@@ -218,7 +223,8 @@ updateBlogFill(() => {
     } else if (changeLike.action === "add" && changeLike.commentId) {
       console.log("8");
       const createCommentLike = async () => {
-        const URL = "https://devsquaredbe.onrender.com/api/likes";
+        const URL = "/api/likes";
+        // const URL = "https://devsquaredbe.onrender.com/api/likes";
         // const URL = "http://localhost:5011/api/likes";
         const options = {
           userName: changeLike.userName,
@@ -248,7 +254,8 @@ updateBlogFill(() => {
     if (loggedIn.name) {
       const getAllLikes = async () => {
         console.log("9");
-        const URL = "https://devsquaredbe.onrender.com/api/likes/";
+        const URL = "/api/likes/";
+        // const URL = "https://devsquaredbe.onrender.com/api/likes/";
         // const URL = "http://localhost:5011/api/likes/";
         const options = { method: "GET" };
         try {
@@ -265,7 +272,8 @@ updateBlogFill(() => {
     if (blogFormData.ready && blogFormData.update) {
       console.log("15");
       const updateBlog = async () => {
-        const URL = `https://devsquaredbe.onrender.com/api/blogs/${currentBlog._id}`;
+        const URL = `/api/blogs/${currentBlog._id}`;
+        // const URL = `https://devsquaredbe.onrender.com/api/blogs/${currentBlog._id}`;
         // const URL = `http://localhost:5011/api/blogs/${currentBlog._id}`;
         const config = {
           headers: {
@@ -297,7 +305,8 @@ updateBlogFill(() => {
     } else if (blogFormData.ready && !blogFormData.update) {
       console.log("16");
       const createBlog = async () => {
-        const URL = "https://devsquaredbe.onrender.com/api/blogs/";
+        const URL = "/api/blogs/";
+        // const URL = "https://devsquaredbe.onrender.com/api/blogs/";
         // const URL = "http://localhost:5011/api/blogs/";
         const config = {
           headers: {
