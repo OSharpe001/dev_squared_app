@@ -12,13 +12,13 @@ connectDB();
 // MIDDLEWARE-- //
 // SETTING UP CORS OPTIONS TO AVOID ACCESS-CONTROL-ALLOW-ORIGIN ISSUES **THIS MUST BE PLACE ABOVE ALL OTHER MIDDLEWARE FUNCTIONS!**
 const corsOption = {
-    origin: ["*", "https://devsquared.onrender.com"],
-    methods: ["POST", "PUT", "PATCH", "GET", "DELETE", "OPTIONS"],
+    origin: "*" /*"https://devsquared.onrender.com"*/,
+    methods: ["PUT", "POST", "PATCH", "GET", "DELETE", "OPTIONS"],
     credentials: true,
     exposeHeaders: ["X-auth-token"],
-    preflightContinue: false,
+    preflightContinue: true,
     allowedHeaders: ["Content-Type", "Accept", "Authorization", "X-auth-token", "Origin", "X-Requested-With"],
-    maxAge: 86400,
+    // maxAge: 86400,
 };
 // TO AVOID THE ACCESS-CONTROL-ALLOW-ORIGIN ISSUE
 app.use(cors(corsOption));
