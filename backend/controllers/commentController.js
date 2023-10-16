@@ -1,4 +1,5 @@
 const Comment = require("../models/commentModel");
+const Like = require("../models/likesModel");
 const asyncHandler = require("express-async-handler");
 
 // GET ALL BLOG COMMENTS (GET REQUEST - "/api/blog_id/comments")
@@ -17,7 +18,7 @@ const getUserComments = asyncHandler(async (req, res) => {
 const setComments = asyncHandler(async (req, res) => {
     if (!req.body.text) {
         res.status(400);
-        throw new Error("Please add your comment...");
+        throw new Error("Denied. No comment.");
     };
 
     const comment = await Comment.create({
@@ -38,24 +39,23 @@ const updateComments = asyncHandler(async (req, res) => {
     // CHECK IF THE COMMENT EXISTS TO BE UPDATED
     if (!comment) {
         res.status(400);
-        throw new Error("Comment does not exist...");
+        throw new Error("Comment not found.");
     };
 
     // CHECK IF USER EXISTS
     if (!req.user) {
         res.status(401);
-        throw new Error("Creator not found...");
+        throw new Error("Creator not found.");
     };
 
     // MAKE SURE THE CURRENT USER WROTE THE COMMENT
     if (comment.user.toString() !== req.user.id) {
         res.status(401);
-        throw new Error("Not authorized...");
+        throw new Error("Not authorized.");
     };
 
     // FINDING THE COMMENT (IF IT EXISTS) AND UPDATING IT
     const updatedComment = await Comment.findByIdAndUpdate(req.params.id, req.body, { new: true });
-
     res.status(200).json(updatedComment);
 });
 
@@ -64,27 +64,32 @@ const deleteComments = asyncHandler(async (req, res) => {
 
     // FIND THE COMMENT BY ID
     const comment = await Comment.findById(req.params.id);
+    const associatedLikes = await Like.find({commentId: req.params.id});
 
     // CHECK IF THE COMMENT DOESN'T EXIST
     if (!comment) {
         res.status(400);
-        throw new Error("Comment not found...");
+        throw new Error("Comment not found.");
     };
 
     // CHECK FOR THE USER
     if (!req.user.id) {
         res.status(401);
-        throw new Error("Creator not found...");
+        throw new Error("Creator not found.");
     };
 
     // MAKE SURE THE CURRENT USER MATCHES THE COMMENT'S CREATOR
     if (comment.user.toString() !== req.user.id) {
         res.status(401);
-        throw new Error("Not authorized...");
+        throw new Error("Not authorized.");
     };
 
-    await Comment.findByIdAndRemove(req.params.id);
+    // DELETE ALL LIKES ASSOCIATED WITH THIS COMMENT
+    associatedLikes.forEach(async (like) => {
+        await Like.findOneAndRemove({ commentId: like.commentId });
+    });
 
+    await Comment.findByIdAndRemove(req.params.id);
     res.status(200).json({ id: req.params.id });
 });
 
