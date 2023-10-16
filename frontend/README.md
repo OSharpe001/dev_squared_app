@@ -20,8 +20,6 @@
 ## Future Enhancements
 - I have Big Dreams for this app but knew that there was no way to complete it all in a week. Here are a few of them...
 
-1. **Make app responsive for mobile.**
-
 2. **Adding a "Groups" feature to make finding friends and colaborators easy.**
 
 3. **Adding a "Colaboration Requests" section to make finding colaborators easier.**

@@ -33,7 +33,7 @@ export default function App() {
     text: "",
     userName: loggedIn.userName,
     update: false,
-    ready: false,
+    ready: false
   });
 
   const currentScreen = useLocation().pathname;
@@ -61,7 +61,7 @@ const cancelBlog = () => {
         title: "",
         text: "",
         update: false,
-        ready: false,
+        ready: false
     }));
     setBlogModalHidden(true);
 };
@@ -69,14 +69,13 @@ const cancelBlog = () => {
 const submitBlogForm = () => {
     setBlogFormData(prev => ({
         ...prev,
-        ready: true,
+        ready: true
     }));
     if (currentBlog._id) {
         setTimeout(setBlogId, 195, "");
         setTimeout(setBlogId, 200, currentBlog._id);
     };
 };
-// console.log("BLOGMODAL'S CURRENTBLOG INFO: ", currentBlog);
 
 updateBlogFill(() => {
     if (blogToUpdate) {
@@ -84,14 +83,13 @@ updateBlogFill(() => {
             ...prev,
             title: blogToUpdate.title,
             text: blogToUpdate.text,
-            update: true,
+            update: true
         }));
     };
 }, [blogToUpdate]);
 
   backToRegistration(() => {
     if (!loggedIn) {
-      console.log("1");
       localStorage.removeItem("Dev2User");
       setBlogId("");
       setCurrentBlog("");
@@ -103,10 +101,7 @@ updateBlogFill(() => {
   useEffect(() => {
     if (loggedIn && blogId) {
       const getCurrentBlog = async () => {
-        console.log("2");
         const URL = `/api/blogs/${blogId}`;
-        // const URL = `https://devsquaredbe.onrender.com/api/blogs/${blogId}`;
-        // const URL = `http://localhost:5011/api/blogs/${blogId}`;
         try {
           const response = await axios.get(URL);
           setCurrentBlog(response.data);
@@ -117,10 +112,7 @@ updateBlogFill(() => {
       };
 
       const getRelevantComments = async () => {
-        console.log("3");
         const URL = "/api/blogs/comments/";
-        // const URL = "https://devsquaredbe.onrender.com/api/blogs/comments/";
-        // const URL = "http://localhost:5011/api/blogs/comments/";
         const options = { method: "GET" };
         try {
           const response = await fetch(URL + blogId, options);
@@ -133,23 +125,19 @@ updateBlogFill(() => {
       getCurrentBlog();
       getRelevantComments();
     } else if (loggedIn.name && !blogId) {
-      console.log("4");
       setCurrentBlog("");
       navigate("/");
     };
 
     // GIVING AND TAKING-BACK "LIKES" (BLOGS AND COMMENTS) FUNCTIONS
     if (changeLike.action === "delete" && changeLike.blogId) {
-      console.log("5");
       const blogLikeDeletion = async () => {
         const blogLikeId = changeLike.blogId;
         const URL = `/api/likes/${blogLikeId}`;
-        // const URL = `https://devsquaredbe.onrender.com/api/likes/${blogLikeId}`;
-        // const URL = `http://localhost:5011/api/likes/${blogLikeId}`;
         const config = {
           headers: {
             Authorization: `Bearer ${loggedIn.token}`
-          },
+          }
         };
         try {
           await axios.delete(URL, config);
@@ -166,11 +154,8 @@ updateBlogFill(() => {
       blogLikeDeletion();
 
     } else if (changeLike.action === "add" && changeLike.blogId) {
-      console.log("6");
       const createBlogLike = async () => {
         const URL = "/api/likes";
-        // const URL = "https://devsquaredbe.onrender.com/api/likes";
-        // const URL = "http://localhost:5011/api/likes";
         const options = {
           userName: changeLike.userName,
           blogId: changeLike.blogId
@@ -178,7 +163,7 @@ updateBlogFill(() => {
         const config = {
           headers: {
             Authorization: `Bearer ${loggedIn.token}`
-          },
+          }
         };
         try {
           await axios.post(URL, options, config);
@@ -195,12 +180,9 @@ updateBlogFill(() => {
       createBlogLike();
 
     } else if (changeLike.action === "delete" && changeLike.commentId) {
-      console.log("7");
       const commentLikeDeletion = async () => {
         const commentLikeId = changeLike.commentId;
         const URL = `/api/likes/${commentLikeId}`;
-        // const URL = `https://devsquaredbe.onrender.com/api/likes/${commentLikeId}`;
-        // const URL = `http://localhost:5011/api/likes/${commentLikeId}`;
         const config = {
           headers: {
             Authorization: `Bearer ${loggedIn.token}`
@@ -221,11 +203,8 @@ updateBlogFill(() => {
       commentLikeDeletion();
 
     } else if (changeLike.action === "add" && changeLike.commentId) {
-      console.log("8");
       const createCommentLike = async () => {
         const URL = "/api/likes";
-        // const URL = "https://devsquaredbe.onrender.com/api/likes";
-        // const URL = "http://localhost:5011/api/likes";
         const options = {
           userName: changeLike.userName,
           commentId: changeLike.commentId
@@ -233,7 +212,7 @@ updateBlogFill(() => {
         const config = {
           headers: {
             Authorization: `Bearer ${loggedIn.token}`
-          },
+          }
         };
         try {
           await axios.post(URL, options, config);
@@ -253,10 +232,7 @@ updateBlogFill(() => {
     // GET ALL LIKES
     if (loggedIn.name) {
       const getAllLikes = async () => {
-        console.log("9");
         const URL = "/api/likes/";
-        // const URL = "https://devsquaredbe.onrender.com/api/likes/";
-        // const URL = "http://localhost:5011/api/likes/";
         const options = { method: "GET" };
         try {
           const response = await fetch(URL, options);
@@ -270,30 +246,18 @@ updateBlogFill(() => {
     };
 
     if (blogFormData.ready && blogFormData.update) {
-      console.log("15");
       const updateBlog = async () => {
         const URL = `/api/blogs/${currentBlog._id}`;
-        // const URL = `https://devsquaredbe.onrender.com/api/blogs/${currentBlog._id}`;
-        // const URL = `http://localhost:5011/api/blogs/${currentBlog._id}`;
         const config = {
           headers: {
-              Authorization: `Bearer ${loggedIn.token}`,
-          },
+              Authorization: `Bearer ${loggedIn.token}`
+          }
         };
         const blogData = {
           title: blogFormData.title,
           text: blogFormData.text,
           userName: blogFormData.userName
         };
-        // console.log("------updateBlog INFO------");
-        // console.log("blogData: ", blogData);
-        // console.log("currentBlog._id: ", currentBlog._id);
-        // console.log("blogData.title: ", blogData.title);
-        // console.log("blogData.text: ", blogData.text);
-        // console.log("blogData.userName: ", blogData.userName);
-        // console.log("loggedIn.token: ", loggedIn.token);
-        // console.log("blogFormData.ready: ", blogFormData.ready);
-        // console.log("blogFormData.update: ", blogFormData.update);
         try {
           await axios.put(URL, blogData, config);
         } catch (err) {
@@ -303,29 +267,18 @@ updateBlogFill(() => {
       updateBlog();
 
     } else if (blogFormData.ready && !blogFormData.update) {
-      console.log("16");
       const createBlog = async () => {
         const URL = "/api/blogs/";
-        // const URL = "https://devsquaredbe.onrender.com/api/blogs/";
-        // const URL = "http://localhost:5011/api/blogs/";
         const config = {
           headers: {
-              Authorization: `Bearer ${loggedIn.token}`,
-          },
+              Authorization: `Bearer ${loggedIn.token}`
+          }
         };
         const blogData = {
           title: blogFormData.title,
           text: blogFormData.text,
           userName: blogFormData.userName
         };
-        // console.log("------createBlog INFO------");
-        // console.log("blogData: ", blogData);
-        // console.log("blogData.title: ", blogData.title);
-        // console.log("blogData.text: ", blogData.text);
-        // console.log("blogData.userName: ", blogData.userName);
-        // console.log("loggedIn.token: ", loggedIn.token);
-        // console.log("blogFormData.ready: ", blogFormData.ready);
-        // console.log("blogFormData.update: ", blogFormData.update);
         try {
           await axios.post(URL, blogData, config);
         } catch (err) {
@@ -336,8 +289,6 @@ updateBlogFill(() => {
     };
 
   }, [blogId, loggedIn.name, changeLike.action, blogFormData.ready]);
-
-console.log("CURRENT SCREEN: ", currentScreen)
 
   return (
     <>

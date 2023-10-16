@@ -9,21 +9,21 @@ const registerUser = asyncHandler(async (req, res) => {
 
     if (!name || !userName || !email || !password) {
         res.status(400);
-        throw new Error("Please complete all fields...");
+        throw new Error("Complete all fields.");
     };
 
     // CHECK IF USER EXISTS
     const userExists = await User.findOne({email});
     if (userExists) {
         res.status(400);
-        throw new Error("Prior account with this email...");
+        throw new Error("Prior account with this email.");
     };
 
     // CHECK IF ALIAS IS ALREADY IN USE
     const aliasExists = await User.findOne({userName});
     if (aliasExists) {
         res.status(400);
-        throw new Error("Prior account uses this alias...");
+        throw new Error("Alias already taken.");
     };
 
     // HASH THE PASSWORD
@@ -44,11 +44,11 @@ const registerUser = asyncHandler(async (req, res) => {
             name: user.name,
             userName: user.userName,
             email: user.email,
-            token: generateToken(user._id),
+            token: generateToken(user._id)
         });
     } else {
         res.status(400);
-        throw new Error("Invalid user data...");
+        throw new Error("Invalid user data.");
     };
 });
 
@@ -66,7 +66,7 @@ const loginUser = asyncHandler(async (req, res) => {
             name: userCheck1.name,
             userName: userCheck1.userName,
             email: userCheck1.email,
-            token: generateToken(userCheck1._id),
+            token: generateToken(userCheck1._id)
         });
     } else if (userCheck2 && (await bcrypt.compare(password, userCheck2.password))) {
         res.json({
@@ -74,11 +74,11 @@ const loginUser = asyncHandler(async (req, res) => {
             name: userCheck2.name,
             userName: userCheck2.userName,
             email: userCheck2.email,
-            token: generateToken(userCheck2._id),
+            token: generateToken(userCheck2._id)
         });
     } else {
         res.status(400);
-        throw new Error("Invalid credentials...");
+        throw new Error("Invalid credentials.");
     };
 });
 
@@ -90,7 +90,7 @@ const getMe = asyncHandler(async (req, res) => {
 // GENERATE WEBTOKEN
 const generateToken = (id) => {
     return webToken.sign({ id }, process.env.JWT_SECRET, {
-        expiresIn: "15d",
+        expiresIn: "15d"
     });
 };
 

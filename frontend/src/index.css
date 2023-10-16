@@ -249,7 +249,7 @@ li {
 }
 
 .logo-name {
-  margin-left: 10px
+  margin-left: 10px;
 }
 
 header nav {
@@ -684,8 +684,9 @@ footer {
   }
 
   .comment-info .author, .comment-info .created, .comment-info .likes {
-    width: min-content
+    width: min-content;
   }
+
   .add-or-update, .update-delete-like-buttons {
     display: flex;
     flex-direction: row;

@@ -10,20 +10,20 @@ const getAllLikes = asyncHandler(async (req, res) => {
 
 // SET LIKES (POST REQUEST - "/api/likes")
 const setLikes = asyncHandler(async (req, res) => {
-    const {userName, commentId, blogId } = req.body;
-    
+    const { userName, commentId, blogId } = req.body;
+
     // FIND THE LIKE BY COMMENT/BLOG AND USERNAME
     const previousBlogLike = await Like.findOne({ userName, blogId });
     const previousCommentLike = await Like.findOne({ userName, commentId });
 
     if (!req.body.userName) {
         res.status(400);
-        throw new Error("Not Authorized...");
+        throw new Error("Not Authorized.");
     };
 
     if (!req.body.blogId && !req.body.commentId) {
         res.status(400);
-        throw new Error("No Blog or Comment. Denied...");
+        throw new Error("Denied. No Blog or Comment.");
     };
 
     if (!previousBlogLike || !previousCommentLike) {
@@ -33,9 +33,8 @@ const setLikes = asyncHandler(async (req, res) => {
             blogId: req.body.blogId,
             commentId: req.body.commentId
         });
+        res.status(200).json(like);
     };
-
-    res.status(200).json(like);
 });
 
 // DELETE LIKES (DELETE REQUEST - "/api/likes:id")
@@ -46,24 +45,23 @@ const deleteLikes = asyncHandler(async (req, res) => {
     // CHECK IF THE LIKE DOESN'T EXIST
     if (!like) {
         res.status(400);
-        throw new Error("Like not found...");
+        throw new Error("Like not found.");
     };
 
     // CHECK FOR THE USER
     if (!req.user) {
         res.status(401);
-        throw new Error("User not found...");
+        throw new Error("User not found.");
     };
 
     // MAKE SURE THE CURRENT USER MATCHES THE LIKE'S CREATOR
     if (like.user.toString() !== req.user.id) {
         res.status(401);
-        throw new Error("User not authorized...");
+        throw new Error("Denied. Not authorized.");
     };
 
     // FINDING THE LIKE AND DELETING IT
     await Like.findByIdAndRemove(req.params.id);
-
     res.status(200).json({ id: req.params.id });
 });
 
