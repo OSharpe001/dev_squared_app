@@ -2,7 +2,6 @@ const asyncHandler = require("express-async-handler");
 const Blog = require("../models/blogModel");
 const Like = require("../models/likesModel");
 const Comment = require("../models/commentModel");
-const { findByIdAndRemove } = require("../models/userModel");
 
 // GET BLOGS LIST (GET REQUEST - "/api/blogs")
 const getBlogsList = asyncHandler(async (req, res) => {

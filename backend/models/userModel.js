@@ -3,25 +3,25 @@ const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, "Please add your full name..."],
+        required: [true, "Add full name."]
     },
     userName: {
         type: String,
-        required: [true, "Please create alias..."],
-        unique: [true, "Alias already used. Please choose another..."],
+        required: [true, "Create alias."],
+        unique: [true, "Choose another alias."]
     },
     email: {
         type: String,
-        required: [true, "Please add your email address..."],
-        unique: [true, "Prior account exists for this email..."],
+        required: [true, "Add email address."],
+        unique: [true, "Account exists for this email."]
     },
     password: {
         type: String,
-        required: [true, "Please create a password..."],
+        required: [true, "Create a password."]
     },
 },
 {
-    timestamps: true,
+    timestamps: true
 });
 
 module.exports = mongoose.model("User", userSchema);

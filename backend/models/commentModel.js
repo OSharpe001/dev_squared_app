@@ -4,20 +4,20 @@ const commentSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: "User",
+        ref: "User"
     },
     text: {
         type: String,
-        required: [true, "Please add comment..."],
+        required: [true, "Add comment."]
     },
     userName: {
         type: String,
-        required: [true, "Not Authorized..."],
+        required: [true, "Not authorized."]
     },
     blogId: {
         type: String,
-        required: [true, "No Blog. Denied..."],
-    },
+        required: [true, "No blog found."]
+    }
 },
 {
     timestamps: true,

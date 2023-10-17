@@ -4,21 +4,21 @@ const blogSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: "User",
+        ref: "User"
     },
     userName: {
         type: String,
-        required: [true, "Not Authorized..."],
+        required: [true, "Not Authorized..."]
     },
     title: {
         type: String,
-        required: [true, "Please add your blog title..."],
-        unique: [true, "Title previously used. Please use new title..."],
+        required: [true, "Add blog title."],
+        unique: [true, "Title previously used. Use new title."]
     },
     text: {
         type: String,
-        required: [true, "Please add blog content..."],
-    },
+        required: [true, "Add blog content."]
+    }
 },
 {
     timestamps: true,

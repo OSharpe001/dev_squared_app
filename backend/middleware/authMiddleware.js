@@ -20,13 +20,13 @@ const protect = asyncHandler(async (req, res, next) => {
         } catch (err) {
             console.log("LATEST ERROR FROM AUTHMIDDLEWARE: ", err);
             res.status(401);
-            throw new Error("Not Authorized...");
+            throw new Error("Not Authorized.");
         };
     };
 
     if (!token) {
         res.status(401);
-        throw new Error("Not Authorized...");
+        throw new Error("Not Authorized.");
     };
 });
 

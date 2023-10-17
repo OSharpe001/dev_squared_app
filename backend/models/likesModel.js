@@ -4,18 +4,18 @@ const likesSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: "User",
+        ref: "User"
     },
     userName: {
         type: String,
-        required: [true, "Not Authorized..."],
+        required: [true, "Not authorized."]
     },
     blogId: {
-        type: String,
+        type: String
     },
     commentId: {
-        type: String,
-    },
+        type: String
+    }
 });
 
 module.exports = mongoose.model("Likes", likesSchema);
