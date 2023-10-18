@@ -16,8 +16,6 @@ export default function CommentModal({ commentModalHidden, setCommentModalHidden
         };
       }, [commentModalHidden]);
 
-    // console.log("COMMENTFORMDATA: ", commentFormData);
-
     return (
         <form className={commentModalHidden ? "hidden" : "comment-modal modal"}>
             <textarea ref={commentInput} className="modal-comment" autoFocus={!commentModalHidden} value={commentFormData.text} onChange={handleCommentTextChange} placeholder="Leave a comment..." />
