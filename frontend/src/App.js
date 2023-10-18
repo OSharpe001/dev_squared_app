@@ -311,20 +311,16 @@ updateBlogFill(() => {
           loggedIn={loggedIn}
           blogComments={blogComments}
           blogModalHidden={blogModalHidden}
-          setBlogModalHidden={setBlogModalHidden}
           allLikes={allLikes}
           setChangeLike={setChangeLike}
           setBlogId={setBlogId}
           blogFormData={blogFormData}
-          blogToUpdate={blogToUpdate}
           updateBlog={updateBlog}
           handleBlogTitleChange={handleBlogTitleChange}
           handleBlogTextChange={handleBlogTextChange}
           cancelBlog={cancelBlog}
           submitBlogForm={submitBlogForm}
-
           navigate={navigate}
-          changeLike={changeLike}
         />} />
         <Route path="/" element={<HomePage
           loggedIn={loggedIn}

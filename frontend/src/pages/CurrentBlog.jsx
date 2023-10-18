@@ -6,7 +6,7 @@ import like from "../assets/images/icons/filled_red_heart.png";
 import dislike from "../assets/images/icons/heart_shell.png";
 
 
-export default function CurrentBlog({ currentBlog, setBlogId, blogComments, loggedIn, blogModalHidden, setBlogModalHidden, allLikes, setChangeLike, blogToUpdate, updateBlog, handleBlogTitleChange, handleBlogTextChange, cancelBlog, submitBlogForm, blogFormData, navigate }) {
+export default function CurrentBlog({ currentBlog, setBlogId, blogComments, loggedIn, blogModalHidden, allLikes, setChangeLike, updateBlog, handleBlogTitleChange, handleBlogTextChange, cancelBlog, submitBlogForm, blogFormData, navigate }) {
 
     const [commentModalHidden, setCommentModalHidden] = useState(true);
     const [commentToDelete, setCommentToDelete] = useState("");
@@ -37,7 +37,6 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
         setTimeout(setBlogId, 195, "");
         setTimeout(setBlogId, 200, currentBlog._id);
     };
-    // console.log("COMMENTMODAL'S CURRENTBLOG INFO: ", currentBlog);
 
     updateCommentFill(() => {
         if (commentToUpdate.text) {
@@ -95,19 +94,15 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
 
     useEffect(() => {
         if (!currentBlog) {
-            console.log("10.99");
             navigate("/");
           };
         if (commentToDelete) {
-            console.log("11");
             const commentDeletion = async () => {
                 const URL = "/api/blogs/comments/";
-                // const URL = "https://devsquaredbe.onrender.com/api/blogs/comments/";
-                // const URL = "http://localhost:5011/api/blogs/comments/";
                 const config = {
                     headers: {
                         Authorization: `Bearer ${loggedIn.token}`
-                    },
+                    }
                 };
                 try {
                     await axios.delete(URL + commentToDelete, config);
@@ -119,15 +114,12 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
         };
 
         if (blogToDelete) {
-            console.log("12");
             const blogDeletion = async () => {
                 const URL = "/api/blogs/";
-                // const URL = "https://devsquaredbe.onrender.com/api/blogs/";
-                // const URL = "http://localhost:5011/api/blogs/";
                 const config = {
                     headers: {
                         Authorization: `Bearer ${loggedIn.token}`
-                    },
+                    }
                 };
                 try {
                     await axios.delete(URL + blogToDelete, config);
@@ -139,30 +131,18 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
         };
 
         if (commentFormData.update && commentFormData.ready) {
-                console.log("13");
                 const updateComment = async () => {
                     const URL = `/api/blogs/comments/${commentToUpdate.id}`;
-                    // const URL = `https://devsquaredbe.onrender.com/api/blogs/comments/${commentToUpdate.id}`;
-                    // const URL = `http://localhost:5011/api/blogs/comments/${commentToUpdate.id}`;
                     const config = {
                         headers: {
-                            Authorization: `Bearer ${loggedIn.token}`,
-                        },
+                            Authorization: `Bearer ${loggedIn.token}`
+                        }
                     };
                     const commentData = {
                         text: commentFormData.text,
                         userName: commentFormData.userName,
                         blogId: commentFormData.blogId,
                     };
-                    // console.log("------updateComment INFO------");
-                    // console.log("commentData: ", commentData);
-                    // console.log("commentToUpdate.id: ", commentToUpdate.id);
-                    // console.log("commentData.blogId: ", commentData.blogId);
-                    // console.log("commentData.text: ", commentData.text);
-                    // console.log("commentData.userName: ", commentData.userName);
-                    // console.log("loggedIn.token: ", loggedIn.token);
-                    // console.log("commentData.ready: ", commentFormData.ready);
-                    // console.log("commentData.update: ", commentFormData.update);
                     try {
                         await axios.put(URL, commentData, config);
                     } catch (err) {
@@ -172,29 +152,18 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
                 updateComment();
 
         } else if (!commentFormData.update && commentFormData.ready) {
-            console.log("14");
             const createComment = async () => {
                 const URL = "/api/blogs/comments/";
-                // const URL = "https://devsquaredbe.onrender.com/api/blogs/comments/";
-                // const URL = "http://localhost:5011/api/blogs/comments";
                 const config = {
                     headers: {
                         Authorization: `Bearer ${loggedIn.token}`
-                    },
+                    }
                 };
                 const commentData = {
                     text: commentFormData.text,
                     userName: commentFormData.userName,
-                    blogId: commentFormData.blogId,
+                    blogId: commentFormData.blogId
                 };
-                // console.log("------createComment INFO------");
-                // console.log("commentData: ", commentData);
-                // console.log("commentData.blogId: ", commentData.blogId);
-                // console.log("commentData.text: ", commentData.text);
-                // console.log("commentData.userName: ", commentData.userName);
-                // console.log("loggedIn.token: ", loggedIn.token);
-                // console.log("commentData.ready: ", commentFormData.ready);
-                // console.log("commentData.update: ", commentFormData.update);
                 try {
                     await axios.post(URL, commentData, config);
                 } catch (err) {
@@ -207,7 +176,6 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
     }, [commentToDelete, blogToDelete, commentFormData.ready]);
 
     const disabled = !blogModalHidden || !commentModalHidden;
-    console.log("CURRENTBLOG VALUE: ", currentBlog);
 
     return (
         <section className="current-blog-page">
@@ -275,22 +243,13 @@ export default function CurrentBlog({ currentBlog, setBlogId, blogComments, logg
             <CommentModal
                 commentModalHidden={commentModalHidden}
                 setCommentModalHidden={setCommentModalHidden}
-                loggedIn={loggedIn}
-                currentBlog={currentBlog}
-                commentToUpdate={commentToUpdate}
                 commentFormData={commentFormData}
                 submitCommentForm={submitCommentForm}
                 handleCommentTextChange={handleCommentTextChange}
-                setBlogId={setBlogId}
             />
 
             <BlogModal
-                loggedIn={loggedIn}
                 blogModalHidden={blogModalHidden}
-                currentBlog={currentBlog}
-                setBlogModalHidden={setBlogModalHidden}
-                blogToUpdate={blogToUpdate}
-                setBlogId={setBlogId}
                 handleBlogTitleChange={handleBlogTitleChange}
                 cancelBlog={cancelBlog}
                 submitBlogForm={submitBlogForm}

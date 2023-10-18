@@ -1,16 +1,16 @@
 import { useEffect, useRef } from 'react';
 
 
-export default function BlogModal({ blogModalHidden, setBlogModalHidden, loggedIn, currentBlog, blogToUpdate, setBlogId, blogFormData, handleBlogTitleChange, handleBlogTextChange, cancelBlog, submitBlogForm }) {
+export default function BlogModal({ blogModalHidden, blogFormData, handleBlogTitleChange, handleBlogTextChange, cancelBlog, submitBlogForm }) {
 
     const autoFocus = useEffect;
     const blogTitleInput = useRef();
 
-    autoFocus(()=> {
+    autoFocus(() => {
         if (!blogModalHidden) {
             blogTitleInput.current.focus();
         };
-      }, [blogModalHidden]);
+    }, [blogModalHidden]);
 
     return (
         <form className={blogModalHidden ? "hidden" : "blog-modal modal"}>

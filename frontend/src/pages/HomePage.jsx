@@ -15,8 +15,6 @@ export default function HomePage({ setBlogId, loggedIn, blogModalHidden, setBlog
                 console.log("10");
                 try {
                     const URL = "/api/blogs";
-                    // const URL = "https://devsquaredbe.onrender.com/api/blogs";
-                    // const URL = "http://localhost:5011/api/blogs";
                     const options = { method: "GET" };
                     const response = await fetch(URL, options);
                     const data = await response.json();
@@ -54,8 +52,8 @@ export default function HomePage({ setBlogId, loggedIn, blogModalHidden, setBlog
 
             <Hero />
             <ul>
-            <h2 className='announcement'>Create A New Blog <span className='underlined'>or</span> Check Out Previous Ones!</h2>
-            <button className="create-blog-button" disabled={disabled} onClick={createBlog}>Create Blog</button>
+                <h2 className='announcement'>Create A New Blog <span className='underlined'>or</span> Check Out Previous Ones!</h2>
+                <button className="create-blog-button" disabled={disabled} onClick={createBlog}>Create Blog</button>
             </ul>
 
             <ul className="bloglist">
@@ -66,24 +64,21 @@ export default function HomePage({ setBlogId, loggedIn, blogModalHidden, setBlog
                             <div className="blog-item-info">
                                 <p className="author underlined">By: {blog.userName}</p>
                                 <p className="created">{new Date(blog.updatedAt).toLocaleString().split(",")[0]}</p>
-                                <p className="likes"><img src={like} alt="likes-heart" className="heart"/> {allLikes.filter(like => (like.blogId === blog._id)).length}</p>
+                                <p className="likes"><img src={like} alt="likes-heart" className="heart" /> {allLikes.filter(like => (like.blogId === blog._id)).length}</p>
                             </div>
-                            
                         </li>
                     </div>
                 ))}
             </ul>
 
             <BlogModal
-                    loggedIn={loggedIn}
-                    blogModalHidden={blogModalHidden}
-                    setBlogModalHidden={setBlogModalHidden}
-                    blogFormData={blogFormData}
-                    handleBlogTitleChange={handleBlogTitleChange}
-                    handleBlogTextChange={handleBlogTextChange}
-                    cancelBlog={cancelBlog}
-                    submitBlogForm={submitBlogForm}
-                />
+                blogModalHidden={blogModalHidden}
+                blogFormData={blogFormData}
+                handleBlogTitleChange={handleBlogTitleChange}
+                handleBlogTextChange={handleBlogTextChange}
+                cancelBlog={cancelBlog}
+                submitBlogForm={submitBlogForm}
+            />
         </div>
     );
 };
