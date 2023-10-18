@@ -4,8 +4,7 @@ const { getBlogsList, getBlog, setBlogs, updateBlogs, deleteBlogs } = require(".
 
 const { protect } = require("../middleware/authMiddleware");
 
-// BLOGS ROUTES--
-// (CHAINING METHODS THAT HAVE THE SAME ROUTE)
+// BLOGS ROUTES (CHAINING METHODS THAT HAVE THE SAME ROUTE)
 router.route("/").get(getBlogsList).post(protect, setBlogs);
 
 router.route("/:id").get(getBlog).put(protect, updateBlogs).delete(protect, deleteBlogs);

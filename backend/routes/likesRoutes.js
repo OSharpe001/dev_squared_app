@@ -4,8 +4,7 @@ const { getAllLikes, setLikes, deleteLikes } = require("../controllers/likesCont
 
 const { protect } = require("../middleware/authMiddleware");
 
-// LIKES ROUTES
-// CHAINING METHODS THAT HAVE THE SAME ROUTE
+// LIKES ROUTES (CHAINING METHODS THAT HAVE THE SAME ROUTE)
 router.route("/").get(getAllLikes).post(protect, setLikes);
 
 router.route("/:id").delete(protect, deleteLikes);
