@@ -19,18 +19,18 @@ export default function Header({ loggedIn, setLoggedIn, setBlogId }) {
 
   // SHIFTING-HEADER USESTATES AND FUNCTIONS
   const [scrollPosition, setScrollPosition] = useState({
-    y: 0,
+    y: 0
   });
   const [prevScrollPosition, setPreviousScrollPositiion] = useState({
-    y: 0,
+    y: 0
   })
   const handleScrollPositionChange = (e) => {
     setPreviousScrollPositiion({
       y: scrollPosition.y
-      },);
+      });
     setScrollPosition({
       y: window.scrollY
-    },);
+    });
   };
   window.addEventListener("scroll", handleScrollPositionChange);
   let headerPos =  scrollPosition.y>0 && scrollPosition.y>prevScrollPosition.y ?"hide": "show";
@@ -56,7 +56,6 @@ export default function Header({ loggedIn, setLoggedIn, setBlogId }) {
       <nav>
         <div className="banner" onClick={backHome}>
           <img className="logo banner-title" src={logo} alt="target" />
-          {/* <p className="banner-title logo-name">Dev^2</p> */}
         </div>
         <div className="nav-items">
             {
