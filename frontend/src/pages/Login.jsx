@@ -69,35 +69,31 @@ export default function Login({ setLoggedIn, currentScreen }) {
 
   useEffect(() => {
     if (formData.password) {
-      console.log("17");
         const getMe = async () => {
         const URL = `/api/users/login`;
-        // const URL = `https://devsquaredbe.onrender.com/api/users/login`;
-        // const URL = `http://localhost:5011/api/users/login`;
         try {
           const response = await axios.post(URL, formData);
           localStorage.setItem("Dev2User", JSON.stringify(response.data));
           setLoggedIn(JSON.parse(localStorage.getItem("Dev2User")));
         } catch (err) {
           console.log(err);
-          alert("Please check your credentials and try again or register")
+          alert("Try again or register");
           resetPassword();
         };
       };
       getMe();
     };
-
   }, [formData, setLoggedIn]);
 
   const errorHandling = ({ target }) => {
     if (target.name === "alias" && alias.length < 4) {
-      setAliasErrorMessage("Please place proper UserName or Email in field");
+      setAliasErrorMessage("Place username or email");
     } else if (alias.length >= 4) {
       setAliasErrorMessage("");
     };
-    if (target.name === "password" && password.length < 7) {
-      setPasswordErrorMessage("Password must have at least 8 characters");
-    } else if (password.length >= 7) {
+    if (target.name === "password" && password.length < 8) {
+      setPasswordErrorMessage("Needs at least 8 characters");
+    } else if (password.length >= 8) {
       setPasswordErrorMessage("");
     };
   };
@@ -116,6 +112,7 @@ export default function Login({ setLoggedIn, currentScreen }) {
         <label htmlFor="password">Password:</label>
         <input onChange={handleChange} onBlur={errorHandling} type="password" name="password" id="password" value={password} />
         <p className="error-message">{passwordErrorMessage}</p>
+
         <button onClick={submitForm} disabled={incomplete}>Submit</button>
       </form>
     </div>

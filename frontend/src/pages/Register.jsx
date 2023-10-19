@@ -29,12 +29,15 @@ export default function Register({ setLoggedIn, currentScreen }) {
   const resetName = () => {
     setName("");
   };
+
   const resetUsername = () => {
     setName("");
   };
+
   const resetEmail = () => {
     setEmail("");
   };
+
   const resetPassword = () => {
     setPassword1("");
     setPassword2("");
@@ -50,7 +53,7 @@ export default function Register({ setLoggedIn, currentScreen }) {
   const submitForm = (e) => {
     e.preventDefault();
     if (incomplete) {
-      alert("Please fill out all fields properly...");
+      alert("Fill all fields properly");
     } else {
       setFormData({
         name: name,
@@ -99,18 +102,15 @@ export default function Register({ setLoggedIn, currentScreen }) {
 
   useEffect(() => {
     if (formData.name && formData.userName && formData.email && formData.password) {
-      console.log("18");
       const getMe = async () => {
         const URL = `/api/users`;
-        // const URL = `https://devsquaredbe.onrender.com/api/users`;
-        // const URL = `http://localhost:5011/api/users`;
         if (formData.password) {
           const response = await axios.post(URL, formData);
           try {
             localStorage.setItem("Dev2User", JSON.stringify(response.data));
             await setLoggedIn(JSON.parse(localStorage.getItem("Dev2User")));
           } catch (err) {
-            alert("an Error occurred. Please try, again.");
+            alert("Error. Please try, again.");
             console.log(err);
             resetPassword();
           };
@@ -123,33 +123,33 @@ export default function Register({ setLoggedIn, currentScreen }) {
 
   const errorHandling = ({ target }) => {
     if (target.name === "name" && target.value.length < 4) {
-      setNameErrorMessage("Please type your Full Name");
+      setNameErrorMessage("Type your full name");
     } else if (target.value.length >= 4) {
       setNameErrorMessage("");
     };
 
     if (target.name === "userName" && (target.value.length < 3 || target.value.length > 18)) {
-      setUserNameErrorMessage("UserName must be between 3 to 18 characters");
+      setUserNameErrorMessage("Must be 3 to 18 characters");
     } else if (userName.includes("@")) {
-      setUserNameErrorMessage('UserName can not have an "@" character');
+      setUserNameErrorMessage('No "@" character allowed');
     } else if (userName.length >= 2 && !userName.includes("@")) {
       setUserNameErrorMessage("");
     };
 
     if (target.name === "email" && (!target.value.includes("@") || !target.value.includes(".") || target.value.length < 6)) {
-      setEmailErrorMessage("Please fill out the Email field, properly");
+      setEmailErrorMessage("Use proper email");
     } else if (email.includes("@") && email.includes(".") && email.length >= 6){
       setEmailErrorMessage("");
     };
 
-    if (target.name === "password1" && target.value.length < 7) {
-      setPassword1ErrorMessage("Password must have at least 8 characters");
+    if (target.name === "password1" && target.value.length < 8) {
+      setPassword1ErrorMessage("Needs at least 8 characters");
     } else if (password1.length >= 8) {
       setPassword1ErrorMessage("");
     };
 
-    if (target.name === "password2" && target.value.length < 7) {
-      setPassword2ErrorMessage("Password must have at least 8 characters");
+    if (target.name === "password2" && target.value.length < 8) {
+      setPassword2ErrorMessage("Needs at least 8 characters");
     } else if (password2 !== password1) {
       setPassword2ErrorMessage("Passwords must match");
     } else if (password2 >= 8 && password2 === password1) {
