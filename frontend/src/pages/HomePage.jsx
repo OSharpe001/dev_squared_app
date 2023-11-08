@@ -12,7 +12,6 @@ export default function HomePage({ setBlogId, loggedIn, blogModalHidden, setBlog
     useEffect(() => {
         if (currentScreen === "/") {
             const getAllBlogs = async () => {
-                console.log("10");
                 try {
                     const URL = "/api/blogs";
                     const options = { method: "GET" };
@@ -48,7 +47,7 @@ export default function HomePage({ setBlogId, loggedIn, blogModalHidden, setBlog
 
     return (
         <div className='home-page'>
-            <h1 className='welcome'>Welcome Back to Dev^2, {loggedIn.userName}!</h1>
+            <h1 className='welcome'>Welcome Back to Dev Squared, {loggedIn.userName}!</h1>
 
             <Hero />
             <ul>

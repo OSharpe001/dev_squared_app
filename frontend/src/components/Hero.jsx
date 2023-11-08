@@ -13,7 +13,7 @@ export default function Hero() {
     return (
         <section className="hero">
             <h2 className="speech">
-                Here at Dev^2, we are dedicated to the
+                Here at Dev Squared, we are dedicated to the
                 development of our fellow Developers!
                 Since you're here, we are certain that
                 you are, too! While you're here, please
