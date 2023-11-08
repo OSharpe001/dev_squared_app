@@ -4,6 +4,10 @@ body {
   box-sizing: border-box;
 }
 
+html {
+  background-color: #555;
+}
+
 .App {
   min-height: 98vh;
 }
@@ -318,7 +322,7 @@ header nav {
 
 /* HOMEPAGE STYLES */
 .home-page {
-  min-height: 87vh;
+  min-height: 90vh;
   color: aliceblue;
   background-color: #2A4365;
   border: 2px solid blue;
