@@ -18,7 +18,7 @@ const protect = asyncHandler(async (req, res, next) => {
 
             next();
         } catch (err) {
-            console.log("LATEST ERROR FROM AUTHMIDDLEWARE: ", err);
+            console.log("AUTHMIDDLEWARE ERROR: ", err);
             res.status(401);
             throw new Error("Not Authorized.");
         };
