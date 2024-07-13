@@ -103,6 +103,7 @@ import pic102 from "../assets/images/memes/IMG_8914.jpg";
 import pic103 from "../assets/images/memes/IMG_8982.PNG";
 import pic104 from "../assets/images/memes/IMG_9294.jpg";
 import pic105 from "../assets/images/memes/IMG_9295.jpg";
+import pic106 from "../assets/images/memes/IMG_9296.png";
 
 
 export const images = [
@@ -629,6 +630,11 @@ export const images = [
     {
         class: "meme-image",
         image: pic105,
+        alt: "meme"
+    },
+    {
+        class: "meme-image",
+        image: pic106,
         alt: "meme"
     },
 ];
