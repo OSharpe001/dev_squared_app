@@ -37,23 +37,24 @@ export default function HomePage({ setBlogId, loggedIn, blogModalHidden, setBlog
 
     const disabled = !blogModalHidden;
 
-    if (blogs.length < 1) {
-        return (
-            <div className='home-page'>
-                <Spinner />
-            </div>
-        );
-    };
-
     return (
         <div className='home-page'>
             <h1 className='welcome'>Welcome Back to Dev Squared, {loggedIn.userName}!</h1>
 
             <Hero />
-            <ul>
-                <h2 className='announcement'>Create A New Blog <span className='underlined'>or</span> Check Out Previous Ones!</h2>
+            {/* <ul> */}
+            <div className='create-button'>
+                <h2 className='announcement'>
+                    {blogs.length < 1 ?
+                        "Create A New Blog"
+                        :
+                        "Create A New Blog or Check Out Previous Ones!"
+                    }
+                </h2>
+
                 <button className="create-blog-button" disabled={disabled} onClick={createBlog}>Create Blog</button>
-            </ul>
+            </div>
+            {/* </ul> */}
 
             <ul className="bloglist">
                 {blogs.map(blog => (
